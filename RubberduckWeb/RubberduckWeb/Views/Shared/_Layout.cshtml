@@ -16,7 +16,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Rubberduck", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a href='@Url.Action("Index", "Home")' class="navbar-brand">
+                    <img src='@Url.Content("~/Content/Images/RubberduckHeaderLogo.png")' alt="Rubberduck"/>
+                </a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
