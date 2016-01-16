@@ -1,31 +1,62 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Home";
 }
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <h1>Welcome</h1>
+    <p class="lead">
+        Your IDE is about to enter the 21st century.<br />
+
+        Rubberduck is a free, open-source COM add-in under active development that integrates with the VBE to enable the features every programmer wants to have in their IDE.
+        ​From unit testing to source control, from code inspections to refactorings, programming in VBA will never be the same.
+    </p>
+    <p>@Html.ActionLink("Learn more »", "Features", null, new { @class = "btn btn-primary btn-lg" })</p>
+
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
+        <h2>Unit Testing</h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            Rubberduck gives you a powerful and fully integrated test environment for your VBA code.
+            <img src="~/Content/Images/TestRunner.png"/>
         </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <p>That's right. Unit testing. In VBA.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a>
+        </p> <!--todo: replace with link to unit testing anchor on feature page-->
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <h2>Refactorings</h2>
+        <p>
+            Clean up your code by easily renaming existing, or extracting new methods.
+            <img src="~/Content/Images/Refactoring.png"/>
+        </p>
+        <p>Real refactorings, one click away. Hmm ok, make that two.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a>
+        </p> <!--todo: replace with link to refactoring anchor on feature page-->
     </div>
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <h2>Code Inspections</h2>
+        <p>
+            Rubberduck warns you about potential quality issues by inspecting your code base.
+            <img src="~/Content/Images/CodeInspections.png"/>
+        </p>
+        <p>...and provides quick fixes for many of them too!</p>
+        <p>
+            <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a> <!--todo: replace with link to inspections anchor on feature page-->
+        </p>
+    </div>
+</div>
+<div class="row jumbotron">
+    <div class="col-md-6">
+        <img src="~/Content/Images/Rubberduck.png" />
+    </div>
+    <div class="col-md-6">
+        <p>Are you running the latest version?</p>
+        <p>
+            <a class="btn btn-primary btn-lg" href="https://github.com/rubberduck-vba/Rubberduck/releases/latest">Download</a>
+        </p>
+        <p>View the source code on GitHub. Star us if you like!</p>
+        <p><a class="btn btn-default btn-lg" href="https://github.com/rubberduck-vba/Rubberduck/">Repository</a></p>
     </div>
 </div>

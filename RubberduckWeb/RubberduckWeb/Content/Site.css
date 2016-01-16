@@ -22,3 +22,8 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/*Over ride bootstrap top margin to account for us using an image instead of text for our Nav Header*/
+.jumbotron {
+    margin-top: 60px;
+}
