@@ -13,6 +13,17 @@ namespace RubberduckWeb
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            /* ex: 
+                http://www.rubberduck-vba.com/about
+                http://www.rubberduck-vba.com/contact
+            */
+            routes.MapRoute(
+                name: "OnlyAction",
+                url: "{action}",
+                defaults: new { controller = "Home", action = "Index" }
+            );
+
+            // default mvc routing 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
