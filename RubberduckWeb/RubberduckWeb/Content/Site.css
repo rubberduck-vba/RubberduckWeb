@@ -24,6 +24,13 @@ textarea {
 }
 
 /*Over ride bootstrap top margin to account for us using an image instead of text for our Nav Header*/
-.jumbotron {
-    margin-top: 60px;
+.body-content {
+    margin-top: 50px;
+    padding-top: 20px;
 }
+
+/*Possible future color scheme for nav bar*/
+/*.navbar-inverse {
+  background-color: #FFFFFF;
+  border-color: #999999;
+}*/

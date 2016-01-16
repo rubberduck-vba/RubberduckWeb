@@ -131,6 +131,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\CodeInspections.png" />
     <Content Include="Content\Images\Refactoring.png" />
+    <Content Include="Content\Images\RenameRefactoring.png" />
     <Content Include="Content\Images\Rubberduck.png" />
     <Content Include="Content\Images\RubberduckHeaderLogo.png" />
     <Content Include="Content\Images\TestRunner.png" />

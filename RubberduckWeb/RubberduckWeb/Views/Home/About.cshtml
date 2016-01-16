@@ -1,7 +1,21 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<div class="row">
+    <div class="col-md-6">
+        <h2>About</h2>
+        <p>
+            It all started with a VBA Excel add-in that enabled writing unit tests that would output their results to an interface - the default implementation sent the output to the debug/immediate window; it was somewhat beautiful... but limited.
+        </p>
+        <p>
+            Rubberduck simply emerged from the idea of rewriting that unit testing code in C# to deploy it as a COM extension / add-in specifically for the VBA IDE, the glorious VBE. We had code that could integrate with the IDE and read (write, too) the contents of code files, and do everything else the VBE API allows us to do.
+        </p>
+        <p>
+            <strong>So we take the code in the IDE, parse it with ANTLR, and then very cool things happen.</strong>
+        </p>
+    </div>
+    <div class="col-md-6">
+        <img src="~/Content/Images/RenameRefactoring.png"/>
+    </div>
+</div>
