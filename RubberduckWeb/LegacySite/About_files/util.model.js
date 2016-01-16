@@ -1,0 +1,2 @@
+define([],function(){function t(t){this.model=t,(this.isKO=Boolean(t.ko))&&(this.ko=t.ko)}return t.prototype={get:function(t,i){return t?this.isKO&&!i&&this.ko.isObservable(this.model[t])?this.ko.toJS(this.model[t]()):this.model[t]:this.model},set:function(t,i){return t?this.isKO&&this.ko.isObservable(this.model[t])?this.model[t](i):this.model[t]=i:!1}},t});
+//# sourceMappingURL=util.model.js.map

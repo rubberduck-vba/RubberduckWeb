@@ -1,0 +1,2 @@
+define([],function(){function t(t){var r=t.replace(/http[s]?:\/\/(www.)?/,"http://").toLowerCase(),e={url:r,blogType:"other"},o=r.match(/tumblr.com(\/blog)?/);if(o)return e.blogType="tumblr",e.url=o[1]?"http://"+r.substring(23)+".tumblr.com/rss":r+"/rss",e;var l=r.indexOf("blogspot.com");return l>-1?(e.blogType="blogger",e.url=r.substring(0,l+12)+"/feeds/posts/default",e):e}return{getCustomUrl:t}});
+//# sourceMappingURL=blogUrlHelper.js.map

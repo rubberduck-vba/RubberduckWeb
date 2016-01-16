@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RubberduckWeb", "RubberduckWeb\RubberduckWeb.csproj", "{CFD80737-28EB-4536-931B-C038780289BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RubberduckWeb.Tests", "RubberduckWeb.Tests\RubberduckWeb.Tests.csproj", "{56410F3D-50D2-4D8E-B1FD-E43F829E6885}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CFD80737-28EB-4536-931B-C038780289BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFD80737-28EB-4536-931B-C038780289BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFD80737-28EB-4536-931B-C038780289BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFD80737-28EB-4536-931B-C038780289BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56410F3D-50D2-4D8E-B1FD-E43F829E6885}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56410F3D-50D2-4D8E-B1FD-E43F829E6885}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56410F3D-50D2-4D8E-B1FD-E43F829E6885}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56410F3D-50D2-4D8E-B1FD-E43F829E6885}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
