@@ -26,6 +26,7 @@ textarea {
 section {
     border-bottom-style: groove;
     border-width: thin;
+    padding-bottom: 10px;
 }
 
 h3, .h3 {
@@ -44,12 +45,18 @@ h3, .h3 {
 
     h3 small, .h3 small {
         color: #5E5D5D;
+        float: right;
     }
 
 /*Over ride bootstrap top margin to account for us using an image instead of text for our Nav Header*/
 .body-content {
     margin-top: 50px;
     padding-top: 20px;
+}
+
+a.navbar-brand {
+    /* shift the nav links farther to the right side of the screen */
+    margin-right: 10em;
 }
 
 /*Possible future color scheme for nav bar*/
