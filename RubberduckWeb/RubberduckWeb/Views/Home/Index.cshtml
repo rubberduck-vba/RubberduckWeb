@@ -33,8 +33,9 @@
             <img src="~/Content/Images/Refactoring.png"/>
         </p>
         <p>Real refactorings, one click away. Hmm ok, make that two.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a>
-        </p> <!--todo: replace with link to refactoring anchor on feature page-->
+        <p>
+            @Html.ActionLink("Learn more »", "Features", "Home", null, null, "refactorings", null, new {@class = "btn btn-default"})
+        </p> 
     </div>
     <div class="col-md-4">
         <h2>Code Inspections</h2>

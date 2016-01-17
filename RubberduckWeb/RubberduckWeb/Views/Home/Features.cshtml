@@ -95,4 +95,60 @@
     </div>
     <p>...and many more on the roadmap!</p>
 </section>
+<section id="refactorings">
+    <h3>Refacotrings</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Extract Method</h4>
+            <p>You're facing a long method that's doing way too many things. Splitting it up manually is tedious, and risky. With this feature you select the code you want to extract out of a method, and Rubberduck converts it to a method call for you.</p>
+        </div>
+        <div class="col-md-6">
+            <img src="~/Content/Images/ExtractMethod.png" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Rename</h4>
+            <p>
+                You've inherited a code base crippled with single-letter identifiers used just about everywhere? This feature isn't a&nbsp;<em>Find/Replace -&nbsp;</em>it locates every reference to the target identifier within the active project, and&nbsp;<em>replaces the token&nbsp;</em>with a new identifier name. <em>Naming is hard</em>; renaming is easy.
+            </p>
+        </div>
+        <div class="col-md-6">
+            <img src="~/Content/Images/Rename.png" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Remove Paramater(s)</h4>
+            <p>A procedure called in 12 places needs to change, and the new version no longer needs one of the parameters? This refactoring will remove it from the signature, and from every call site as well.</p>
+        </div>
+        <div class="col-md-4">
+            <img src="~/Content/Images/RemoveParamaters.png" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Reorder Paramaters</h4>
+            <p>Sometimes you come across this utility function that's used just about everywhere, that has this annoying first parameter that would be so much better specified last. This refactoring lets you change the order of the&nbsp;parameters in a signature, and automatically adjust all call sites.</p>
+        </div>
+        <div class="col-md-6">
+            <img src="~/Content/Images/ReorderParamaters.png" />
+        </div>
+    </div>
+    <p>...and many more on the roadmap!</p>
+</section>
+<section id="git">
+    <h3>
+        Git Source Control <small>Coming in Rubberduck 2.0 - Stay tuned!</small>
+    </h3>
+    <p>Powered by <a href="https://github.com/libgit2/libgit2sharp" target="_blank">LibGit2Sharp</a>, you can now create a local or remote git repository (including GitHub!) and commit, push and pull changes, and create, switch and merge branches... directly from a docked toolwindow in the VBE.in</p>
+    <p>Version 1.4 includes this feature as a beta / feature preview.</p>
+</section>
+<section id="indenter">
+    <h3>
+        Smart Indentation <small>Coming in Rubberduck 2.0 - Stay tuned!</small>
+    </h3>
+    <p>The original author and current maintainer of the popular&nbsp;<strong><a href="http://www.oaltd.co.uk/indenter/indentpage.asp" target="_blank">Smart Indenter</a>&nbsp;</strong>add-in have graciously offered the latest version of their source code to the Rubberduck project. Thanks to Rob Bovey and Stephen Bullen, Rubberduck 2.0 will have the smartest automagic indentation built-in.</p>
+</section>
+
 

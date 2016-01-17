@@ -131,11 +131,16 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\CodeExplorer.png" />
     <Content Include="Content\Images\CodeInspections.png" />
+    <Content Include="Content\Images\CodeInspections_Large.png" />
+    <Content Include="Content\Images\ExtractMethod.png" />
     <Content Include="Content\Images\FindAllReferences.png" />
     <Content Include="Content\Images\FindSymbol.png" />
     <Content Include="Content\Images\GoToImplementation.png" />
     <Content Include="Content\Images\Refactoring.png" />
+    <Content Include="Content\Images\RemoveParamaters.png" />
+    <Content Include="Content\Images\Rename.png" />
     <Content Include="Content\Images\RenameRefactoring.png" />
+    <Content Include="Content\Images\ReorderParamaters.png" />
     <Content Include="Content\Images\Rubberduck.png" />
     <Content Include="Content\Images\RubberduckHeaderLogo.png" />
     <Content Include="Content\Images\TestRunner.png" />
