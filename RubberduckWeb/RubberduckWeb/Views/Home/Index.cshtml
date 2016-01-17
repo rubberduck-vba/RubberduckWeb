@@ -23,8 +23,8 @@
         </p>
         <p>That's right. Unit testing. In VBA.</p>
         <p>
-            @Html.ActionLink("Learn more »", "Features", "Home", null, null, "navigation", null, new { @class = "btn btn-default" })
-        </p> <!--todo: replace with link to unit testing anchor on feature page-->
+            @Html.ActionLink("Learn more »", "Features", "Home", null, null, "unitTesting", null, new { @class = "btn btn-default" })
+        </p> 
     </div>
     <div class="col-md-4">
         <h2>Refactorings</h2>
@@ -44,7 +44,7 @@
         </p>
         <p>...and provides quick fixes for many of them too!</p>
         <p>
-            <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a> <!--todo: replace with link to inspections anchor on feature page-->
+            @Html.ActionLink("Learn more »", "Features", "Home", null, null, "codeInspections", null, new { @class = "btn btn-default" })
         </p>
     </div>
 </div>

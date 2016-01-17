@@ -46,3 +46,9 @@ h3, .h3 {
         color: #5E5D5D;
         float: right;
     }
+
+section#codeInspections img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
