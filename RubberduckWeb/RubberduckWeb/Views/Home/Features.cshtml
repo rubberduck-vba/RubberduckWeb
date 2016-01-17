@@ -5,3 +5,52 @@
 
 <h2>Features</h2>
 
+<p>There's quite a lot to cover here, and it's constantly evolving. Here's a little overview, as of version 1.4.</p>
+
+<section id="navigation">
+    <h3>Navigation</h3>
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Code Explorer</h4>
+            <p>is a bit like the Project Explorer, except it drills down to module members and can display member signatures.</p>
+            <img src="~/Content/Images/CodeExplorer.png" />
+        </div>
+        <div class="col-md-4">
+            <h4>Find all references</h4>
+            <p>to any procedure, parameter, variable, constant, enum, library function, line label, even built-in identifiers.</p>
+            <img src="~/Content/Images/FindAllReferences.png" />
+        </div>
+        <div class="col-md-4">
+            <h4>ToDo Explorer</h4>
+            <p>finds configurable markers in comments, and regroups them all in one convenient place.</p>
+            <img src="~/Content/Images/TodoExplorer.png" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Go to implementation</h4>
+            <p>finds all implementations of interface members. If you're coding against abstractions, this feature is priceless.</p>
+            <img src="~/Content/Images/GoToImplementation.png" />
+        </div>
+        <div class="col-md-4">
+            <h4>Find symbol</h4>
+            <p>lets you search for literally anything, literally anywhere. From procedures to parameters, locals to globals, constants, enums and their members, user-defined types and their members, modules, classes, forms, line labels, and probably other things I'm forgetting</p>
+        </div>
+        <div class="col-md-4">
+            <img src="~/Content/Images/FindSymbol.png" />
+        </div>
+    </div>
+</section>
+<section id="unitTesting">
+    <h3>Unit Testing <small>This feature is unfortunately not available for all application hosts.</small></h3>
+    <div class="row">
+        <div class="col-md-6">
+            <img src="~/Content/Images/TestRunner_Large.png"/>
+        </div>
+        <div class="col-md-6">
+            <p><strong>You're not dreaming.</strong> Rubberduck's testing API gives you an <em>Assert</em> class that lets you write <em>Arrange-Act-Assert</em> unit tests just like you would in a modern-day IDE.</p>
+            <p>Use &#64;TestInitialize and &#64;TestCleanup methods to reduce test initialization code, and &#64;ModuleInitialize and &#64;ModuleCleanup markers to initialize fields available to all tests in a module.</p>
+        </div>
+    </div>
+</section>
+

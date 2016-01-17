@@ -23,6 +23,29 @@ textarea {
     max-width: 280px;
 }
 
+section {
+    border-bottom-style: groove;
+    border-width: thin;
+}
+
+h3, .h3 {
+    padding: 20px;
+    /* Fade from light blue on left to transparent on right */
+    background: #9FBFDB; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left, #9FBFDB, rgba(255, 255, 255, 0)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, #9FBFDB, rgba(255, 255, 255, 0)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, #9FBFDB, rgba(255, 255, 255, 0)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, #9FBFDB, rgba(255, 255, 255, 0)); /* Standard syntax */
+
+    /* round the borders off*/
+    -ms-border-radius: 15px;
+    border-radius: 15px;
+}
+
+    h3 small, .h3 small {
+        color: #5E5D5D;
+    }
+
 /*Over ride bootstrap top margin to account for us using an image instead of text for our Nav Header*/
 .body-content {
     margin-top: 50px;

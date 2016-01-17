@@ -22,7 +22,8 @@
             <img src="~/Content/Images/TestRunner.png"/>
         </p>
         <p>That's right. Unit testing. In VBA.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a>
+        <p>
+            @Html.ActionLink("Learn more »", "Features", "Home", null, null, "navigation", null, new { @class = "btn btn-default" })
         </p> <!--todo: replace with link to unit testing anchor on feature page-->
     </div>
     <div class="col-md-4">
