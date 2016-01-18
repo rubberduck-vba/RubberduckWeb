@@ -33,8 +33,16 @@ section {
     padding-bottom: 10px;
 }
 
+.jumbotron {
+    background-color: #BCD1E4;
+}
+
+.lead {
+    margin-bottom: 10px;
+}
+
 h3, .h3 {
-    padding: 20px;
+    padding: 15px;
     /* Fade from light blue on left to transparent on right */
     background: #9FBFDB; /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(left, #9FBFDB, rgba(255, 255, 255, 0)); /* For Safari 5.1 to 6.0 */
@@ -57,3 +65,7 @@ section#codeInspections img {
     margin-left: auto;
     margin-right: auto;
 }
+
+/*#blogFeed {
+    width: 80%;
+}*/
