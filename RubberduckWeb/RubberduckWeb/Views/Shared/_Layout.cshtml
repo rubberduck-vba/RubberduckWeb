@@ -8,7 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-static-top">
+    <div class="navbar navbar-inverse navbar-static-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -17,7 +17,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a href='@Url.Action("Index", "Home")' class="navbar-brand">
-                    <img src='@Url.Content("~/Content/Images/RubberduckHeaderLogo.png")' alt="Rubberduck" width="280"/>
+                    <img src='@Url.Content("~/Content/Images/RubberduckHeaderLogo.png")' alt="Rubberduck" width="280" />
                 </a>
             </div>
             <div class="navbar-collapse collapse">
@@ -38,7 +38,6 @@
             <p>&copy; Rubberduck VBA. - @DateTime.Now.Year All rights reserved.</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

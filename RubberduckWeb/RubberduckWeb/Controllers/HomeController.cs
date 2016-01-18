@@ -31,10 +31,15 @@ namespace RubberduckWeb.Controllers
             return View();
         }
 
-        public async Task<ActionResult> News()
+        public ActionResult News()
         {
             //todo: do this client side so the page loads faster?
-            return View(await GetBlogFeedItemsAsync());
+            return View();
+        }
+
+        public async Task<PartialViewResult> _BlogFeed()
+        {
+            return PartialView(await GetBlogFeedItemsAsync());
         }
 
         private async Task<IEnumerable<SyndicationItem>> GetBlogFeedItemsAsync()
