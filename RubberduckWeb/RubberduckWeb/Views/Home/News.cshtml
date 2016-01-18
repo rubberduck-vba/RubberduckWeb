@@ -1,7 +1,39 @@
-﻿
+﻿@model IEnumerable<System.ServiceModel.Syndication.SyndicationItem>
+
 @{
     ViewBag.Title = "News";
 }
 
-<h2>News</h2>
+<section>
+    <h2>What's up duck?</h2>
+
+    <p>
+        When we have an announcement to make, we publish on <a href="https://rubberduckvba.wordpress.com/" target="_blank"><strong>Rubberduck News</strong></a>.
+        If you're following us on Twitter or WordPress, you'll be notified right away.
+        Here's what you might have been missing lately...
+    </p>
+</section>
+<section id="blogFeed" class="container sub-content">
+    @if (Model == null)
+    {
+        <p class="alert alert-danger">Aww snap! We couldn't retrieve the RSS Feed!</p>
+    }
+    else
+    {
+        foreach (var post in Model)
+        {
+            <div class="row feedSnippet">
+                <h4>
+                    <!--Id is the permalink-->
+                    <a href="@post.Id" target="_blank">@post.Title.Text</a> <small>@post.PublishDate.Date.ToLongDateString()</small>
+                </h4>
+                <p>@Html.Raw(post.Summary.Text)</p>
+            </div>
+        }
+    }
+</section>
+
+@Scripts.Render("~/bundles/jquery")
+
+
 

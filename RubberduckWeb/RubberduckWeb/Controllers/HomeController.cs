@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel.Syndication;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml;
 
 namespace RubberduckWeb.Controllers
 {
@@ -15,8 +17,6 @@ namespace RubberduckWeb.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
@@ -29,7 +29,14 @@ namespace RubberduckWeb.Controllers
 
         public ActionResult News()
         {
-            return View();
+            //todo: do this client side so the page loads faster.
+            const string rssUri = "https://rubberduckvba.wordpress.com/feed/";
+            using (var reader = XmlReader.Create(rssUri))
+            {
+                var feed = SyndicationFeed.Load(reader);
+
+                return View(feed?.Items.Take(6));
+            }
         }
 
         public ActionResult Features()

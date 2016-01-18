@@ -8,6 +8,11 @@
     padding-right: 15px;
 }
 
+/* sub content is just a bit more narrow than normal body content.*/
+.sub-content {
+    width: 90%;
+}
+
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
