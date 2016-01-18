@@ -35,7 +35,7 @@ namespace RubberduckWeb.Controllers
             {
                 var feed = SyndicationFeed.Load(reader);
 
-                return View(feed?.Items.Take(6));
+                return View(feed?.Items);
             }
         }
 
