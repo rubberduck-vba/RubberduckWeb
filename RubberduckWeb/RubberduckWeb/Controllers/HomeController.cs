@@ -15,6 +15,11 @@ namespace RubberduckWeb.Controllers
             return View();
         }
 
+        public ActionResult Features()
+        {
+            return View();
+        }
+
         public ActionResult About()
         {
             return View();
@@ -22,14 +27,11 @@ namespace RubberduckWeb.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
         public ActionResult News()
         {
-            //todo: do this client side so the page loads faster?
             return View();
         }
 
@@ -57,11 +59,6 @@ namespace RubberduckWeb.Controllers
                     return feed?.Items;
                 }
             }
-        }
-
-        public ActionResult Features()
-        {
-            return View();
         }
     }
 }
