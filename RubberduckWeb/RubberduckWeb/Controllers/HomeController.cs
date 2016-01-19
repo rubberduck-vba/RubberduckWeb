@@ -37,7 +37,18 @@ namespace RubberduckWeb.Controllers
 
         public async Task<PartialViewResult> BlogFeed()
         {
-            return PartialView(await GetBlogFeedItemsAsync());
+            try
+            {
+                return PartialView(await GetBlogFeedItemsAsync());
+            }
+            catch
+            { 
+                // Whatever happens, don't return a 500 response code to the jQuery call.
+                // That results in a half blank page.
+
+                // If the model is null, an error message is shown, leverage that.
+                return PartialView();
+            }
         }
 
         private async Task<IEnumerable<SyndicationItem>> GetBlogFeedItemsAsync()
