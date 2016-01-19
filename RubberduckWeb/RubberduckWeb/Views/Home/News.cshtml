@@ -18,14 +18,11 @@
     </section>
 
     @section scripts{
-    <script>
-        $(document).ready(function() {
-            //Url will look something like this '/home/BlogFeed/'
-           $.get(@String.Concat(Url.Action("BlogFeed"), "/"), function(data) {
-                $('#blogFeed').html(data);
+        <script>
+            $(function() {
+                $('#blogFeed').load('@Url.Action("BlogFeed")');
             });
-        });
-    </script>
+        </script>
     }
     
     <div id="twitterFeed" class="col-md-3">
