@@ -181,7 +181,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Features.cshtml" />
     <Content Include="Views\Home\News.cshtml" />
-    <Content Include="Views\Home\_BlogFeed.cshtml" />
+    <Content Include="Views\Home\BlogFeed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

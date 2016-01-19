@@ -14,16 +14,19 @@
 <div class="row">
     <h3>Rubberduck News</h3>
     <section id="blogFeed" class="col-md-9">
-        <!--We'll load this client side-->
+        <!--We'll load this client side to speed up inital page load-->
     </section>
-    @Scripts.Render("~/bundles/jquery")
+
+    @section scripts{
     <script>
-        $(document).ready(function () {
-            $.get('/home/_BlogFeed/', function (data) {
+        $(document).ready(function() {
+           $.get(@String.Concat(Url.Action("BlogFeed"), "/"), function(data) {
                 $('#blogFeed').html(data);
             });
         });
     </script>
+    }
+    
     <div id="twitterFeed" class="col-md-3">
         <a class="twitter-timeline" href="https://twitter.com/rubberduckvba" data-widget-id="689036212724723712" height="1200">Tweets by @@rubberduckvba</a>
         <script>

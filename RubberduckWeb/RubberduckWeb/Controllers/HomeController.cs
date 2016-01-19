@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.ServiceModel.Syndication;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using System.Xml;
 
@@ -37,7 +33,7 @@ namespace RubberduckWeb.Controllers
             return View();
         }
 
-        public async Task<PartialViewResult> _BlogFeed()
+        public async Task<PartialViewResult> BlogFeed()
         {
             return PartialView(await GetBlogFeedItemsAsync());
         }
