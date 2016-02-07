@@ -137,12 +137,12 @@
     <Content Include="Content\Images\FindAllReferences.png" />
     <Content Include="Content\Images\FindSymbol.png" />
     <Content Include="Content\Images\GoToImplementation.png" />
+    <Content Include="Content\Images\Rubberduck.png" />
     <Content Include="Content\Images\Refactoring.png" />
     <Content Include="Content\Images\RemoveParamaters.png" />
     <Content Include="Content\Images\Rename.png" />
     <Content Include="Content\Images\RenameRefactoring.png" />
     <Content Include="Content\Images\ReorderParamaters.png" />
-    <Content Include="Content\Images\Rubberduck.png" />
     <Content Include="Content\Images\RubberduckHeaderLogo.png" />
     <Content Include="Content\Images\TestRunner.png" />
     <Content Include="Content\Images\TestRunner_Large.png" />
