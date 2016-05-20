@@ -133,16 +133,22 @@
     <Content Include="Content\Images\CodeExplorer.png" />
     <Content Include="Content\Images\CodeInspections.png" />
     <Content Include="Content\Images\CodeInspections_Large.png" />
+    <Content Include="Content\Images\EncapsulateField.png" />
+    <Content Include="Content\Images\ExtractInterface.png" />
     <Content Include="Content\Images\ExtractMethod.png" />
     <Content Include="Content\Images\FindAllReferences.png" />
     <Content Include="Content\Images\FindSymbol.png" />
     <Content Include="Content\Images\GoToImplementation.png" />
+    <Content Include="Content\Images\ImplementInterface.png" />
+    <Content Include="Content\Images\IntroduceField.png" />
+    <Content Include="Content\Images\IntroduceParameter.png" />
+    <Content Include="Content\Images\MoveCloserToUsage.png" />
+    <Content Include="Content\Images\RemoveParameters.png" />
+    <Content Include="Content\Images\ReorderParameters.png" />
     <Content Include="Content\Images\Rubberduck.png" />
     <Content Include="Content\Images\Refactoring.png" />
-    <Content Include="Content\Images\RemoveParamaters.png" />
     <Content Include="Content\Images\Rename.png" />
     <Content Include="Content\Images\RenameRefactoring.png" />
-    <Content Include="Content\Images\ReorderParamaters.png" />
     <Content Include="Content\Images\RubberduckHeaderLogo.png" />
     <Content Include="Content\Images\TestRunner.png" />
     <Content Include="Content\Images\TestRunner_Large.png" />
@@ -166,7 +172,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -183,11 +191,9 @@
     <Content Include="Views\Home\Features.cshtml" />
     <Content Include="Views\Home\News.cshtml" />
     <Content Include="Views\Home\BlogFeed.cshtml" />
+    <Content Include="Views\Home\Refactorings.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

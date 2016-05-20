@@ -15,6 +15,11 @@ namespace RubberduckWeb.Controllers
             return View();
         }
 
+        public ActionResult Refactorings()
+        {
+            return View();
+        }
+
         public ActionResult Features()
         {
             return View();

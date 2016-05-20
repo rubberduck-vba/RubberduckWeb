@@ -39,15 +39,18 @@ section {
 h3, .h3 {
     padding: 15px;
     /* Fade from light blue on left to transparent on right */
-    background: #9FBFDB; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(left, #9FBFDB, rgba(255, 255, 255, 0)); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(right, #9FBFDB, rgba(255, 255, 255, 0)); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(right, #9FBFDB, rgba(255, 255, 255, 0)); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to right, #9FBFDB, rgba(255, 255, 255, 0)); /* Standard syntax */
+    background: #7697bd; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left, #7697bd, rgba(255, 255, 255, 0)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, #7697bd, rgba(255, 255, 255, 0)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, #7697bd, rgba(255, 255, 255, 0)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, #7697bd, rgba(255, 255, 255, 0)); /* Standard syntax */
 
     /* round the borders off*/
     -ms-border-radius: 15px;
     border-radius: 15px;
+
+    font-weight: bold;
+    color: white;
 }
 
     h3 small, .h3 small {
