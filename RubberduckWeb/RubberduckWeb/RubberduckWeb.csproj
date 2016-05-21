@@ -192,6 +192,7 @@
     <Content Include="Views\Home\News.cshtml" />
     <Content Include="Views\Home\BlogFeed.cshtml" />
     <Content Include="Views\Home\Refactorings.cshtml" />
+    <Content Include="Views\Home\Inspections.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
