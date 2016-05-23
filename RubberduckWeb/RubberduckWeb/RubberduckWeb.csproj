@@ -150,6 +150,7 @@
     <Content Include="Content\Images\Rename.png" />
     <Content Include="Content\Images\RenameRefactoring.png" />
     <Content Include="Content\Images\RubberduckHeaderLogo.png" />
+    <Content Include="Content\Images\TestExplorer.png" />
     <Content Include="Content\Images\TestRunner.png" />
     <Content Include="Content\Images\TestRunner_Large.png" />
     <Content Include="Content\Images\TodoExplorer.png" />
@@ -193,6 +194,7 @@
     <Content Include="Views\Home\BlogFeed.cshtml" />
     <Content Include="Views\Home\Refactorings.cshtml" />
     <Content Include="Views\Home\Inspections.cshtml" />
+    <Content Include="Views\Home\UnitTest.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

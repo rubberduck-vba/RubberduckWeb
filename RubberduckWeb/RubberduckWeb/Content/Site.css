@@ -64,14 +64,9 @@ section#codeInspections img {
     margin-right: auto;
 }
 
-.navbar-nav {
-    float: right;
-}
-
 .dropdown-menu {
     display: none;
-    position: relative;
-    float: right;
+    position: absolute;
     background-color: #222;
 }
 
@@ -87,14 +82,18 @@ section#codeInspections img {
 }
 
 ul.nav li.dropdown:hover > ul.dropdown-menu {
-    display: inline-block;
-}
-
-.nav-item {
-    display: inline-block;
+    display: block;
 }
 
 .nav > li {
     display: inline-block;
     vertical-align: top;
+}
+
+.nav{
+    margin-left: -15px;
+}
+
+nav {
+    border-top: 2px solid gray;
 }

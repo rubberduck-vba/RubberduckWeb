@@ -25,6 +25,11 @@ namespace RubberduckWeb.Controllers
             return View();
         }
 
+        public ActionResult UnitTest()
+        {
+            return View();
+        }
+
         public ActionResult About()
         {
             return View();
