@@ -97,3 +97,7 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
 nav {
     border-top: 2px solid gray;
 }
+
+section {
+    border-bottom-width: 0;
+}
