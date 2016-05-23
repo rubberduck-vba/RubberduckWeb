@@ -102,3 +102,18 @@ nav {
 section {
     border-bottom-width: 0;
 }
+
+.img-thumbnail {
+    width: 100px;
+}
+
+.image-div {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    float: right;
+    border: 1px solid lightgray;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+}
