@@ -189,12 +189,14 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Features.cshtml" />
     <Content Include="Views\Home\News.cshtml" />
     <Content Include="Views\Home\BlogFeed.cshtml" />
     <Content Include="Views\Home\Refactorings.cshtml" />
     <Content Include="Views\Home\Inspections.cshtml" />
-    <Content Include="Views\Home\UnitTest.cshtml" />
+    <Content Include="Views\Home\UnitTesting.cshtml" />
+    <Content Include="Views\Home\Navigation.cshtml" />
+    <Content Include="Views\Home\SourceControl.cshtml" />
+    <Content Include="Views\Home\Indentation.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
