@@ -90,11 +90,12 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
     vertical-align: top;
 }
 
-.nav{
+.nav {
     margin-left: -15px;
 }
 
 nav {
+    margin-top: 25px;
     border-top: 2px solid gray;
 }
 
