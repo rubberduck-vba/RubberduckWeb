@@ -68,3 +68,33 @@ section#codeInspections img {
     float: right;
 }
 
+.dropdown-menu {
+    display: none;
+    position: relative;
+    float: right;
+    background-color: #222;
+}
+
+.dropdown-menu > li > a {
+    color: #999;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #222;
+}
+
+ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: inline-block;
+}
+
+.nav-item {
+    display: inline-block;
+}
+
+.nav > li {
+    display: inline-block;
+    vertical-align: top;
+}

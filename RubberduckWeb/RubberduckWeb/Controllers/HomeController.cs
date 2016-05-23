@@ -25,11 +25,6 @@ namespace RubberduckWeb.Controllers
             return View();
         }
 
-        public ActionResult Features()
-        {
-            return View();
-        }
-
         public ActionResult About()
         {
             return View();
