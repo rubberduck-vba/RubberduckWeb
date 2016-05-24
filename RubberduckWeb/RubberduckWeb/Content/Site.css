@@ -115,5 +115,6 @@ section {
     border: 1px solid lightgray;
     padding: 20px;
     background-color: white;
+    -ms-border-radius: 10px;
     border-radius: 10px;
 }

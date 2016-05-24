@@ -1,8 +1,10 @@
-﻿var $displayImage = function (path) {
+﻿"use strict";
+
+function $displayImage(path) {
     $("div.image-div").css("display", "block");
     $("img.image").attr("src", path);
 };
 
-var $hideImage = function () {
+function $hideImage() {
     $("div.image-div").css("display", "none");
 };
