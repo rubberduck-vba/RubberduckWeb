@@ -6,12 +6,12 @@
     <h3>Inspections</h3>
 </div>
 <section id="codeInspections">
-    <p>Most code inspections propose at least one quick fix that can be applied with a single click. Severity levels range from DoNotShow to Error and is completely configurable, for every single inspection.</p>
+    <p>Most code inspections propose at least one quick fix that can be applied with a single click. Severity levels range from Do Not Show to Error and are completely configurable, for every single inspection.</p>
     <img src="~/Content/Images/CodeInspections_Large.png" />
     <div>
         @using (Html.BeginForm("GetInspectionResults", "Inspections", FormMethod.Post))
         {
-            <textarea id="code" name="code" type="text" height="300" width="500"></textarea>
+            <textarea id="code" name="code" type="text" height="300" rows="3"></textarea>
             <input id="LoadInspections" type="submit" value="Inspect" />
         }
     </div>
@@ -55,7 +55,7 @@
         <div class="col-md-4">
             <h4>Maintainability/Readability</h4>
             <ul>
-                <li onclick="$inspectionResults()">Scope of variable is broader than it needs to be</li>
+                <li>Scope of variable is broader than it needs to be</li>
                 <li>Public field breaks encapsulation</li>
                 <li>Implicit reference to ActiveSheet</li>
                 <li>Implicit reference to ActiveWorkbook</li>
