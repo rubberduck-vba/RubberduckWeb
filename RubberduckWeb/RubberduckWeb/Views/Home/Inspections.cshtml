@@ -7,15 +7,12 @@
 </div>
 <section id="codeInspections">
     <p>Most code inspections propose at least one quick fix that can be applied with a single click. Severity levels range from Do Not Show to Error and are completely configurable, for every single inspection.</p>
-    <img src="~/Content/Images/CodeInspections_Large.png" />
-    <div>
-        @using (Html.BeginForm("GetInspectionResults", "Inspections", FormMethod.Post))
-        {
-            <textarea id="code" name="code" type="text" height="300" rows="3"></textarea>
-            <input id="LoadInspections" type="submit" value="Inspect" />
-        }
-    </div>
-
+    <img src="~/Content/Images/CodeInspections_Large.png"/>
+    @using (Html.BeginForm("GetInspectionResults", "Inspections", FormMethod.Post, new { @class = "inspections-form" }))
+    {
+        <textarea id="code" name="code" type="text" cols="100" rows="10" placeholder="Enter code to run the inspections against."></textarea>
+        <input id="LoadInspections" type="submit" value="Inspect" />
+    }
     <div class="row">
         <div class="col-md-4">
             <h4>Code Quality Issues</h4>

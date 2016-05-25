@@ -15,13 +15,6 @@
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
 section {
     border-bottom-style: groove;
     border-width: thin;
@@ -117,4 +110,8 @@ section {
     background-color: white;
     -ms-border-radius: 10px;
     border-radius: 10px;
+}
+
+.inspections-form {
+    
 }

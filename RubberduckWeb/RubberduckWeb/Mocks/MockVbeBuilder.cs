@@ -12,8 +12,8 @@ namespace RubberduckWeb.Mocks
     /// </summary>
     public class MockVbeBuilder
     {
-        public const string TEST_PROJECT_NAME = "TestProject1";
-        public const string TEST_MODULE_NAME = "TestModule1";
+        public const string TEST_PROJECT_NAME = "VBAProject";
+        public const string TEST_MODULE_NAME = "Module1";
         private readonly Mock<VBE> _vbe;
 
         private Mock<VBProjects> _vbProjects;
