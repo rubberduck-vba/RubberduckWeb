@@ -1,26 +1,25 @@
 ﻿using System;
 using Microsoft.Vbe.Interop;
 using Moq;
-using Rubberduck.Inspections;
 using Rubberduck.Parsing.VBA;
 using Rubberduck.VBEditor.VBEHost;
 using RubberduckTests;
 using RubberduckWeb.Mocks;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using RubberduckWeb.Mocks.Rubberduck.Inspections;
 
 namespace RubberduckWeb.Controllers
 {
     public class InspectionsController : Controller
     {
-        private readonly IEnumerable<IInspection> _inspections;
+        private readonly DefaultInspector _inspector;
         private readonly RubberduckParserState _state;
 
-        public InspectionsController(IEnumerable<IInspection> inspections, RubberduckParserState state)
+        public InspectionsController(DefaultInspector inspector, RubberduckParserState state)
         {
-            _inspections = inspections;
+            _inspector = inspector;
             _state = state;
         }
 
@@ -40,14 +39,12 @@ namespace RubberduckWeb.Controllers
             {
                 return $"Rubberduck could not compile this code: {parser.State.Status}.";
             }
+            
+            var inspectionResults = _inspector.FindIssuesAsync(parser.State, new System.Threading.CancellationToken());
 
-            var inspectionResults = new List<ICodeInspectionResult>();
-            foreach (var inspection in _inspections)
-            {
-                inspectionResults.AddRange(inspection.GetInspectionResults());
-            }
-
-            return string.Join(Environment.NewLine, inspectionResults.Select(s => $"<table class=\"inspections-table\"><tr><td>{s.Description}</td><td>{s.Inspection.Severity}</td><td>{s.Inspection.InspectionType}</td></tr></table>"));
+            return string.Join(Environment.NewLine,
+                inspectionResults.Select(s =>
+                        $"<table class=\"inspections-table\"><tr><td>{s.Description}</td><td>{s.Inspection.Severity}</td><td>{s.Inspection.InspectionType}</td></tr></table>"));
         }
     }
 }
