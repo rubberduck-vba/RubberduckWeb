@@ -32,6 +32,7 @@ namespace RubberduckWeb.Controllers
             var vbe = builder.BuildFromSingleStandardModule(code, out component);
             var mockHost = new Mock<IHostApplication>();
             mockHost.SetupAllProperties();
+
             var parser = MockParser.Create(vbe.Object, _state);
 
             Task.Run(() => parser.Parse()).Wait();

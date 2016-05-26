@@ -71,8 +71,8 @@ namespace RubberduckWeb.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<RubberduckParserState>().ToSelf().InSingletonScope();
-            kernel.Bind<RubberduckParser>().ToSelf().InSingletonScope();
+            kernel.Bind<RubberduckParserState>().ToSelf().InCallScope();
+            kernel.Bind<RubberduckParser>().ToSelf().InCallScope();
 
             var assemblies = new[]
             {
