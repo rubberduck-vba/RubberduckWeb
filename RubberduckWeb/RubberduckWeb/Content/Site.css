@@ -113,5 +113,11 @@ section {
 }
 
 .inspections-form {
-    
+    border: 3px double black;
+    padding: 10px 23px;
+    margin: 5px
+}
+
+#code {
+    width: 100%;
 }
