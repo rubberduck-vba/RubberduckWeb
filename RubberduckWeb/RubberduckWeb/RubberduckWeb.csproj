@@ -269,6 +269,7 @@
     <Content Include="Views\Home\Navigation.cshtml" />
     <Content Include="Views\Home\SourceControl.cshtml" />
     <Content Include="Views\Home\Indentation.cshtml" />
+    <Content Include="Views\Home\InspectionResults.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
