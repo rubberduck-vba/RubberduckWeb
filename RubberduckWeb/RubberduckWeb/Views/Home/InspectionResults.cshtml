@@ -4,13 +4,23 @@
 
 @model List<Rubberduck.Inspections.ICodeInspectionResult>
 <div class="row">
-    @foreach (var item in Model)
-    {
-        <table>
-            <tr>@item.Inspection.Severity</tr>
-            <tr>@item.Description</tr>
-            <tr>@item.QualifiedSelection.Selection.StartLine</tr>
-            <tr>@item.QualifiedSelection.Selection.StartColumn</tr>
-        </table>
-    }
+    <table>
+        <tbody>
+            <tr>
+                <th>Severity</th>
+                <th>Description</th>
+                <th>Start Line</th>
+                <th>Start Column</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Inspection.Severity</td>
+                    <td>@item.Description</td>
+                    <td>@item.QualifiedSelection.Selection.StartLine</td>
+                    <td>@item.QualifiedSelection.Selection.StartColumn</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

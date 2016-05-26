@@ -121,3 +121,16 @@ section {
 #code {
     width: 100%;
 }
+
+#inspection-results > table {
+    border: 1px solid black;
+}
+
+td th {
+    padding: 5px !important;
+    margin: 5px !important;
+}
+
+tr:nth-child(even) {
+    border-color: aliceblue;
+}
