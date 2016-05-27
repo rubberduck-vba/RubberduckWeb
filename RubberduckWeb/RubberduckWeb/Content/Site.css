@@ -136,4 +136,9 @@ tr:nth-child(even) {
     border: 3px double black;
     margin: 5px;
     border-collapse: separate;
+    width: 100%;
+}
+
+#inspection-results {
+    padding: 0 15px;
 }
