@@ -135,6 +135,7 @@ namespace RubberduckWeb.Mocks
             result.SetupGet(m => m.FileName).Returns(() => filename);
             result.SetupGet(m => m.Protection).Returns(() => protection);
             result.SetupGet(m => m.VBE).Returns(_getVbe);
+            result.Setup(m => m.BuildFileName);
 
             return result;
         }
