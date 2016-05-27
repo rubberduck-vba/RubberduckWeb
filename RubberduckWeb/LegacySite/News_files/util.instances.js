@@ -1,2 +1,0 @@
-define([],function(){function t(t,n){this.name=t,this.Module=n,this.instances={},this.instanceNum=0}return t.prototype={create:function(t,n){return t.length&&!this.get(t)?this.instances[(n=n||{}).instanceId=++this.instanceNum]=new this.Module(t.data(this.name+"-instance",this.instanceNum),n):!1},get:function(t){return t.length?this.instances[t.data(this.name+"-instance")]:!1},destroy:function(t){var n=this.get(t);return n?(delete this.instances[n.model&&n.model.get?n.model.get("instanceId"):n.options.instanceId],!0):!1}},t});
-//# sourceMappingURL=util.instances.js.map
