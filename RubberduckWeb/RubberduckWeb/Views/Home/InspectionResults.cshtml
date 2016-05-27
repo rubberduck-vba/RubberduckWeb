@@ -2,23 +2,31 @@
     ViewBag.Title = "InspectionResults";
 }
 
-@model List<Rubberduck.Inspections.ICodeInspectionResult>
+@using Rubberduck.Inspections
+@model List<ICodeInspectionResult>
+@{
+    var severityIconUrls = new Dictionary<CodeInspectionSeverity, string>
+    {
+        { CodeInspectionSeverity.Error, "/Content/Images/Error.png" },
+        { CodeInspectionSeverity.Warning, "/Content/Images/Warning.png" },
+        { CodeInspectionSeverity.Suggestion, "/Content/Images/Suggestion.png" },
+        { CodeInspectionSeverity.Hint, "/Content/Images/Hint.png" }
+    };
+}
 <div class="row">
     <table class="inspection-results-table">
         <tbody>
             <tr>
                 <th>Severity</th>
                 <th>Description</th>
-                <th>Start Line</th>
-                <th>Start Column</th>
+                <th>Selection</th>
             </tr>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.Inspection.Severity</td>
+                    <td><img alt="@item.Inspection.Severity" src="@severityIconUrls[item.Inspection.Severity]"/></td>
                     <td>@item.Description</td>
-                    <td>@item.QualifiedSelection.Selection.StartLine</td>
-                    <td>@item.QualifiedSelection.Selection.StartColumn</td>
+                    <td>@string.Format("L{0}C{1}", item.QualifiedSelection.Selection.StartLine, item.QualifiedSelection.Selection.StartColumn)</td>
                 </tr>
             }
         </tbody>
