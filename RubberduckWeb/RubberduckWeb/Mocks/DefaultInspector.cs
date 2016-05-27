@@ -1,7 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Rubberduck.Parsing.VBA;
 using Rubberduck.UI;
@@ -15,14 +14,19 @@ namespace RubberduckWeb.Mocks
     {
         public class DefaultInspector
         {
-            private readonly IEnumerable<IInspection> _inspections;
+            private readonly List<IInspection> _inspections;
 
-            public DefaultInspector(IEnumerable<IInspection> inspections)
+            public DefaultInspector(IEnumerable<IInspection> inspections, RubberduckParserState state)
             {
-                _inspections = inspections;
+                _inspections = inspections.ToList();
+
+                if (_inspections.All(i => i.Name != nameof(ParameterNotUsedInspection)))
+                {
+                    _inspections.Add(new ParameterNotUsedInspection(null, state, null));
+                }
             }
 
-            public List<ICodeInspectionResult> FindIssuesAsync(RubberduckParserState state, CancellationToken token)
+            public List<ICodeInspectionResult> FindIssuesAsync(RubberduckParserState state)
             {
                 if (state == null || !state.AllUserDeclarations.Any())
                 {
@@ -44,15 +48,11 @@ namespace RubberduckWeb.Mocks
                     .Select(inspection =>
                         new Task(() =>
                         {
-                            token.ThrowIfCancellationRequested();
                             var inspectionResults = inspection.GetInspectionResults();
-
-                            if (inspectionResults.Any())
+                            
+                            foreach (var inspectionResult in inspectionResults)
                             {
-                                foreach (var inspectionResult in inspectionResults)
-                                {
-                                    allIssues.Add(inspectionResult);
-                                }
+                                allIssues.Add(inspectionResult);
                             }
                         })).ToArray();
 

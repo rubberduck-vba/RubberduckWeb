@@ -39,7 +39,7 @@ namespace RubberduckWeb.Controllers
                 throw new ArgumentException(parser.State.Status.ToString());
             }
 
-            var results = _inspector.FindIssuesAsync(parser.State, new System.Threading.CancellationToken());
+            var results = _inspector.FindIssuesAsync(parser.State);
 
             return Task.FromResult(PartialView("~/Views/Home/InspectionResults.cshtml", results));
         }
