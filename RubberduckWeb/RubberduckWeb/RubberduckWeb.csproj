@@ -194,6 +194,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\CodeExplorer-small.png" />
     <Content Include="Content\Images\CodeExplorer.png" />
     <Content Include="Content\Images\CodeInspections.png" />
     <Content Include="Content\Images\CodeInspections_Large.png" />
@@ -201,6 +202,7 @@
     <Content Include="Content\Images\EncapsulateField.png" />
     <Content Include="Content\Images\Hint.png" />
     <Content Include="Content\Images\Suggestion.png" />
+    <Content Include="Content\Images\TestExplorer-small.png" />
     <Content Include="Content\Images\Warning.png" />
     <Content Include="Content\Images\ExtractInterface.png" />
     <Content Include="Content\Images\ExtractMethod.png" />
@@ -221,7 +223,6 @@
     <Content Include="Content\Images\TestExplorer.png" />
     <Content Include="Content\Images\TestRunner.png" />
     <Content Include="Content\Images\TestRunner_Large.png" />
-    <Content Include="Content\Images\TodoExplorer.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

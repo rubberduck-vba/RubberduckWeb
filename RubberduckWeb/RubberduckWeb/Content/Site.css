@@ -46,10 +46,14 @@ h3, .h3 {
     color: white;
 }
 
-    h3 small, .h3 small {
-        color: #5E5D5D;
-        float: right;
-    }
+h3 small, .h3 small {
+    color: #5E5D5D;
+    float: right;
+}
+
+h4, .h4 {
+    padding-left: 15px;
+}
 
 section#codeInspections img {
     display: block;
@@ -147,4 +151,8 @@ tr:nth-child(even) {
     color: red;
     font-weight: bold;
     font-size: 16px;
+}
+
+.row {
+    margin-bottom: 20px;
 }

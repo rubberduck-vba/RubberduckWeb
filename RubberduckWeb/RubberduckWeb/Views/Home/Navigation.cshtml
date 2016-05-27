@@ -4,17 +4,21 @@
 }
 
 <section id="navigation">
+    <div class="image-div col-md-push-4">
+        <img class="image" />
+    </div>
     <h3>Navigation</h3>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-lg-6">
             <h4>Code Explorer</h4>
-            <p>is a bit like the Project Explorer, except it drills down to module members and can display member signatures.</p>
-            <img src="~/Content/Images/CodeExplorer.png" />
+            <img alt="Code Explorer" src="~/Content/Images/CodeExplorer-small.png" onclick="$displayImage('/Content/Images/CodeExplorer.png')" class="col-lg-6"/>
+            <p class="col-lg-6">The Code Explorer is a full replacement for the Project Explorer&mdash;only better. It has all the old features, such as importing, exporting, and removing (only our import allows you to import multiple modules, unlike the Project Explorer), and some new ones, such as indenting a procedure, module, all modules in a folder, or all modules in a project. It also sports Commit and Undo commands to open the Source Control panel and commit or undo all changes in a tracked file without needed to open the Source Control panel.</p>
         </div>
-        <div class="col-md-4">
-            <h4>ToDo Explorer</h4>
-            <p>finds configurable markers in comments, and regroups them all in one convenient place.</p>
-            <img src="~/Content/Images/TodoExplorer.png" />
+
+        <div class="col-lg-6">
+            <h4>Todo Explorer</h4>
+            <img alt="Todo Explorer" src="~/Content/Images/TestExplorer-small.png" onclick="$displayImage('/Content/Images/TestExplorer.png')" class="col-lg-6" />
+            <p class="col-lg-6">The Test Explorer helps you create, run, and manage unit tests with minimal boilerplate.</p>
         </div>
     </div>
     <div class="row">
