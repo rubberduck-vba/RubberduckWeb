@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "Refactorings";
+}
+
+<div class="lead">
+    <h3>Refactorings</h3>
+</div>
+<div class="image-div col-lg-push-4">
+    <img class="image"/>
+</div>
+<section>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Rename</h4>
+            <p>
+                You've inherited a code base crippled with single-letter identifiers used just about everywhere? This feature isn't a Find/Replace - it locates every reference to the target identifier within the active project, and replaces the token with a new identifier name. Naming is hard; renaming is easy.
+            </p>
+        </div>
+        <div class="col-md-6">
+            <img class="img-thumbnail" src="~/Content/Images/Rename.png" onclick="$displayImage('/Content/Images/Rename.png')" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Extract Method</h4>
+            <p>You're facing a long method that's doing way too many things. Splitting it up manually is tedious, and risky. With this feature you select the code you want to extract out of a method, and Rubberduck converts it to a method call for you.</p>
+        </div>
+        <div class="col-md-6">
+            <img class="img-thumbnail" src="~/Content/Images/ExtractMethod.png" onclick="$displayImage('/Content/Images/ExtractMethod.png')" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Extract Interface</h4>
+            <p>Need to implement an interface for an existing class? Our Extract Interface will make this a breeze--just choose the members you want to implement and click OK. This refactoring currently implements the new members the same way as the Implement Interface refactoring, but we are preparing to make this rename the chosen members (and update their usages!) to implement the interface with no work on your part.</p>
+        </div>
+        <div class="col-md-6">
+            <img class="img-thumbnail" src="~/Content/Images/ExtractInterface.png" onclick="$displayImage('/Content/Images/ExtractInterface.png')" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Implement Interface</h4>
+            <p>This refactoring works off a selected <em>Implements</em> statement. It will detect and implement any members of the interface that are not yet implemented, throwing an exception in the member body.</p>
+        </div>
+        <div class="col-md-6">
+            <img class="img-thumbnail" src="~/Content/Images/ImplementInterface.png" onclick="$displayImage('/Content/Images/ImplementInterface.png')" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Remove Parameter(s)</h4>
+            <p>A procedure called in 12 places needs to change, and the new version no longer needs one of the parameters? This refactoring will remove it from the signature, and from every call site as well.</p>
+        </div>
+        <div class="col-md-4">
+            <img class="img-thumbnail" src="~/Content/Images/RemoveParameters.png" onclick="$displayImage('/Content/Images/RemoveParameters.png')" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Reorder Parameters</h4>
+            <p>Sometimes you come across this utility function that's used just about everywhere, that has this annoying first parameter that would be so much better specified last. This refactoring lets you change the order of the&nbsp;parameters in a signature, and automatically adjust all call sites.</p>
+        </div>
+        <div class="col-md-6">
+            <img class="img-thumbnail" src="~/Content/Images/ReorderParameters.png" onclick="$displayImage('/Content/Images/ReorderParameters.png')" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Move Closer To Usage</h4>
+            <p>This refactoring moves a variable or field that is only used in a single scope closer to its usage.  This will be very useful for cleaning up codebases written by someone who did not understand the principle of narrow scope.</p>
+        </div>
+        <div class="col-md-6">
+            <img class="img-thumbnail" src="~/Content/Images/MoveCloserToUsage.png" onclick="$displayImage('/Content/Images/MoveCloserToUsage.png')" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Encapsulate Field</h4>
+            <p>This refactoring encapsulates a public or private field into a property. It is intelligent enough to know when the property should have a letter or setter (or if it could have both) and requires a valid name, taking into account the other members in its parent scope.</p>
+        </div>
+        <div class="col-md-6">
+            <img class="img-thumbnail" src="~/Content/Images/EncapsulateField.png" onclick="$displayImage('/Content/Images/EncapsulateField.png')" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Introduce Parameter</h4>
+            <p>This refactoring allows you to promote a local variable to a parameter in the member it is declared in. If the parent is a property, it will update all property members.</p>
+        </div>
+        <div class="col-md-6">
+            <img class="img-thumbnail" src="~/Content/Images/IntroduceParameter.png" onclick="$displayImage('/Content/Images/IntroduceParameter.png')" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Introduce Field</h4>
+            <p>This refactoring allows you to promote a local variable to a field in the class or module it is declared in.</p>
+        </div>
+        <div class="col-md-6">
+            <img class="img-thumbnail" src="~/Content/Images/IntroduceField.png" onclick="$displayImage('/Content/Images/IntroduceField.png')" />
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Inspections";
+}
+
+<div class="lead">
+    <h3>Inspections</h3>
+</div>
+<section id="codeInspections">
+    <p>Most code inspections propose at least one quick fix that can be applied with a single click. Severity levels range from Do Not Show to Error and are completely configurable, for every single inspection.</p>
+    <img src="~/Content/Images/CodeInspections_Large.png"/>
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Code Quality Issues</h4>
+            <ul>
+                <li>Object variable assignment requires <em>Set</em> keyword</li>
+                <li>Function return value is never used</li>
+                <li>Object variable reference is self-assigned</li>
+                <li>Write-only property</li>
+                <li>ByVal parameter is assigned</li>
+                <li>Constant is not used</li>
+                <li>Non-returning function or property getter</li>
+                <li>Parameter can be passed by value</li>
+                <li>Parameter is not referred to</li>
+                <li>Procedure is not referred to</li>
+                <li>Variable is used but not assigned</li>
+                <li>Variable is not referred to</li>
+                <li>Variable is declared but never assigned</li>
+                <li>Implicit ByRef parameter</li>
+                <li>Member return type is implicitly <em>Variant</em></li>
+                <li><em>Option Explicit</em> is not specified</li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h4>Language Opportunities</h4>
+            <ul>
+                <li>Empty string literal</li>
+                <li>Procedure can be written as a function</li>
+                <li>Use of variant-returning string function</li>
+                <li><em>Call</em> statement usage</li>
+                <li><em>Global</em> statement usage</li>
+                <li><em>Let</em> statement usage</li>
+                <li>Type hint usage</li>
+                <li><em>Rem</em> statement usage</li>
+                <li>Implicitly <em>Variant</em> variable</li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h4>Maintainability/Readability</h4>
+            <ul>
+                <li>Scope of variable is broader than it needs to be</li>
+                <li>Public field breaks encapsulation</li>
+                <li>Implicit reference to ActiveSheet</li>
+                <li>Implicit reference to ActiveWorkbook</li>
+                <li>Module has more than one <em>'&#64;Folder</em> annotation</li>
+                <li>Use meaningful names</li>
+                <li>Project has default name</li>
+                <li>Implicitly public member</li>
+                <li>Parameter declaration is split on multiple lines</li>
+                <li><em>Option Base 1</em> is specified</li>
+                <li>Multiple declarations in single instruction</li>
+            </ul>
+        </div>
+    </div>
+    <div class="inspections-form row">
+        <div class="row">
+            <textarea id="code" type="text" rows="10" placeholder="Enter code to run the inspections against."></textarea>
+        </div>
+        <div class="row">
+            <button id="loadInspections" onclick="$loadInspections()">Inspect</button>
+        </div>
+    </div>
+    <div id="inspection-results"></div>
+</section>

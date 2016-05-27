@@ -1,2 +1,0 @@
-define(["common/browser/browser"],function(r){var e="ux"in r.window;return{isUxCore:e,require:function(n,i,o){return e?r.window.require(n,i,o):r.window.require(n).then(i,o)}}});
-//# sourceMappingURL=helper.js.map

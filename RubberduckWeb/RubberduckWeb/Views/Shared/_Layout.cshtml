@@ -5,35 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rubberduck - @ViewBag.Title</title>
     @Styles.Render("~/Content/css")
+    @Scripts.Render("~/Scripts/Rubberduck.js")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body onmousedown="$hideImage()">
     <div class="navbar navbar-inverse navbar-static-top">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
                 <a href='@Url.Action("Index", "Home")' class="navbar-brand">
-                    <img src='@Url.Content("~/Content/Images/RubberduckHeaderLogo.png")' alt="Rubberduck" width="280" />
+                    <img src='@Url.Content("~/Content/Images/RubberduckHeaderLogo.png")' alt="Rubberduck" width="280"/>
                 </a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Features", "Features", "Home")</li>
-                    <li>@Html.ActionLink("News", "News", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
         </div>
+        <nav class="container">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                <li class="dropdown">
+                    <a>Features</a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Refactorings", "Refactorings", "Home")</li>
+                        <li>@Html.ActionLink("Inspections", "Inspections", "Home")</li>
+                        <li>@Html.ActionLink("Unit Testing", "UnitTesting", "Home")</li>
+                        <li>@Html.ActionLink("Navigation", "Navigation", "Home")</li>
+                        <li>@Html.ActionLink("Source Control", "SourceControl", "Home")</li>
+                        <li>@Html.ActionLink("Indentation", "Indentation", "Home")</li>
+                    </ul>
+                </li>
+
+                <li>@Html.ActionLink("News", "News", "Home")</li>
+                <li>@Html.ActionLink("About", "About", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            </ul>
+        </nav>
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
+        <hr/>
         <footer>
             <p>&copy; Rubberduck VBA. - @DateTime.Now.Year All rights reserved.</p>
         </footer>

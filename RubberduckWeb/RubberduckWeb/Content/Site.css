@@ -15,13 +15,6 @@
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
 section {
     border-bottom-style: groove;
     border-width: thin;
@@ -39,15 +32,18 @@ section {
 h3, .h3 {
     padding: 15px;
     /* Fade from light blue on left to transparent on right */
-    background: #9FBFDB; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(left, #9FBFDB, rgba(255, 255, 255, 0)); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(right, #9FBFDB, rgba(255, 255, 255, 0)); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(right, #9FBFDB, rgba(255, 255, 255, 0)); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to right, #9FBFDB, rgba(255, 255, 255, 0)); /* Standard syntax */
+    background: #7697bd; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left, #7697bd, rgba(255, 255, 255, 0)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, #7697bd, rgba(255, 255, 255, 0)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, #7697bd, rgba(255, 255, 255, 0)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, #7697bd, rgba(255, 255, 255, 0)); /* Standard syntax */
 
     /* round the borders off*/
     -ms-border-radius: 15px;
     border-radius: 15px;
+
+    font-weight: bold;
+    color: white;
 }
 
     h3 small, .h3 small {
@@ -61,7 +57,94 @@ section#codeInspections img {
     margin-right: auto;
 }
 
-.navbar-nav {
-    float: right;
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #222;
 }
 
+.dropdown-menu > li > a {
+    color: #999;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #222;
+}
+
+ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;
+}
+
+.nav > li {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.nav {
+    margin-left: -15px;
+}
+
+nav {
+    margin-top: 25px;
+    border-top: 2px solid gray;
+}
+
+section {
+    border-bottom-width: 0;
+}
+
+.img-thumbnail {
+    width: 100px;
+}
+
+.image-div {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    float: right;
+    border: 1px solid lightgray;
+    padding: 20px;
+    background-color: white;
+    -ms-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.inspections-form {
+    border: 3px double black;
+    padding: 10px 23px;
+    margin: 5px;
+    width: 100%;
+}
+
+#code {
+    width: 100%;
+}
+
+td, th {
+    padding: 5px;
+    margin: 5px;
+}
+
+tr:nth-child(even) {
+    background-color: aliceblue;
+}
+
+.inspection-results-table {
+    border: 3px double black;
+    margin: 5px;
+    border-collapse: separate;
+    width: 100%;
+}
+
+#inspection-results {
+    padding: 0 15px;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+    font-size: 16px;
+}
