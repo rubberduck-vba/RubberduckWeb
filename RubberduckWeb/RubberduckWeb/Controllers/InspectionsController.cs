@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using Microsoft.Vbe.Interop;
 using Moq;
 using Rubberduck.Parsing.VBA;
@@ -7,7 +7,6 @@ using RubberduckTests;
 using RubberduckWeb.Mocks;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using Rubberduck.Inspections;
 using RubberduckWeb.Mocks.Rubberduck.Inspections;
 
 namespace RubberduckWeb.Controllers
@@ -35,11 +34,13 @@ namespace RubberduckWeb.Controllers
 
             var parser = MockParser.Create(vbe.Object, _state);
             Task.Run(() => parser.Parse()).Wait();
-            var results =  parser.State.Status != ParserState.Ready
-                ? new List<ICodeInspectionResult>()
-                : _inspector.FindIssuesAsync(parser.State, new System.Threading.CancellationToken());
+            if (parser.State.Status >= ParserState.Error)
+            {
+                throw new ArgumentException(parser.State.Status.ToString());
+            }
 
-            
+            var results = _inspector.FindIssuesAsync(parser.State, new System.Threading.CancellationToken());
+
             return Task.FromResult(PartialView("~/Views/Home/InspectionResults.cshtml", results));
         }
     }

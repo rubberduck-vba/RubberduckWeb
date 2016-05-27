@@ -142,3 +142,9 @@ tr:nth-child(even) {
 #inspection-results {
     padding: 0 15px;
 }
+
+.error {
+    color: red;
+    font-weight: bold;
+    font-size: 16px;
+}

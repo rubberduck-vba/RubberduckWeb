@@ -17,6 +17,9 @@ function $loadInspections() {
         type: "POST",
         success: function (data) {
             $("div#inspection-results").html(data);
+        },
+        error: function () {
+            $("div#inspection-results").html('<p class="error">Rubberduck failed to either parse or resolve this code.  Please verify that it works, then report this problem at our <a href="https://github.com/rubberduck-vba/Rubberduck">GitHub repository</a> if necessary.</p>');
         }
     });
 }
