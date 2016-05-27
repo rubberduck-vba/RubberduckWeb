@@ -19,12 +19,13 @@
             <tr>
                 <th>Severity</th>
                 <th>Description</th>
-                <th>Selection</th>
+                <th>Location</th>
             </tr>
-            @foreach (var item in Model)
+            @foreach (var item in Model.OrderBy(o => o.QualifiedSelection.Selection.StartLine)
+                                       .ThenBy(t => t.QualifiedSelection.Selection.StartColumn))
             {
                 <tr>
-                    <td><img alt="@item.Inspection.Severity" src="@severityIconUrls[item.Inspection.Severity]"/></td>
+                    <td width="50"><img alt="@item.Inspection.Severity" src="@severityIconUrls[item.Inspection.Severity]"/></td>
                     <td>@item.Description</td>
                     <td>@string.Format("L{0}C{1}", item.QualifiedSelection.Selection.StartLine, item.QualifiedSelection.Selection.StartColumn)</td>
                 </tr>
