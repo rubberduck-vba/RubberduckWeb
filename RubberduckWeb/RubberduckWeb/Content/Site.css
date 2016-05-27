@@ -115,22 +115,25 @@ section {
 .inspections-form {
     border: 3px double black;
     padding: 10px 23px;
-    margin: 5px
+    margin: 5px;
+    width: 100%;
 }
 
 #code {
     width: 100%;
 }
 
-#inspection-results > table {
-    border: 1px solid black;
-}
-
-td th {
-    padding: 5px !important;
-    margin: 5px !important;
+td, th {
+    padding: 5px;
+    margin: 5px;
 }
 
 tr:nth-child(even) {
-    border-color: aliceblue;
+    background-color: aliceblue;
+}
+
+.inspection-results-table {
+    border: 3px double black;
+    margin: 5px;
+    border-collapse: separate;
 }

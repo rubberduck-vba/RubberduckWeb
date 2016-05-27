@@ -16,7 +16,7 @@ function $loadInspections() {
         data: { code: $("textarea#code").val() },
         type: "POST",
         success: function (data) {
-            $("div#inspection-results").replaceWith(data);
+            $("div#inspection-results").html(data);
         }
     });
 }
