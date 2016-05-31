@@ -107,7 +107,9 @@ section {
 .image-div {
     display: none;
     position: fixed;
-    z-index: 10;
+    top:50%;
+    left:50%;
+    z-index: 1000;
     float: right;
     border: 1px solid lightgray;
     padding: 20px;
