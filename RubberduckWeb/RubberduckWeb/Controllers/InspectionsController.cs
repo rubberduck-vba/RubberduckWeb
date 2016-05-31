@@ -28,7 +28,11 @@ namespace RubberduckWeb.Controllers
             //Arrange
             var builder = new MockVbeBuilder();
             VBComponent component;
+
+            // ensure line endings are \r\n
+            code = code.Replace("\r\n", "\n").Replace("\n", "\r\n");
             var vbe = builder.BuildFromSingleStandardModule(code ?? string.Empty, out component);
+
             var mockHost = new Mock<IHostApplication>();
             mockHost.SetupAllProperties();
 
