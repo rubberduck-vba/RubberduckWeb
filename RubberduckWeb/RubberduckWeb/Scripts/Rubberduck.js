@@ -1,15 +1,16 @@
 ﻿"use strict";
 
 function $displayImage(path) {
+    var imgPreload = new Image();
+    $(imgPreload).attr({
+        src: path
+    });
+
     $("div.image-div").css("display", "block");
     $("img.image").attr("src", path);
-    
-    var image = $("img.image");
-    var width = image.innerWidth();
-    var height = image.innerHeight();
 
-    $("div.image-div").css("margin-left", -1 * (width / 2));
-    $("div.image-div").css("margin-top", -1 * (height / 2));
+    $("div.image-div").css("margin-left", -1 * (imgPreload.width / 2));
+    $("div.image-div").css("margin-top", -1 * (imgPreload.height / 2));
 };
 
 function $hideImage() {
