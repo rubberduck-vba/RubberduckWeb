@@ -124,6 +124,7 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -203,6 +204,8 @@
     <Content Include="Content\Images\Hint.png" />
     <Content Include="Content\Images\Suggestion.png" />
     <Content Include="Content\Images\TestExplorer-small.png" />
+    <Content Include="Content\Images\TodoExplorer-small.png" />
+    <Content Include="Content\Images\TodoExplorer.png" />
     <Content Include="Content\Images\Warning.png" />
     <Content Include="Content\Images\ExtractInterface.png" />
     <Content Include="Content\Images\ExtractMethod.png" />
@@ -267,11 +270,11 @@
     <Content Include="Views\Home\BlogFeed.cshtml" />
     <Content Include="Views\Home\Refactorings.cshtml" />
     <Content Include="Views\Home\Inspections.cshtml" />
-    <Content Include="Views\Home\UnitTesting.cshtml" />
     <Content Include="Views\Home\Navigation.cshtml" />
     <Content Include="Views\Home\SourceControl.cshtml" />
     <Content Include="Views\Home\Indentation.cshtml" />
     <Content Include="Views\Home\InspectionResults.cshtml" />
+    <Content Include="Views\Home\UnitTesting.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

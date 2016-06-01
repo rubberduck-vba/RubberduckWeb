@@ -2,19 +2,33 @@
 @{
     ViewBag.Title = "Unit Test";
 }
-<section id="unitTesting">
+<section id="unit-testing">
+    <div class="image-div col-md-push-4">
+        <img class="image" />
+    </div>
     <h3>
         Unit Testing <small>This feature is unfortunately not available for all application hosts.</small>
     </h3>
     <div class="row">
-        <div class="col-md-6">
-            <img src="~/Content/Images/TestExplorer.png" />
+        <div class="col-md-3 unit-test-img-div">
+            <style>
+                .unit-test-img-div {
+                    margin-left: 15px;
+                }
+            </style>
+            <img alt="Test Explorer" src="~/Content/Images/TestExplorer-small.png" onclick="$displayImage('/Content/Images/TestExplorer.png')" />
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
             <p>
-                <strong>You're not dreaming.</strong> Rubberduck's testing API gives you an <em>Assert</em> class that lets you write <em>Arrange-Act-Assert</em> unit tests just like you would in a modern-day IDE.
+                The Test Explorer helps you create, run, and manage unit tests with minimal boilerplate.
+                Just add a test module and test stub through the UI, write your test using Rubberduck's
+                <em>Assert</em> and <em>PermissiveAssert</em> classes, and run it. Procedures marked
+                with the <em>'&amp;ModuleInitialize</em> and <em>'&amp;ModuleCleanup</em> annotations run
+                before and after the tests in a module are run, and methods marked with the
+                <em>'&amp;TestInitialize</em> and <em>'&amp;TestCleanup</em> annotations run before and after each test.
+                Tests are marked with the <em>'&amp;TestMethod</em> annotation, ignore tests are marked with the
+                <em>'&amp;IgnoreTest</em> annotation, and the module as a whole is marked with the <em>'&amp;TestModule</em> annotation.
             </p>
-            <p>Use &#64;TestInitialize and &#64;TestCleanup methods to reduce test initialization code, and &#64;ModuleInitialize and &#64;ModuleCleanup markers to initialize fields available to all tests in a module.</p>
         </div>
     </div>
 </section>
