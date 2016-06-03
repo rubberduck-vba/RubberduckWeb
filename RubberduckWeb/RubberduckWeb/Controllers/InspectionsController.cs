@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.Vbe.Interop;
 using Moq;
 using Rubberduck.Parsing.VBA;
@@ -45,7 +46,12 @@ namespace RubberduckWeb.Controllers
 
             var results = _inspector.FindIssuesAsync(parser.State);
 
-            return Task.FromResult(PartialView("~/Views/Home/InspectionResults.cshtml", results));
+            if (results.Any())
+            {
+                return Task.FromResult(PartialView("~/Views/Home/InspectionResults.cshtml", results));
+            }
+
+            return Task.FromResult(PartialView("~/Views/Home/NoInspectionResults.cshtml", results));
         }
     }
 }

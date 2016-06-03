@@ -149,10 +149,17 @@ tr:nth-child(even) {
     padding: 0 15px;
 }
 
-.error {
-    color: red;
+.rd-alert { /*as separate from bootstrap alert*/
     font-weight: bold;
     font-size: 16px;
+}
+
+.error {
+    color: red;
+}
+
+.congratulations {
+    color: green;
 }
 
 .row {
