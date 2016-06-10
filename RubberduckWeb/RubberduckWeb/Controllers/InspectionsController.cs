@@ -32,7 +32,7 @@ namespace RubberduckWeb.Controllers
 
             // ensure line endings are \r\n
             code = code.Replace("\r\n", "\n").Replace("\n", "\r\n");
-            var vbe = builder.BuildFromSingleStandardModule(code ?? string.Empty, out component);
+            var vbe = builder.BuildFromSingleStandardModule(code, out component);
 
             var mockHost = new Mock<IHostApplication>();
             mockHost.SetupAllProperties();
