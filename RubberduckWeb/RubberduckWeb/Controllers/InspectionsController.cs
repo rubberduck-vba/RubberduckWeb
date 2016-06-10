@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.Vbe.Interop;
 using Moq;
 using Rubberduck.Parsing.VBA;
@@ -31,7 +32,7 @@ namespace RubberduckWeb.Controllers
 
             // ensure line endings are \r\n
             code = code.Replace("\r\n", "\n").Replace("\n", "\r\n");
-            var vbe = builder.BuildFromSingleStandardModule(code ?? string.Empty, out component);
+            var vbe = builder.BuildFromSingleStandardModule(code, out component);
 
             var mockHost = new Mock<IHostApplication>();
             mockHost.SetupAllProperties();
@@ -45,7 +46,12 @@ namespace RubberduckWeb.Controllers
 
             var results = _inspector.FindIssuesAsync(parser.State);
 
-            return Task.FromResult(PartialView("~/Views/Home/InspectionResults.cshtml", results));
+            if (results.Any())
+            {
+                return Task.FromResult(PartialView("~/Views/Home/InspectionResults.cshtml", results));
+            }
+
+            return Task.FromResult(PartialView("~/Views/Home/NoInspectionResults.cshtml", results));
         }
     }
 }
