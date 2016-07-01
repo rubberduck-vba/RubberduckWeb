@@ -26,7 +26,7 @@ namespace RubberduckWeb.Mocks
                 }
             }
 
-            public List<ICodeInspectionResult> FindIssuesAsync(RubberduckParserState state)
+            public List<ICodeInspectionResult> Inspect(RubberduckParserState state)
             {
                 if (state == null || !state.AllUserDeclarations.Any())
                 {

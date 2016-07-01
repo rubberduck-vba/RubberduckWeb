@@ -44,7 +44,7 @@ namespace RubberduckWeb.Controllers
                 throw new ArgumentException(parser.State.Status.ToString());
             }
 
-            var results = _inspector.FindIssuesAsync(parser.State);
+            var results = _inspector.Inspect(parser.State);
 
             if (results.Any())
             {
