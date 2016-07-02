@@ -165,3 +165,8 @@ tr:nth-child(even) {
 .row {
     margin-bottom: 20px;
 }
+
+#code {
+    font-size: 12pt;
+    font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+}
