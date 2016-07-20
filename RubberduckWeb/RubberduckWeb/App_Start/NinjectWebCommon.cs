@@ -58,7 +58,7 @@ namespace RubberduckWeb.App_Start
                 RegisterServices(kernel);
                 return kernel;
             }
-            catch
+            catch(Exception exception)
             {
                 kernel.Dispose();
                 throw;
@@ -98,9 +98,8 @@ namespace RubberduckWeb.App_Start
 
         private static void BindCodeInspectionTypes(IKernel kernel)
         {
-            var inspections = Assembly.GetAssembly(typeof(InspectionBase))
-                                      .GetTypes()
-                                      .Where(type => type.BaseType == typeof(InspectionBase));
+            var assembly = Assembly.GetAssembly(typeof (InspectionBase));
+            var inspections = assembly.GetTypes().Where(type => type.BaseType == typeof(InspectionBase));
 
             // multibinding for IEnumerable<IInspection> dependency
             foreach (var inspection in inspections)
