@@ -49,8 +49,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr4.Runtime.4.3.0\lib\net45\Antlr4.Runtime.net45.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Castle.Core.3.2.0\lib\net45\Castle.Core.dll</HintPath>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -68,9 +68,9 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>..\libs\Microsoft.Vbe.Interop.Forms.dll</HintPath>
     </Reference>
-    <Reference Include="Moq, Version=4.2.1507.118, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
+    <Reference Include="Moq, Version=4.5.16.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.5.16\lib\net45\Moq.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
@@ -104,13 +104,16 @@
       <HintPath>..\packages\NLog.4.3.4\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Rubberduck, Version=2.0.2.39651, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Rubberduck, Version=2.0.6.26123, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libs\Rubberduck.dll</HintPath>
     </Reference>
-    <Reference Include="Rubberduck.Parsing, Version=2.0.6023.38518, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Rubberduck.Parsing, Version=2.0.6045.23972, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libs\Rubberduck.Parsing.dll</HintPath>
+    </Reference>
+    <Reference Include="Rubberduck.RegexAssistant">
+      <HintPath>libs\Rubberduck.RegexAssistant.dll</HintPath>
     </Reference>
     <Reference Include="Rubberduck.SettingsProvider, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -124,7 +127,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libs\Rubberduck.SourceControl.dll</HintPath>
     </Reference>
-    <Reference Include="Rubberduck.VBEditor, Version=2.0.6022.41932, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Rubberduck.VBEditor, Version=2.0.6045.23971, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libs\Rubberduck.VBEditor.dll</HintPath>
     </Reference>
@@ -252,17 +255,11 @@
     <Content Include="libs\Microsoft.Vbe.Interop.Forms.dll" />
     <Content Include="libs\Rubberduck.dll" />
     <Content Include="libs\Rubberduck.Parsing.dll" />
-    <Content Include="libs\Rubberduck.Parsing.pdb" />
-    <Content Include="libs\Rubberduck.pdb" />
+    <Content Include="libs\Rubberduck.RegexAssistant.dll" />
     <Content Include="libs\Rubberduck.SettingsProvider.dll" />
-    <Content Include="libs\Rubberduck.SettingsProvider.pdb" />
     <Content Include="libs\Rubberduck.SmartIndenter.dll" />
-    <Content Include="libs\Rubberduck.SmartIndenter.pdb" />
     <Content Include="libs\Rubberduck.SourceControl.dll" />
-    <Content Include="libs\Rubberduck.SourceControl.pdb" />
     <Content Include="libs\Rubberduck.VBEditor.dll" />
-    <Content Include="libs\Rubberduck.VBEditor.pdb" />
-    <Content Include="libs\RubberduckTests.dll" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Rubberduck.js" />
@@ -310,7 +307,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>

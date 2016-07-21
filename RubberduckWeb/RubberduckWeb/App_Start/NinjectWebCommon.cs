@@ -7,23 +7,23 @@ using Rubberduck.Inspections;
 using Rubberduck.Parsing;
 using Rubberduck.Parsing.VBA;
 using Rubberduck.VBEditor.VBEHost;
+using System;
+using System.Web;
+using Microsoft.Vbe.Interop;
+using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+using Moq;
+using Ninject;
+using Ninject.Web.Common;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(RubberduckWeb.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(RubberduckWeb.App_Start.NinjectWebCommon), "Stop")]
+[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(RubberduckWeb.App_Start.NinjectWebCommon), "Stop")]
 
 namespace RubberduckWeb.App_Start
 {
-    using System;
-    using System.Web;
-
-    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-
-    using Ninject;
-    using Ninject.Web.Common;
-
     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
+        private static readonly ISinks Sinks = new Mock<ISinks>().Object;
 
         /// <summary>
         /// Starts the application
@@ -58,7 +58,7 @@ namespace RubberduckWeb.App_Start
                 RegisterServices(kernel);
                 return kernel;
             }
-            catch(Exception exception)
+            catch
             {
                 kernel.Dispose();
                 throw;
@@ -71,9 +71,6 @@ namespace RubberduckWeb.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<RubberduckParserState>().ToSelf().InCallScope();
-            kernel.Bind<RubberduckParser>().ToSelf().InCallScope();
-
             var assemblies = new[]
             {
                 Assembly.GetExecutingAssembly(),
@@ -81,9 +78,13 @@ namespace RubberduckWeb.App_Start
                 Assembly.GetAssembly(typeof(InspectionBase)),
                 Assembly.GetAssembly(typeof(IRubberduckParser))
             };
+            ApplyDefaultInterfacesConvention(kernel, assemblies);
+
+            kernel.Rebind<ISinks>().ToConstant(Sinks);
+            kernel.Bind<RubberduckParserState>().ToSelf().InCallScope();
+            kernel.Bind<RubberduckParser>().ToSelf().InCallScope();
 
             BindCodeInspectionTypes(kernel);
-            ApplyDefaultInterfacesConvention(kernel, assemblies);
         }
 
         private static void ApplyDefaultInterfacesConvention(IKernel kernel, IEnumerable<Assembly> assemblies)
@@ -106,7 +107,8 @@ namespace RubberduckWeb.App_Start
             {
                 if (inspection.Name == nameof(ImplicitActiveSheetReferenceInspection) ||
                     inspection.Name == nameof(ImplicitActiveWorkbookReferenceInspection) ||
-                    inspection.Name == nameof(ParameterNotUsedInspection))
+                    inspection.Name == nameof(ParameterNotUsedInspection) ||
+                    inspection.Name == nameof(UseMeaningfulNameInspection))
                 {
                     continue;
                 }
