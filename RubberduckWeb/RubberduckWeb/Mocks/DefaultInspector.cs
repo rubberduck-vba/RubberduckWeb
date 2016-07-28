@@ -23,16 +23,13 @@ namespace RubberduckWeb.Mocks
             {
                 _inspections = inspections.ToList();
 
-                if (_inspections.All(i => i.Name != nameof(ParameterNotUsedInspection)))
-                {
-                    _inspections.Add(new ParameterNotUsedInspection(null, state, null));
-                }
-
                 if (_inspections.All(i => i.Name != nameof(UseMeaningfulNameInspection)))
                 {
                     var settings = new Mock<IPersistanceService<CodeInspectionSettings>>();
                     settings.Setup(s => s.Load(It.IsAny<CodeInspectionSettings>()))
                         .Returns(new CodeInspectionSettings());
+
+                    _inspections.Add(new EncapsulatePublicFieldInspection(state, null));
                     _inspections.Add(new UseMeaningfulNameInspection(null, state, settings.Object));
                 }
             }

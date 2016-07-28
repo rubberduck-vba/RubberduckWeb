@@ -4,7 +4,6 @@ using Microsoft.Vbe.Interop;
 using Moq;
 using Rubberduck.Parsing.VBA;
 using Rubberduck.VBEditor.VBEHost;
-using RubberduckTests;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using RubberduckWeb.Mocks.Rubberduck.Inspections;

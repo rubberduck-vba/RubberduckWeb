@@ -107,7 +107,7 @@ namespace RubberduckWeb.App_Start
             {
                 if (inspection.Name == nameof(ImplicitActiveSheetReferenceInspection) ||
                     inspection.Name == nameof(ImplicitActiveWorkbookReferenceInspection) ||
-                    inspection.Name == nameof(ParameterNotUsedInspection) ||
+                    inspection.Name == nameof(EncapsulatePublicFieldInspection) ||
                     inspection.Name == nameof(UseMeaningfulNameInspection))
                 {
                     continue;
