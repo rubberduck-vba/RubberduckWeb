@@ -7,5 +7,28 @@
     <h3>
         Source Control
     </h3>
-    <p>Powered by <a href="https://github.com/libgit2/libgit2sharp" target="_blank">LibGit2Sharp</a>, you can now create a local or remote git repository (including GitHub!) and commit, push and pull changes, and create, switch and merge branches directly from a docked toolwindow in the VBE.</p>
+    <p>
+        Powered by <a href="https://github.com/libgit2/libgit2sharp" target="_blank">LibGit2Sharp</a>,
+        you can now create a local or remote git repository (including GitHub!) and commit, push and pull
+        changes, and create, switch and merge branches directly from a docked toolwindow in the VBE.
+    </p>
+    <h4>Creating/Opening a Respository</h4>
+    <p>
+        There are many ways of creating or opening a repository in Rubberduck. If you are working in a
+        new project that you want to be under Source Control right from the beginning (recommended for
+        every new project), use the "Init New Repo" button, provide a local folder location, and start
+        making changes and commits. If you have a local repository on your drive that you want to open,
+        then use the "Open Existing Repo" button, select the repository's folder, and let Rubberduck open
+        it. If there is a repository in a remote location, such as on GitHub, use the Clone button,
+        provide the URI to the remote repository and the location you wish to clone it to, and let
+        Rubberduck clone and open it.
+    </p>
+    <h4>Publishing a Local Repository</h4>
+    <p>
+        Rubberduck has not forgotten that it is the first program to offer Git integration with the VBE;
+        you can easily publish all your repositories to a remote location simply by opening or creating
+        a repository, then clicking the "Publish Repository To Remote" button and providing a URI to the
+        empty, remote repository, you wish to publish to. Rubberduck will publish the current branch of
+        your local repository to this remote repository.
+    </p>
 </section>

@@ -7,6 +7,9 @@ using Rubberduck.UI;
 using Antlr4.Runtime.Tree;
 using Rubberduck.Inspections;
 using Rubberduck.Parsing;
+using Rubberduck.Settings;
+using Rubberduck.SettingsProvider;
+using Moq;
 
 namespace RubberduckWeb.Mocks
 {
@@ -23,6 +26,14 @@ namespace RubberduckWeb.Mocks
                 if (_inspections.All(i => i.Name != nameof(ParameterNotUsedInspection)))
                 {
                     _inspections.Add(new ParameterNotUsedInspection(null, state, null));
+                }
+
+                if (_inspections.All(i => i.Name != nameof(UseMeaningfulNameInspection)))
+                {
+                    var settings = new Mock<IPersistanceService<CodeInspectionSettings>>();
+                    settings.Setup(s => s.Load(It.IsAny<CodeInspectionSettings>()))
+                        .Returns(new CodeInspectionSettings());
+                    _inspections.Add(new UseMeaningfulNameInspection(null, state, settings.Object));
                 }
             }
 
@@ -80,12 +91,14 @@ namespace RubberduckWeb.Mocks
                     var obsoleteLetStatementListener = new ObsoleteLetStatementInspection.ObsoleteLetStatementListener();
                     var emptyStringLiteralListener = new EmptyStringLiteralInspection.EmptyStringLiteralListener();
                     var argListWithOneByRefParamListener = new ProcedureCanBeWrittenAsFunctionInspection.ArgListWithOneByRefParamListener();
+                    var malformedAnnotationListener = new MalformedAnnotationInspection.MalformedAnnotationStatementListener();
 
                     var combinedListener = new CombinedParseTreeListener(new IParseTreeListener[]{
                         obsoleteCallStatementListener,
                         obsoleteLetStatementListener,
                         emptyStringLiteralListener,
                         argListWithOneByRefParamListener,
+                        malformedAnnotationListener
                     });
 
                     ParseTreeWalker.Default.Walk(combinedListener, componentTreePair.Value);
@@ -94,6 +107,7 @@ namespace RubberduckWeb.Mocks
                     result.EmptyStringLiterals = result.EmptyStringLiterals.Concat(emptyStringLiteralListener.Contexts.Select(context => new QualifiedContext(componentTreePair.Key, context)));
                     result.ObsoleteLetContexts = result.ObsoleteLetContexts.Concat(obsoleteLetStatementListener.Contexts.Select(context => new QualifiedContext(componentTreePair.Key, context)));
                     result.ObsoleteCallContexts = result.ObsoleteCallContexts.Concat(obsoleteCallStatementListener.Contexts.Select(context => new QualifiedContext(componentTreePair.Key, context)));
+                    result.MalformedAnnotations = result.MalformedAnnotations.Concat(malformedAnnotationListener.Contexts.Select(context => new QualifiedContext(componentTreePair.Key, context)));
                 }
                 return result;
             }

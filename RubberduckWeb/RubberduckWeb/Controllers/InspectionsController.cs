@@ -5,13 +5,15 @@ using Moq;
 using Rubberduck.Parsing.VBA;
 using Rubberduck.VBEditor.VBEHost;
 using RubberduckTests;
-using RubberduckWeb.Mocks;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using RubberduckWeb.Mocks.Rubberduck.Inspections;
 
 namespace RubberduckWeb.Controllers
 {
+    using RubberduckTests.Mocks;
+    using MockVbeBuilder = Mocks.MockVbeBuilder;
+
     public class InspectionsController : Controller
     {
         private readonly DefaultInspector _inspector;
@@ -38,7 +40,7 @@ namespace RubberduckWeb.Controllers
             mockHost.SetupAllProperties();
 
             var parser = MockParser.Create(vbe.Object, _state);
-            Task.Run(() => parser.Parse()).Wait();
+            Task.Run(() => parser.Parse(new System.Threading.CancellationTokenSource())).Wait();
             if (parser.State.Status >= ParserState.Error)
             {
                 throw new ArgumentException(parser.State.Status.ToString());
