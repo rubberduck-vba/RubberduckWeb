@@ -12,7 +12,8 @@ using Ninject.Web.Common;
 using Rubberduck.Inspections;
 using Rubberduck.Parsing;
 using Rubberduck.Parsing.VBA;
-using Rubberduck.VBEditor.VBEHost;
+using Rubberduck.VBEditor.Application;
+using Rubberduck.VBEditor.Events;
 using RubberduckWeb;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
@@ -22,7 +23,7 @@ namespace RubberduckWeb
 {
     public static class NinjectWebCommon 
     {
-        private static readonly Bootstrapper bootstrapper = new Bootstrapper();
+        private static readonly Bootstrapper Bootstrapper = new Bootstrapper();
         private static readonly ISinks Sinks = new Mock<ISinks>().Object;
 
         /// <summary>
@@ -32,7 +33,7 @@ namespace RubberduckWeb
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
-            bootstrapper.Initialize(CreateKernel);
+            Bootstrapper.Initialize(CreateKernel);
         }
         
         /// <summary>
@@ -40,7 +41,7 @@ namespace RubberduckWeb
         /// </summary>
         public static void Stop()
         {
-            bootstrapper.ShutDown();
+            Bootstrapper.ShutDown();
         }
         
         /// <summary>
@@ -74,15 +75,15 @@ namespace RubberduckWeb
             var assemblies = new[]
             {
                 Assembly.GetExecutingAssembly(),
-                Assembly.GetAssembly(typeof(IHostApplication)),
-                Assembly.GetAssembly(typeof(InspectionBase)),
-                Assembly.GetAssembly(typeof(IRubberduckParser))
+                Assembly.GetAssembly(typeof(IHostApplication)), // Rubberduck.VBEditor
+                Assembly.GetAssembly(typeof(InspectionBase)),   // Rubberduck
+                Assembly.GetAssembly(typeof(IRubberduckParser)) // Rubberduck.Parsing
             };
             ApplyDefaultInterfacesConvention(kernel, assemblies);
 
             kernel.Rebind<ISinks>().ToConstant(Sinks);
-            kernel.Bind<RubberduckParserState>().ToSelf().InCallScope();
-            kernel.Bind<RubberduckParser>().ToSelf().InCallScope();
+            kernel.Bind<RubberduckParserState>().ToSelf().InRequestScope();
+            kernel.Bind<IRubberduckParser>().To<RubberduckParser>().InRequestScope();
 
             BindCodeInspectionTypes(kernel);
         }
@@ -94,7 +95,7 @@ namespace RubberduckWeb
                 // inspections & factories have their own binding rules
                 .Where(type => !type.Name.EndsWith("Factory") && !type.Name.EndsWith("ConfigProvider") && !type.GetInterfaces().Contains(typeof(IInspection)))
                 .BindDefaultInterface()
-                .Configure(binding => binding.InCallScope())); // TransientScope wouldn't dispose disposables
+                .Configure(binding => binding.InRequestScope())); // TransientScope wouldn't dispose disposables
         }
 
         private static void BindCodeInspectionTypes(IKernel kernel)
@@ -102,18 +103,19 @@ namespace RubberduckWeb
             var assembly = Assembly.GetAssembly(typeof (InspectionBase));
             var inspections = assembly.GetTypes().Where(type => type.BaseType == typeof(InspectionBase));
 
-            // multibinding for IEnumerable<IInspection> dependency
+            // skip inspections with undesirable dependencies
             foreach (var inspection in inspections)
             {
                 if (inspection.Name == nameof(ImplicitActiveSheetReferenceInspection) ||
                     inspection.Name == nameof(ImplicitActiveWorkbookReferenceInspection) ||
                     inspection.Name == nameof(ParameterNotUsedInspection) ||
+                    inspection.Name == nameof(EncapsulatePublicFieldInspection) ||
                     inspection.Name == nameof(UseMeaningfulNameInspection))
                 {
                     continue;
                 }
 
-                kernel.Bind<IInspection>().To(inspection).InCallScope();
+                kernel.Bind<IInspection>().To(inspection).InSingletonScope();
             }
         }
     }

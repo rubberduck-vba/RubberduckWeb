@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.Vbe.Interop;
 using Moq;
 using Rubberduck.Parsing.VBA;
-using Rubberduck.VBEditor.VBEHost;
-using RubberduckTests;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Rubberduck.VBEditor.Application;
+using Rubberduck.VBEditor.SafeComWrappers.Abstract;
 using RubberduckWeb.Mocks.Rubberduck.Inspections;
 
 namespace RubberduckWeb.Controllers
 {
     using RubberduckTests.Mocks;
-    using MockVbeBuilder = Mocks.MockVbeBuilder;
 
     public class InspectionsController : Controller
     {
@@ -30,7 +28,7 @@ namespace RubberduckWeb.Controllers
         {
             //Arrange
             var builder = new MockVbeBuilder();
-            VBComponent component;
+            IVBComponent component;
 
             // ensure line endings are \r\n
             code = code.Replace("\r\n", "\n").Replace("\n", "\r\n");

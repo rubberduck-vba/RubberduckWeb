@@ -25,7 +25,7 @@ namespace RubberduckWeb.Mocks
 
                 if (_inspections.All(i => i.Name != nameof(ParameterNotUsedInspection)))
                 {
-                    _inspections.Add(new ParameterNotUsedInspection(null, state, null));
+                    _inspections.Add(new ParameterNotUsedInspection(state, null));
                 }
 
                 if (_inspections.All(i => i.Name != nameof(UseMeaningfulNameInspection)))
@@ -52,7 +52,7 @@ namespace RubberduckWeb.Mocks
                 var parseTreeWalkResults = GetParseTreeResults(state);
                 foreach (var parseTreeInspection in _inspections.Where(inspection => inspection.Severity != CodeInspectionSeverity.DoNotShow && inspection is IParseTreeInspection))
                 {
-                    (parseTreeInspection as IParseTreeInspection).ParseTreeResults = parseTreeWalkResults;
+                    ((IParseTreeInspection)parseTreeInspection).ParseTreeResults = parseTreeWalkResults;
                 }
 
                 var inspections = _inspections.Where(inspection => inspection.Severity != CodeInspectionSeverity.DoNotShow)
