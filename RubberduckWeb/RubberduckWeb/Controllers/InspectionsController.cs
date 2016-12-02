@@ -5,6 +5,7 @@ using Rubberduck.Parsing.VBA;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Rubberduck.VBEditor.Application;
+using Rubberduck.VBEditor.Events;
 using Rubberduck.VBEditor.SafeComWrappers.Abstract;
 using RubberduckWeb.Mocks.Rubberduck.Inspections;
 

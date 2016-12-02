@@ -16,19 +16,25 @@
 <div class="row">
     <table class="inspection-results-table">
         <tbody>
-            <tr>
-                <th>Severity</th>
-                <th>Description</th>
-                <th>Location</th>
-            </tr>
-            @foreach (var item in Model.OrderBy(o => o.QualifiedSelection.Selection.StartLine)
-                                       .ThenBy(t => t.QualifiedSelection.Selection.StartColumn))
+        <tr>
+            <th>Severity</th>
+            <th>Description</th>
+            <th>Reasoning</th>
+            <th>Location</th>
+        </tr>
+            @if(Model != null)
             {
-                <tr>
-                    <td width="50"><img alt="@item.Inspection.Severity" src="@severityIconUrls[item.Inspection.Severity]"/></td>
-                    <td>@item.Description</td>
-                    <td>@string.Format("L{0}C{1}", item.QualifiedSelection.Selection.StartLine, item.QualifiedSelection.Selection.StartColumn)</td>
-                </tr>
+                foreach (var item in Model.OrderBy(o => o.QualifiedSelection.Selection.StartLine)
+                                       .ThenBy(t => t.QualifiedSelection.Selection.StartColumn))
+                {
+                    <tr>
+                        <td width="50"><img alt="@item.Inspection.Severity" src="@severityIconUrls[item.Inspection.Severity]"/></td>
+                        <td>@item.Description</td>
+                        <td>@item.Inspection.Meta</td>
+                        <td>@string.Format("L{0}C{1}", item.QualifiedSelection.Selection.StartLine, item.QualifiedSelection.Selection.StartColumn)</td>
+                    </tr>
+                }
+                <tr>Note: Inspection results may differ when Rubberduck is running in the Visual Basic Editor (VBE) IDE, where referenced type libraries (VBA Standard library, Excel object model, etc.) are used in by the resolver.</tr>
             }
         </tbody>
     </table>

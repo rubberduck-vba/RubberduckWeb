@@ -83,7 +83,7 @@ namespace RubberduckWeb
 
             kernel.Rebind<ISinks>().ToConstant(Sinks);
             kernel.Bind<RubberduckParserState>().ToSelf().InRequestScope();
-            kernel.Bind<IRubberduckParser>().To<RubberduckParser>().InRequestScope();
+            kernel.Bind<IRubberduckParser>().To<RubberduckParser>().InCallScope();
 
             BindCodeInspectionTypes(kernel);
         }
@@ -95,7 +95,7 @@ namespace RubberduckWeb
                 // inspections & factories have their own binding rules
                 .Where(type => !type.Name.EndsWith("Factory") && !type.Name.EndsWith("ConfigProvider") && !type.GetInterfaces().Contains(typeof(IInspection)))
                 .BindDefaultInterface()
-                .Configure(binding => binding.InRequestScope())); // TransientScope wouldn't dispose disposables
+                .Configure(binding => binding.InCallScope())); // TransientScope wouldn't dispose disposables
         }
 
         private static void BindCodeInspectionTypes(IKernel kernel)
@@ -110,12 +110,13 @@ namespace RubberduckWeb
                     inspection.Name == nameof(ImplicitActiveWorkbookReferenceInspection) ||
                     inspection.Name == nameof(ParameterNotUsedInspection) ||
                     inspection.Name == nameof(EncapsulatePublicFieldInspection) ||
-                    inspection.Name == nameof(UseMeaningfulNameInspection))
+                    inspection.Name == nameof(UseMeaningfulNameInspection) ||
+                    inspection.Name == nameof(UndeclaredVariableInspection))
                 {
                     continue;
                 }
 
-                kernel.Bind<IInspection>().To(inspection).InSingletonScope();
+                kernel.Bind<IInspection>().To(inspection).InRequestScope();
             }
         }
     }
