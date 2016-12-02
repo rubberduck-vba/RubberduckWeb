@@ -1,24 +1,24 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Web;
+using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+using Moq;
+using Ninject;
 using Ninject.Extensions.Conventions;
 using Ninject.Extensions.NamedScope;
+using Ninject.Web.Common;
 using Rubberduck.Inspections;
 using Rubberduck.Parsing;
 using Rubberduck.Parsing.VBA;
 using Rubberduck.VBEditor.VBEHost;
-using System;
-using System.Web;
-using Microsoft.Vbe.Interop;
-using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-using Moq;
-using Ninject;
-using Ninject.Web.Common;
+using RubberduckWeb;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(RubberduckWeb.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(RubberduckWeb.App_Start.NinjectWebCommon), "Stop")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
+[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(NinjectWebCommon), "Stop")]
 
-namespace RubberduckWeb.App_Start
+namespace RubberduckWeb
 {
     public static class NinjectWebCommon 
     {

@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Rubberduck.Parsing.VBA;
-using Rubberduck.UI;
 using Antlr4.Runtime.Tree;
+using Moq;
 using Rubberduck.Inspections;
 using Rubberduck.Parsing;
+using Rubberduck.Parsing.VBA;
 using Rubberduck.Settings;
 using Rubberduck.SettingsProvider;
-using Moq;
+using Rubberduck.UI;
 
 namespace RubberduckWeb.Mocks
 {
