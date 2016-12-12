@@ -303,7 +303,6 @@
     <Content Include="Views\Home\Indentation.cshtml" />
     <Content Include="Views\Home\InspectionResults.cshtml" />
     <Content Include="Views\Home\UnitTesting.cshtml" />
-    <Content Include="Views\Home\NoInspectionResults.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

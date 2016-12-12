@@ -53,13 +53,7 @@ namespace RubberduckWeb.Controllers
                         && (ir.QualifiedSelection.QualifiedName.Name == "TestProject1." || ir.QualifiedSelection.QualifiedName.Name == "TestProject1.TestModule1")
                     );
 
-
-            if (results.Any())
-            {
-                return Task.FromResult(PartialView("~/Views/Home/InspectionResults.cshtml", results));
-            }
-
-            return Task.FromResult(PartialView("~/Views/Home/NoInspectionResults.cshtml", results));
+            return Task.FromResult(PartialView("~/Views/Home/InspectionResults.cshtml", results));
         }
     }
 }
