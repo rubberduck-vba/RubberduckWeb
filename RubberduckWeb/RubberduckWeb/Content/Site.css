@@ -119,10 +119,22 @@ section {
 }
 
 .inspections-form {
-    border: 3px double black;
-    padding: 10px 23px;
-    margin: 5px;
+    border: 1px solid #202020;
+    border-radius: 2px;
+    -o-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -moz-border-radius: 2px;
+    padding: 10px;
+    margin: 0px;
     width: 100%;
+}
+
+.inspections-form div {
+    margin-top: 10px;
+}
+
+.inspections-form div:first-child {
+    margin-top: 0px;
 }
 
 #code {
@@ -139,14 +151,13 @@ tr:nth-child(even) {
 }
 
 .inspection-results-table {
-    border: 3px double black;
-    margin: 5px;
+    border: 1px solid #202020;
+    border-radius: 2px;
+    -o-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -moz-border-radius: 2px;
     border-collapse: separate;
     width: 100%;
-}
-
-#inspection-results {
-    padding: 0 15px;
 }
 
 .rd-alert { /*as separate from bootstrap alert*/

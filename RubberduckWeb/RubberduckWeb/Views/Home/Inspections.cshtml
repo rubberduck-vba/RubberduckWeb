@@ -67,12 +67,12 @@
     </div>
     <div class="col-lg-12">
         <div><strong>Try it!</strong> (build: @ViewBag.Build)</div>
-        <div class="inspections-form row">
-            <div class="row">
+        <div class="inspections-form">
+            <div class="">
                 <textarea id="code" type="text" rows="10" placeholder="Enter code to run the inspections against."></textarea>
             </div>
-            <div class="row">
-                <button id="loadInspections" onclick="$loadInspections()">Inspect</button>
+            <div class="">
+                <button id="loadInspections" class="btn btn-primary" onclick="$loadInspections()">Inspect</button>
             </div>
         </div>
         <div id="inspection-results"></div>
