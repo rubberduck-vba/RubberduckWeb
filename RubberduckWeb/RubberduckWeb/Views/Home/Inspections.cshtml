@@ -1,5 +1,8 @@
-﻿@{
+﻿@using System.Reflection
+@using Rubberduck.Inspections
+@{
     ViewBag.Title = "Inspections";
+    ViewBag.Build = Assembly.GetAssembly(typeof(IInspection)).GetName().Version.ToString();
 }
 
 <div class="lead">
@@ -62,7 +65,7 @@
             </ul>
         </div>
     </div>
-    <div><strong>Try it!</strong></div>
+    <div><strong>Try it!</strong> (build: @ViewBag.Build)</div>
     <div class="inspections-form row">
         <div class="row">
             <textarea id="code" type="text" rows="10" placeholder="Enter code to run the inspections against."></textarea>

@@ -34,7 +34,7 @@
                         <td>@string.Format("L{0}C{1}", item.QualifiedSelection.Selection.StartLine, item.QualifiedSelection.Selection.StartColumn)</td>
                     </tr>
                 }
-                <tr>Note: Inspection results may differ when Rubberduck is running in the Visual Basic Editor (VBE) IDE, where referenced type libraries (VBA Standard library, Excel object model, etc.) are used in by the resolver.</tr>
+                <tr>Note: Inspection results may differ when Rubberduck is running in the Visual Basic Editor (VBE) IDE, where referenced type libraries (VBA Standard library, Excel object model, etc.) are used by the resolver. Soon we'll serialize the declarations we're extracting from the most commonly used type libraries, to improve this online experience (experiment?). Some inspections are also explicitly excluded.</tr>
             }
         </tbody>
     </table>
