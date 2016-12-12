@@ -255,6 +255,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="libs\Microsoft.Vbe.Interop.dll" />
     <Content Include="libs\Microsoft.Vbe.Interop.Forms.dll" />
+    <Content Include="libs\Office.dll" />
     <Content Include="libs\Rubberduck.dll" />
     <Content Include="libs\Rubberduck.Parsing.dll" />
     <Content Include="libs\Rubberduck.RegexAssistant.dll" />
