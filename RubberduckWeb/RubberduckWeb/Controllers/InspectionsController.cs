@@ -4,6 +4,7 @@ using Moq;
 using Rubberduck.Parsing.VBA;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Rubberduck.Inspections;
 using Rubberduck.VBEditor.Application;
 using Rubberduck.VBEditor.Events;
 using Rubberduck.VBEditor.SafeComWrappers.Abstract;
@@ -46,6 +47,12 @@ namespace RubberduckWeb.Controllers
             }
 
             var results = _inspector.Inspect(parser.State);
+
+            // strip away module & project naming suggestions, they don't make sense in the web UI
+            results.RemoveAll(ir => ir.Inspection is UseMeaningfulNameInspection
+                        && (ir.QualifiedSelection.QualifiedName.Name == "TestProject1." || ir.QualifiedSelection.QualifiedName.Name == "TestProject1.TestModule1")
+                    );
+
 
             if (results.Any())
             {
