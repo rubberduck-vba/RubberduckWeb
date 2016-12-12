@@ -8,12 +8,12 @@ else
 {
     foreach (var post in Model)
     {
-        <div class="row feedSnippet col-md-12">
+        <div class="row feedSnippet">
             <h4>
                 @*Id is the permalink*@
                 <a href="@post.Id" target="_blank">@post.Title.Text</a> <small>@post.PublishDate.Date.ToLongDateString()</small>
             </h4>
-            <p>@Html.Raw(post.Summary.Text)</p>
+            <p class="col-lg-12">@Html.Raw(post.Summary.Text)</p>
         </div>
     }
 }
