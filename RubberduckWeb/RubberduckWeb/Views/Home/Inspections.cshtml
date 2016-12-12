@@ -9,9 +9,9 @@
     <h3>Inspections</h3>
 </div>
 <section id="codeInspections">
-    <p>Most code inspections propose at least one quick fix that can be applied with a single click. Severity levels range from Do Not Show to Error and are completely configurable, for every single inspection.</p>
-    <img alt="Code Inspections" src="~/Content/Images/CodeInspections.png"/>
-    <div class="row">
+    <div class="col-lg-12">
+        <p>Most code inspections propose at least one quick fix that can be applied with a single click. Severity levels range from Do Not Show to Error and are completely configurable, for every single inspection.</p>
+        <img alt="Code Inspections" src="~/Content/Images/CodeInspections.png" />
         <div class="col-md-4">
             <h4>Code Quality Issues</h4>
             <ul>
@@ -65,14 +65,17 @@
             </ul>
         </div>
     </div>
-    <div><strong>Try it!</strong> (build: @ViewBag.Build)</div>
-    <div class="inspections-form row">
-        <div class="row">
-            <textarea id="code" type="text" rows="10" placeholder="Enter code to run the inspections against."></textarea>
+    <div class="col-lg-12">
+        <div><strong>Try it!</strong> (build: @ViewBag.Build)</div>
+        <div class="inspections-form">
+            <div class="">
+                <textarea id="code" type="text" rows="10" placeholder="Enter code to run the inspections against."></textarea>
+            </div>
+            <div class="">
+                <button id="loadInspections" class="btn btn-primary" onclick="$loadInspections()">Inspect</button>
+            </div>
         </div>
-        <div class="row">
-            <button id="loadInspections" onclick="$loadInspections()">Inspect</button>
-        </div>
+        <div id="inspection-results"></div>
     </div>
-    <div id="inspection-results"></div>
+    <div class="row"></div>
 </section>
