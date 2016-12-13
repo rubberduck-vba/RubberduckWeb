@@ -18,6 +18,7 @@ function $hideImage() {
 };
 
 function $loadInspections() {
+    $("div#inspection-busy-indicator").removeClass("hidden");
     $.ajax({
         url: "/Inspections/GetInspectionResults",
         datatype: "json",
@@ -27,11 +28,13 @@ function $loadInspections() {
             console.log(data);
             console.log("success");
             $("div#inspection-results").html(data);
+            $("div#inspection-busy-indicator").addClass("hidden");
         },
         error: function (data) {
             console.log(data);
             console.log("error");
             $("div#inspection-results").html('<div class="row"><p class="rd-alert error">Rubberduck failed to either parse or resolve this code.  Please verify that it works, then report this problem at our <a href="https://github.com/rubberduck-vba/Rubberduck">GitHub repository</a> if necessary.</p></div>');
+            $("div#inspection-busy-indicator").addClass("hidden");
         }
     });
 }

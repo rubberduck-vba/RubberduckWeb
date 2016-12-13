@@ -181,3 +181,14 @@ tr:nth-child(even) {
     font-size: 12pt;
     font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
 }
+
+.no-round-corners {
+    border-radius: 0px;
+    -o-border-radius: 0px;
+    -ms-border-radius: 0px;
+    -moz-border-radius: 0px;
+}
+
+#inspection-busy-indicator {
+    margin: 10px 0;
+}

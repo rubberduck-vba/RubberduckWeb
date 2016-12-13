@@ -43,7 +43,7 @@ namespace RubberduckWeb.Controllers
             Task.Run(() => parser.Parse(new System.Threading.CancellationTokenSource())).Wait();
             if (parser.State.Status >= ParserState.Error)
             {
-                throw new ArgumentException(parser.State.Status.ToString());
+                return Task.FromResult(PartialView("~/Views/Home/InspectionResults.cshtml", null));
             }
 
             var results = _inspector.Inspect(parser.State);
@@ -53,13 +53,7 @@ namespace RubberduckWeb.Controllers
                         && (ir.QualifiedSelection.QualifiedName.Name == "TestProject1." || ir.QualifiedSelection.QualifiedName.Name == "TestProject1.TestModule1")
                     );
 
-
-            if (results.Any())
-            {
-                return Task.FromResult(PartialView("~/Views/Home/InspectionResults.cshtml", results));
-            }
-
-            return Task.FromResult(PartialView("~/Views/Home/NoInspectionResults.cshtml", results));
+            return Task.FromResult(PartialView("~/Views/Home/InspectionResults.cshtml", results));
         }
     }
 }

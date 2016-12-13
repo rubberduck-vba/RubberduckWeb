@@ -24,6 +24,8 @@
         </tr>
         @if (Model != null)
         {
+            if (Model.Count > 0)
+            {
             foreach (var item in Model.OrderBy(o => o.QualifiedSelection.Selection.StartLine)
                                    .ThenBy(t => t.QualifiedSelection.Selection.StartColumn))
             {
@@ -33,8 +35,21 @@
                     <td>@item.Inspection.Meta</td>
                     <td>@string.Format("L{0}C{1}", item.QualifiedSelection.Selection.StartLine, item.QualifiedSelection.Selection.StartColumn)</td>
                 </tr>
+                }
             }
-            <tr><td colspan="4">Note: Inspection results may differ when Rubberduck is running in the Visual Basic Editor (VBE) IDE, where referenced type libraries (VBA Standard library, Excel object model, etc.) are used by the resolver. Soon we'll serialize the declarations we're extracting from the most commonly used type libraries, to improve this online experience (experiment?). Some inspections are also explicitly excluded.</td></tr>
+            else
+            {
+                <tr><th colspan="4" class="text-center alert alert-success no-round-corners">No issues were found</th></tr>
+            }
+            <tr><td colspan="4" class="alert alert-warning no-round-corners">Note: Inspection results may differ when Rubberduck is running in the Visual Basic Editor (VBE) IDE, where referenced type libraries (VBA Standard library, Excel object model, etc.) are used by the resolver. Soon we'll serialize the declarations we're extracting from the most commonly used type libraries, to improve this online experience (experiment?). Some inspections are also explicitly excluded.</td></tr>
+        }
+        else
+        {
+            <tr>
+                <th colspan="4" class="text-center alert alert-danger no-round-corners">
+                    Rubberduck failed to parse your code. Please check the input and try again.
+                </th>
+            </tr>
         }
     </tbody>
 </table>
