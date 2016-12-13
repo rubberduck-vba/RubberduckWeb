@@ -43,7 +43,7 @@ namespace RubberduckWeb.Controllers
             Task.Run(() => parser.Parse(new System.Threading.CancellationTokenSource())).Wait();
             if (parser.State.Status >= ParserState.Error)
             {
-                throw new ArgumentException(parser.State.Status.ToString());
+                return Task.FromResult(PartialView("~/Views/Home/InspectionResults.cshtml", null));
             }
 
             var results = _inspector.Inspect(parser.State);
