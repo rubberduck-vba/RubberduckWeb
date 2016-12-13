@@ -182,11 +182,6 @@ tr:nth-child(even) {
     font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
 }
 
-tr.alert {
-    background-color: #f7f7f7;
-    color: #702020;
-}
-
 .no-round-corners {
     border-radius: 0px;
     -o-border-radius: 0px;
