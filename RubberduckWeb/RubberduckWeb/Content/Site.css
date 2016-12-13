@@ -188,3 +188,7 @@ tr:nth-child(even) {
     -ms-border-radius: 0px;
     -moz-border-radius: 0px;
 }
+
+#inspection-busy-indicator {
+    margin: 10px 0;
+}
