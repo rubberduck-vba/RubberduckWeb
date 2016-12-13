@@ -189,6 +189,6 @@ tr:nth-child(even) {
     -moz-border-radius: 0px;
 }
 
-#inspection-busy-indicator {
+#inspection-busy-indicator, #inspection-error-indicator {
     margin: 10px 0;
 }
