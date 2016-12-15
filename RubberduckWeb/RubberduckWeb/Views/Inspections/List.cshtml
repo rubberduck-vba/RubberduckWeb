@@ -50,7 +50,16 @@
         <div><strong>Try it!</strong> (build: @ViewBag.Build)</div>
         <div class="inspections-form">
             <div>
-                <textarea id="code" type="text" rows="10" placeholder="Enter code to run the inspections against."></textarea>
+                <textarea id="code" type="text" rows="10" placeholder="Enter code to run the inspections against.">
+Sub Test()
+    Dim foo As String
+    foo = ""
+
+    If bar = 15 Then
+        Baz()
+    End If
+End Sub
+                </textarea>
             </div>
             <div>
                 <button id="loadInspections" class="btn btn-primary" onclick="$loadInspections()">Inspect</button>
