@@ -13,16 +13,43 @@ using RubberduckWeb.Mocks.Rubberduck.Inspections;
 namespace RubberduckWeb.Controllers
 {
     using RubberduckTests.Mocks;
+    using System.Collections.Generic;
+    using System.Text;
 
     public class InspectionsController : Controller
     {
         private readonly DefaultInspector _inspector;
         private readonly RubberduckParserState _state;
 
-        public InspectionsController(DefaultInspector inspector, RubberduckParserState state)
+        private List<IInspection> _inspections;
+
+        public InspectionsController(IEnumerable<IInspection> inspections, DefaultInspector inspector, RubberduckParserState state)
         {
+            _inspections = inspections.ToList();
             _inspector = inspector;
             _state = state;
+        }
+
+        public ActionResult Index()
+        {
+            return RedirectToAction("List");
+        }
+
+        public ActionResult List()
+        {
+            return View(_inspections);
+        }
+
+        public ActionResult Details(string id)
+        {
+            var inspection = _inspections.FirstOrDefault(x => x.Name == id);
+
+            if (inspection == null)
+            {
+                return RedirectToAction("List");
+            }
+
+            return View(inspection);
         }
 
         [HttpPost]
@@ -54,6 +81,71 @@ namespace RubberduckWeb.Controllers
                     );
 
             return Task.FromResult(PartialView("~/Views/Home/InspectionResults.cshtml", results));
+        }
+
+        public static string FormatInspectionName(IInspection inspection)
+        {
+            return InsertOnCharacter(inspection.Name.Remove(inspection.Name.Length - 10), CharacterType.UpperLetter, " ");
+        }
+        
+        /// <summary>
+        /// Inserts a <code>string</code> into another <code>string</code> before each occurrence of the specified <see cref="CharacterType"/>.
+        /// </summary>
+        /// <param name="source">The <code>string</code> to insert into.</param>
+        /// <param name="type">The <see cref="CharacterType"/> to insert before.</param>
+        /// <param name="insert">The <code>string</code> to insert.</param>
+        /// <returns>The resultant <code>string</code>.</returns>
+        /// <remarks>
+        /// In the case of the first character of <code>source</code> matching the specified <see cref="CharacterType"/>, the <code>insert</code> will not be inserted.
+        /// </remarks>
+        public static string InsertOnCharacter(string source, CharacterType type, string insert)
+        {
+            var esb = new StringBuilder(source.Length);
+
+            var firstRun = false;
+            foreach (var c in source)
+            {
+                var cType = GetCharacterType(c);
+
+                if (firstRun && cType == type)
+                {
+                    esb.Append(insert);
+                }
+
+                esb.Append(c);
+
+                firstRun = true;
+            }
+
+            return esb.ToString();
+        }
+
+        public static CharacterType GetCharacterType(char c)
+        {
+            if (c >= 'a' && c <= 'z')
+            {
+                return CharacterType.LowerLetter;
+            }
+
+            if (c >= 'A' && c <= 'Z')
+            {
+                return CharacterType.UpperLetter;
+            }
+
+            if (c >= '0' && c <= '9')
+            {
+                return CharacterType.Number;
+            }
+
+            return CharacterType.Symbol;
+        }
+
+        public enum CharacterType
+        {
+            UpperLetter,
+            LowerLetter,
+            Number,
+            Symbol,
         }
     }
 }
