@@ -70,7 +70,7 @@ namespace RubberduckWeb.Controllers
             Task.Run(() => parser.Parse(new System.Threading.CancellationTokenSource())).Wait();
             if (parser.State.Status >= ParserState.Error)
             {
-                return Task.FromResult(PartialView("~/Views/Home/InspectionResults.cshtml", null));
+                return Task.FromResult(PartialView("InspectionResults", null));
             }
 
             var results = _inspector.Inspect(parser.State);
@@ -80,7 +80,7 @@ namespace RubberduckWeb.Controllers
                         && (ir.QualifiedSelection.QualifiedName.Name == "TestProject1." || ir.QualifiedSelection.QualifiedName.Name == "TestProject1.TestModule1")
                     );
 
-            return Task.FromResult(PartialView("~/Views/Home/InspectionResults.cshtml", results));
+            return Task.FromResult(PartialView("InspectionResults", results));
         }
 
         public static string FormatInspectionName(IInspection inspection)

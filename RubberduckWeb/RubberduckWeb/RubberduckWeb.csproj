@@ -300,7 +300,7 @@
     <Content Include="Views\Home\Navigation.cshtml" />
     <Content Include="Views\Home\SourceControl.cshtml" />
     <Content Include="Views\Home\Indentation.cshtml" />
-    <Content Include="Views\Home\InspectionResults.cshtml" />
+    <Content Include="Views\Inspections\InspectionResults.cshtml" />
     <Content Include="Views\Home\UnitTesting.cshtml" />
     <Content Include="Views\Inspections\List.cshtml" />
     <Content Include="Views\Inspections\Details.cshtml" />
