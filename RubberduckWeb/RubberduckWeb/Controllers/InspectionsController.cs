@@ -85,7 +85,7 @@ namespace RubberduckWeb.Controllers
 
         public static string FormatInspectionName(IInspection inspection)
         {
-            return InsertOnCharacter(inspection.Name.Remove(inspection.Name.Length - 10), CharacterType.UpperLetter, " ");
+            return InsertOnCharacter(inspection.Name.Remove(inspection.Name.Length - "Inspection".Length), CharacterType.UpperLetter, " ");
         }
         
         /// <summary>
