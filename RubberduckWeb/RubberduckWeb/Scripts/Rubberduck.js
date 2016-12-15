@@ -18,6 +18,7 @@ function $hideImage() {
 };
 
 function $loadInspections() {
+    $("div#inspection-error-indicator").addClass("hidden");
     $("div#inspection-busy-indicator").removeClass("hidden");
     $.ajax({
         url: "/Inspections/GetInspectionResults",
