@@ -15,13 +15,17 @@ using Rubberduck.Parsing.VBA;
 using Rubberduck.VBEditor.Application;
 using Rubberduck.VBEditor.Events;
 using RubberduckWeb;
+using Rubberduck.SmartIndenter;
+using Rubberduck.VBEditor.SafeComWrappers.Abstract;
+using Rubberduck.SettingsProvider;
+using Rubberduck.Settings;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(NinjectWebCommon), "Stop")]
 
 namespace RubberduckWeb
 {
-    public static class NinjectWebCommon 
+    public static class NinjectWebCommon
     {
         private static readonly Bootstrapper Bootstrapper = new Bootstrapper();
         private static readonly ISinks Sinks = new Mock<ISinks>().Object;
@@ -29,13 +33,13 @@ namespace RubberduckWeb
         /// <summary>
         /// Starts the application
         /// </summary>
-        public static void Start() 
+        public static void Start()
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             Bootstrapper.Initialize(CreateKernel);
         }
-        
+
         /// <summary>
         /// Stops the application.
         /// </summary>
@@ -43,7 +47,7 @@ namespace RubberduckWeb
         {
             Bootstrapper.ShutDown();
         }
-        
+
         /// <summary>
         /// Creates the kernel that will manage your application.
         /// </summary>
@@ -77,11 +81,18 @@ namespace RubberduckWeb
                 Assembly.GetExecutingAssembly(),
                 Assembly.GetAssembly(typeof(IHostApplication)), // Rubberduck.VBEditor
                 Assembly.GetAssembly(typeof(InspectionBase)),   // Rubberduck
+                Assembly.GetAssembly(typeof(IIndenter)),        // Rubberduck.SmartIndenter
                 Assembly.GetAssembly(typeof(IRubberduckParser)) // Rubberduck.Parsing
             };
             ApplyDefaultInterfacesConvention(kernel, assemblies);
 
+            IVBComponent component; // discard, not needed
+            var vbe = new RubberduckTests.Mocks.MockVbeBuilder().BuildFromSingleStandardModule("", out component).Object;
+
             kernel.Rebind<ISinks>().ToConstant(Sinks);
+            kernel.Rebind<IVBE>().ToConstant(vbe);
+            kernel.Rebind<IIndenter>().ToConstant(new Indenter(vbe, () => new IndenterSettings()));
+            kernel.Rebind<IPersistanceService<CodeInspectionSettings>>().To<XmlPersistanceService<CodeInspectionSettings>>().InCallScope();
             kernel.Bind<RubberduckParserState>().ToSelf().InRequestScope();
             kernel.Bind<IRubberduckParser>().To<RubberduckParser>().InCallScope();
 
@@ -100,22 +111,12 @@ namespace RubberduckWeb
 
         private static void BindCodeInspectionTypes(IKernel kernel)
         {
-            var assembly = Assembly.GetAssembly(typeof (InspectionBase));
+            var assembly = Assembly.GetAssembly(typeof(InspectionBase));
             var inspections = assembly.GetTypes().Where(type => type.BaseType == typeof(InspectionBase));
 
             // skip inspections with undesirable dependencies
             foreach (var inspection in inspections)
             {
-                if (inspection.Name == nameof(ImplicitActiveSheetReferenceInspection) ||
-                    inspection.Name == nameof(ImplicitActiveWorkbookReferenceInspection) ||
-                    inspection.Name == nameof(ParameterNotUsedInspection) ||
-                    inspection.Name == nameof(EncapsulatePublicFieldInspection) ||
-                    inspection.Name == nameof(UseMeaningfulNameInspection) ||
-                    inspection.Name == nameof(UndeclaredVariableInspection))
-                {
-                    continue;
-                }
-
                 kernel.Bind<IInspection>().To(inspection).InRequestScope();
             }
         }

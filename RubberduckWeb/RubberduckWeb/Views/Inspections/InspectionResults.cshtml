@@ -1,0 +1,64 @@
+﻿@using RubberduckWeb.Controllers
+
+@{
+    ViewBag.Title = "InspectionResults";
+}
+
+@using Rubberduck.Inspections
+@model List<ICodeInspectionResult>
+@{
+    var severityIconUrls = new Dictionary<CodeInspectionSeverity, string>
+    {
+        { CodeInspectionSeverity.Error, "/Content/Images/Error.png" },
+        { CodeInspectionSeverity.Warning, "/Content/Images/Warning.png" },
+        { CodeInspectionSeverity.Suggestion, "/Content/Images/Suggestion.png" },
+        { CodeInspectionSeverity.Hint, "/Content/Images/Hint.png" }
+    };
+}
+
+<h3>Results</h3>
+<table class="inspection-results-table">
+    <tbody>
+        <tr>
+            <th>Severity</th>
+            <th>Inspection Name</th>
+            <th>Description</th>
+            <th>Reasoning</th>
+            <th>Location</th>
+        </tr>
+        @if (Model != null)
+        {
+            if (Model.Count > 0)
+            {
+                foreach (var item in Model.OrderBy(o => o.QualifiedSelection.Selection.StartLine)
+                                       .ThenBy(t => t.QualifiedSelection.Selection.StartColumn))
+                {
+                    <tr>
+                        <td width="50"><img alt="@item.Inspection.Severity" src="@severityIconUrls[item.Inspection.Severity]" /></td>
+                        <td>@Html.ActionLink(InspectionsController.FormatInspectionName(item.Inspection), "Details", new { id = item.Inspection.Name })</td>
+                        <td>@item.Description</td>
+                        <td>@item.Inspection.Meta</td>
+                        <td>@string.Format("L{0}C{1}", item.QualifiedSelection.Selection.StartLine, item.QualifiedSelection.Selection.StartColumn)</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><th colspan="4" class="text-center alert alert-success no-round-corners">No issues were found</th></tr>
+            }
+            <tr>
+                <td colspan="4" class="alert alert-warning no-round-corners">
+                    Note: Inspection results may differ when Rubberduck is running in the Visual Basic Editor (VBE) IDE, where referenced type libraries (VBA Standard library, Excel object model, etc.) are used by the resolver. Soon we'll serialize the declarations we're extracting from the most commonly used type libraries, to improve this online experience (experiment?). Some inspections are also explicitly excluded.
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <th colspan="4" class="text-center alert alert-danger no-round-corners">
+                    Rubberduck failed to parse your code. Please check the input and try again.
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>

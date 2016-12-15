@@ -160,19 +160,6 @@ tr:nth-child(even) {
     width: 100%;
 }
 
-.rd-alert { /*as separate from bootstrap alert*/
-    font-weight: bold;
-    font-size: 16px;
-}
-
-.error {
-    color: red;
-}
-
-.congratulations {
-    color: green;
-}
-
 .row {
     margin-bottom: 20px;
 }
@@ -189,6 +176,6 @@ tr:nth-child(even) {
     -moz-border-radius: 0px;
 }
 
-#inspection-busy-indicator {
+#inspection-busy-indicator, #inspection-error-indicator {
     margin: 10px 0;
 }

@@ -21,7 +21,7 @@ namespace RubberduckWeb.Mocks
 
             public DefaultInspector(IEnumerable<IInspection> inspections, RubberduckParserState state)
             {
-                _inspections = inspections.ToList();
+                _inspections = inspections.Where(x => x.Name != nameof(UndeclaredVariableInspection)).ToList();
 
                 if (_inspections.All(i => i.Name != nameof(ParameterNotUsedInspection)))
                 {
