@@ -1,0 +1,39 @@
+﻿@model HttpException
+@{
+    ViewBag.Title = "Code418";
+}
+
+<h2>I'm a Rubber Duck (HTTP 418)</h2>
+<img src="~/Content/Images/Rubberduck.png" />
+
+<div class="modal fade" id="errorModal">
+    <div class="vbe-mock-error-modal modal-dialog" role="document">
+        <h1 class="modal-title">rubberduckvba.com</h1>
+        <div class="body modal-body">
+            <div class="message">
+                Run-time error '418':<br />
+                <br />
+                I'm a rubber duck.<br />
+                <br />
+                <ul>
+                    <li>Continue: Home page</li>
+                    <li>End: Close popup</li>
+                    <li>Debug: View open issues</li>
+                    <li>Help: Create new issue</li>
+                </ul>
+            </div>
+            <div class="buttons">
+                <div>@Html.ActionLink("Continue", "Index", "Home")</div>
+                <div><a href="#" data-dismiss="modal">End</a></div>
+                <div><a href="https://github.com/rubberduck-vba/RubberduckWeb/issues">Debug</a></div>
+                <div><a href="https://github.com/rubberduck-vba/RubberduckWeb/issues/new">Help</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $("#errorModal").modal("show");
+    </script>
+}

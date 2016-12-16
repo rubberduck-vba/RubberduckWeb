@@ -199,6 +199,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\InspectionsController.cs" />
     <Compile Include="Mocks\DefaultInspector.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -210,6 +211,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\ArrowIcon.png" />
     <Content Include="Content\Images\CodeExplorer.png" />
     <Content Include="Content\Images\CodeInspections-small.png" />
     <Content Include="Content\Images\CodeInspections.png" />
@@ -307,6 +309,11 @@
     <Content Include="Views\Home\UnitTesting.cshtml" />
     <Content Include="Views\Inspections\List.cshtml" />
     <Content Include="Views\Inspections\Details.cshtml" />
+    <Content Include="Views\Error\Generic.cshtml" />
+    <Content Include="Views\Error\PageNotFound.cshtml" />
+    <Content Include="Views\Error\InternalServerError.cshtml" />
+    <Content Include="Views\Error\HttpDefault.cshtml" />
+    <Content Include="Views\Error\Code418.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
