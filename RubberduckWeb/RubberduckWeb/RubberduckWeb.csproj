@@ -199,6 +199,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BuildController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\InspectionsController.cs" />
     <Compile Include="Mocks\DefaultInspector.cs" />
@@ -314,6 +315,7 @@
     <Content Include="Views\Error\InternalServerError.cshtml" />
     <Content Include="Views\Error\HttpDefault.cshtml" />
     <Content Include="Views\Error\Code418.cshtml" />
+    <Content Include="Views\Build\Version.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
