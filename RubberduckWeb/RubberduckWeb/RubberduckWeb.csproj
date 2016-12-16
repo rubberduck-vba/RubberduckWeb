@@ -213,6 +213,7 @@
     <Content Include="Content\Images\CodeExplorer.png" />
     <Content Include="Content\Images\CodeInspections-small.png" />
     <Content Include="Content\Images\CodeInspections.png" />
+    <Content Include="Content\Images\CodeInspectionsCropped.png" />
     <Content Include="Content\Images\Error.png" />
     <Content Include="Content\Images\EncapsulateField.png" />
     <Content Include="Content\Images\FindAllReferences01.png" />
@@ -224,9 +225,11 @@
     <Content Include="Content\Images\Hint.png" />
     <Content Include="Content\Images\icon_ReSharper.png" />
     <Content Include="Content\Images\IndenterSettings.png" />
+    <Content Include="Content\Images\RefactorCropped.png" />
     <Content Include="Content\Images\SourceControlPanel.png" />
     <Content Include="Content\Images\Suggestion.png" />
     <Content Include="Content\Images\TestExplorer01.png" />
+    <Content Include="Content\Images\TestExplorer01Cropped.png" />
     <Content Include="Content\Images\TestExplorer02.png" />
     <Content Include="Content\Images\TodoExplorer.png" />
     <Content Include="Content\Images\Warning.png" />

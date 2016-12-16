@@ -179,3 +179,7 @@ tr:nth-child(even) {
 #inspection-busy-indicator, #inspection-error-indicator {
     margin: 10px 0;
 }
+
+.border-image {
+    border: 1px solid #666;
+}
