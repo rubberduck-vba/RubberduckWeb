@@ -37,19 +37,17 @@ h3, .h3 {
     background: -o-linear-gradient(right, #7697bd, rgba(255, 255, 255, 0)); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(right, #7697bd, rgba(255, 255, 255, 0)); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to right, #7697bd, rgba(255, 255, 255, 0)); /* Standard syntax */
-
     /* round the borders off*/
     -ms-border-radius: 15px;
     border-radius: 15px;
-
     font-weight: bold;
     color: white;
 }
 
-h3 small, .h3 small {
-    color: #5E5D5D;
-    float: right;
-}
+    h3 small, .h3 small {
+        color: #5E5D5D;
+        float: right;
+    }
 
 h4, .h4 {
     padding-left: 15px;
@@ -67,16 +65,16 @@ section#codeInspections img {
     background-color: #222;
 }
 
-.dropdown-menu > li > a {
-    color: #999;
-}
+    .dropdown-menu > li > a {
+        color: #999;
+    }
 
-.dropdown-menu > li > a:hover,
-.dropdown-menu > li > a:focus {
-    color: #ffffff;
-    text-decoration: none;
-    background-color: #222;
-}
+        .dropdown-menu > li > a:hover,
+        .dropdown-menu > li > a:focus {
+            color: #ffffff;
+            text-decoration: none;
+            background-color: #222;
+        }
 
 ul.nav li.dropdown:hover > ul.dropdown-menu {
     display: block;
@@ -107,8 +105,8 @@ section {
 .image-div {
     display: none;
     position: fixed;
-    top:50%;
-    left:50%;
+    top: 50%;
+    left: 50%;
     z-index: 1000;
     float: right;
     border: 1px solid lightgray;
@@ -129,13 +127,13 @@ section {
     width: 100%;
 }
 
-.inspections-form div {
-    margin-top: 10px;
-}
+    .inspections-form div {
+        margin-top: 10px;
+    }
 
-.inspections-form div:first-child {
-    margin-top: 0px;
-}
+        .inspections-form div:first-child {
+            margin-top: 0px;
+        }
 
 #code {
     width: 100%;
@@ -182,4 +180,137 @@ tr:nth-child(even) {
 
 .border-image {
     border: 1px solid #666;
+    border-radius: 2px;
 }
+
+/* This is all for the mock VBE Error modal bit, it takes a lot of CSS to even get close to the VBE error dialogue, but we did it */
+.vbe-mock-error-modal {
+    width: 379px;
+    font-family: 'Microsoft Sans Serif', 'Segoe UI', Arial, sans-serif;
+    background-color: #f8f8f8;
+    font-size: 11px;
+    line-height: 12px;
+    border-radius: 6px;
+    padding: 6px;
+    border: 1px solid #666;
+    box-shadow: rgba(0, 0, 0, 0.08) 1px 0px, rgba(0, 0, 0, 0.08) -1px 0px, rgba(0, 0, 0, 0.08) 0px 1px, rgba(0, 0, 0, 0.08) 0px -1px, rgba(0, 0, 0, 0.05) 2px 0px, rgba(0, 0, 0, 0.05) -2px 0px, rgba(0, 0, 0, 0.05) 0px 2px, rgba(0, 0, 0, 0.05) 0px -2px, rgba(0, 0, 0, 0.03) 3px 0px, rgba(0, 0, 0, 0.03) -3px 0px, rgba(0, 0, 0, 0.03) 0px 3px, rgba(0, 0, 0, 0.03) 0px -3px, rgba(0, 0, 0, 0.02) 4px 0px, rgba(0, 0, 0, 0.02) -4px 0px, rgba(0, 0, 0, 0.02) 0px 4px, rgba(0, 0, 0, 0.02) 0px -4px, rgba(0, 0, 0, 0.04) 5px 0px, rgba(0, 0, 0, 0.04) -5px 0px, rgba(0, 0, 0, 0.04) 0px 5px, rgba(0, 0, 0, 0.04) 0px -5px;
+}
+
+.vbe-mock-error-modal .fade {
+
+}
+
+    .vbe-mock-error-modal h1 {
+        font-size: 12px;
+        margin: 0 0 8px 0;
+        padding: 0 0 0 2px;
+    }
+
+    .vbe-mock-error-modal .body {
+        height: 176px;
+        background-color: #f0f0f0;
+        border: 1px solid #7b7b7b;
+        padding: 15px 12px 0px 12px;
+        border-radius: 1px;
+        position: relative;
+    }
+
+        .vbe-mock-error-modal .body .buttons {
+            position: absolute;
+            bottom: 10px;
+        }
+
+            .vbe-mock-error-modal .body .buttons div:first-child {
+                margin-left: 0px;
+            }
+
+            .vbe-mock-error-modal .body .buttons div {
+                display: inline-block;
+                margin-left: 12px;
+                background-color: #f0f0f0;
+                border-top: 1px solid #ffffff;
+                border-left: 1px solid #ffffff;
+                border-right: 1px solid #696969;
+                border-bottom: 1px solid #696969;
+            }
+
+                .vbe-mock-error-modal .body .buttons div:hover {
+                    background-color: #f0f0f0;
+                    border-top: 1px solid #696969;
+                    border-left: 1px solid #696969;
+                    border-right: 1px solid #ffffff;
+                    border-bottom: 1px solid #ffffff;
+                }
+
+                    .vbe-mock-error-modal .body .buttons div:hover a {
+                        border-top: 1px solid #a0a0a0;
+                        border-left: 1px solid #a0a0a0;
+                        border-right: 1px solid #e3e3e3;
+                        border-bottom: 1px solid #e3e3e3;
+                    }
+
+                .vbe-mock-error-modal .body .buttons div a {
+                    color: #202020;
+                    display: block;
+                    width: 71px;
+                    height: 19px;
+                    text-align: center;
+                    border-top: 1px solid #e3e3e3;
+                    border-left: 1px solid #e3e3e3;
+                    border-right: 1px solid #a0a0a0;
+                    border-bottom: 1px solid #a0a0a0;
+                    padding-top: 2px;
+                }
+
+                    .vbe-mock-error-modal .body .buttons div a:hover {
+                        text-decoration: none;
+                    }
+
+/* This is all for the mock VBE debugger bit */
+.vbe-mock-debugger {
+    border: 1px solid #696969;
+    margin: 0;
+    padding: 0;
+}
+
+    .vbe-mock-debugger .code-area {
+        border-left: 20px solid #f0f0f0;
+        font-family: monospace;
+        font-size: 12px;
+        position: relative;
+    }
+
+    .vbe-mock-debugger .keyword {
+        color: #000080;
+    }
+
+    .vbe-mock-debugger .code {
+        border-left: 1px solid #000;
+    }
+
+        .vbe-mock-debugger .code .block {
+            padding-left: 12px;
+            margin-top: 12px;
+            border-bottom: 1px solid #808080;
+        }
+
+            .vbe-mock-debugger .code .block:first-child {
+                margin-top: 0;
+            }
+
+            .vbe-mock-debugger .code .block:last-child {
+                border-bottom: none;
+            }
+
+            .vbe-mock-debugger .code .block .error {
+                background-color: #ff0;
+                position: relative;
+                padding: 0;
+                margin: 0;
+            }
+
+                .vbe-mock-debugger .code .block .error img {
+                    background-color: #f0f0f0;
+                    top: 1px;
+                    position: absolute;
+                }

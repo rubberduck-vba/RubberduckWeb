@@ -1,0 +1,68 @@
+﻿@model HttpException
+@{
+    ViewBag.Title = "PageNotFound";
+}
+
+<h2>Page Not Found (HTTP 404)</h2>
+<div class="vbe-mock-debugger">
+    <div class="code-area">
+        <div class="code">
+            <div class="block">
+                <span class="keyword">Option Explicit</span>
+            </div>
+            <div class="block">
+                <span class="keyword">Private Function</span> LoadPage(<span class="keyword">ByVal</span> url <span class="keyword">As String</span>) <span class="keyword">As String</span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">On Error Goto</span> 1995<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Dim</span> page <span class="keyword">As String</span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Dim</span> fileLine <span class="keyword">As String</span><br /><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="error"><img src="~/Content/Images/ArrowIcon.png" style="left: -56px;" /><span class="keyword">Open</span> url <span class="keyword">For Input As</span> #1</span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Do Until</span> EOF(1)<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Line Input</span> #1, fileLine<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;page = page &amp; fileLine<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Loop</span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Close</span> #1<br /><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;LoadPage = page<br />
+                <span class="keyword">End Function</span>
+            </div>
+            <div class="block">
+                <span class="keyword">Public Sub</span> NavigateBrowser(<span class="keyword">ByVal</span> url <span class="keyword">As String</span>)<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Dim</span> page <span class="keyword">As String</span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;page = LoadPage(url)<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;Browser.Display page<br />
+                <span class="keyword">End Sub</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="errorModal">
+    <div class="vbe-mock-error-modal modal-dialog" role="document">
+        <h1 class="modal-title">rubberduckvba.com</h1>
+        <div class="body modal-body">
+            <div class="message">
+                Run-time error '404':<br />
+                <br />
+                The requested page was not found.<br />
+                <br />
+                <ul>
+                    <li>Continue: Home page</li>
+                    <li>End: Close popup</li>
+                    <li>Debug: View open issues</li>
+                    <li>Help: Create new issue</li>
+                </ul>
+            </div>
+            <div class="buttons">
+                <div>@Html.ActionLink("Continue", "Index", "Home")</div>
+                <div><a href="#" data-dismiss="modal">End</a></div>
+                <div><a href="https://github.com/rubberduck-vba/RubberduckWeb/issues">Debug</a></div>
+                <div><a href="https://github.com/rubberduck-vba/RubberduckWeb/issues/new">Help</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $("#errorModal").modal("show");
+    </script>
+}
