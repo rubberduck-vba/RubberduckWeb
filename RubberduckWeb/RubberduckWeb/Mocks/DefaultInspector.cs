@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Antlr4.Runtime.Tree;
 using Moq;
 using Rubberduck.Inspections;
+using Rubberduck.Inspections.Abstract;
+using Rubberduck.Inspections.Resources;
 using Rubberduck.Parsing;
 using Rubberduck.Parsing.VBA;
 using Rubberduck.Settings;
@@ -37,22 +39,22 @@ namespace RubberduckWeb.Mocks
                 }
             }
 
-            public List<ICodeInspectionResult> Inspect(RubberduckParserState state)
+            public List<IInspectionResult> Inspect(RubberduckParserState state)
             {
                 if (state == null || !state.AllUserDeclarations.Any())
                 {
-                    return new List<ICodeInspectionResult>();
+                    return new List<IInspectionResult>();
                 }
 
                 state.OnStatusMessageUpdate(RubberduckUI.CodeInspections_Inspecting);
 
-                var allIssues = new ConcurrentBag<ICodeInspectionResult>();
+                var allIssues = new ConcurrentBag<IInspectionResult>();
 
                 // Prepare ParseTreeWalker based inspections
                 var parseTreeWalkResults = GetParseTreeResults(state);
                 foreach (var parseTreeInspection in _inspections.Where(inspection => inspection.Severity != CodeInspectionSeverity.DoNotShow && inspection is IParseTreeInspection))
                 {
-                    ((IParseTreeInspection)parseTreeInspection).ParseTreeResults = parseTreeWalkResults;
+                    ((IParseTreeInspection)parseTreeInspection).SetResults(parseTreeWalkResults);
                 }
 
                 var inspections = _inspections.Where(inspection => inspection.Severity != CodeInspectionSeverity.DoNotShow)
@@ -77,9 +79,9 @@ namespace RubberduckWeb.Mocks
                 return allIssues.ToList();
             }
 
-            private ParseTreeResults GetParseTreeResults(RubberduckParserState state)
+            private IEnumerable<QualifiedContext> GetParseTreeResults(RubberduckParserState state)
             {
-                var result = new ParseTreeResults();
+                var result = new List<QualifiedContext>();
 
                 foreach (var componentTreePair in state.ParseTrees)
                 {
@@ -90,8 +92,8 @@ namespace RubberduckWeb.Mocks
                     var obsoleteCallStatementListener = new ObsoleteCallStatementInspection.ObsoleteCallStatementListener();
                     var obsoleteLetStatementListener = new ObsoleteLetStatementInspection.ObsoleteLetStatementListener();
                     var emptyStringLiteralListener = new EmptyStringLiteralInspection.EmptyStringLiteralListener();
-                    var argListWithOneByRefParamListener = new ProcedureCanBeWrittenAsFunctionInspection.ArgListWithOneByRefParamListener();
-                    var malformedAnnotationListener = new MalformedAnnotationInspection.MalformedAnnotationStatementListener();
+                    var argListWithOneByRefParamListener = new ProcedureCanBeWrittenAsFunctionInspection.SingleByRefParamArgListListener();
+                    var malformedAnnotationListener = new MissingAnnotationArgumentInspection.InvalidAnnotationStatementListener();
 
                     var combinedListener = new CombinedParseTreeListener(new IParseTreeListener[]{
                         obsoleteCallStatementListener,
@@ -103,11 +105,11 @@ namespace RubberduckWeb.Mocks
 
                     ParseTreeWalker.Default.Walk(combinedListener, componentTreePair.Value);
 
-                    result.ArgListsWithOneByRefParam = result.ArgListsWithOneByRefParam.Concat(argListWithOneByRefParamListener.Contexts.Select(context => new QualifiedContext(componentTreePair.Key, context)));
-                    result.EmptyStringLiterals = result.EmptyStringLiterals.Concat(emptyStringLiteralListener.Contexts.Select(context => new QualifiedContext(componentTreePair.Key, context)));
-                    result.ObsoleteLetContexts = result.ObsoleteLetContexts.Concat(obsoleteLetStatementListener.Contexts.Select(context => new QualifiedContext(componentTreePair.Key, context)));
-                    result.ObsoleteCallContexts = result.ObsoleteCallContexts.Concat(obsoleteCallStatementListener.Contexts.Select(context => new QualifiedContext(componentTreePair.Key, context)));
-                    result.MalformedAnnotations = result.MalformedAnnotations.Concat(malformedAnnotationListener.Contexts.Select(context => new QualifiedContext(componentTreePair.Key, context)));
+                    result.AddRange(argListWithOneByRefParamListener.Contexts.Select(context => new QualifiedContext(componentTreePair.Key, context)));
+                    result.AddRange(emptyStringLiteralListener.Contexts.Select(context => new QualifiedContext(componentTreePair.Key, context)));
+                    result.AddRange(obsoleteLetStatementListener.Contexts.Select(context => new QualifiedContext(componentTreePair.Key, context)));
+                    result.AddRange(obsoleteCallStatementListener.Contexts.Select(context => new QualifiedContext(componentTreePair.Key, context)));
+                    result.AddRange(malformedAnnotationListener.Contexts.Select(context => new QualifiedContext(componentTreePair.Key, context)));
                 }
                 return result;
             }

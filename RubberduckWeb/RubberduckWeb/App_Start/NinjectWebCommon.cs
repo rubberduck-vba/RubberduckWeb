@@ -9,7 +9,7 @@ using Ninject;
 using Ninject.Extensions.Conventions;
 using Ninject.Extensions.NamedScope;
 using Ninject.Web.Common;
-using Rubberduck.Inspections;
+using Rubberduck.Inspections.Abstract;
 using Rubberduck.Parsing;
 using Rubberduck.Parsing.VBA;
 using Rubberduck.VBEditor.Application;
