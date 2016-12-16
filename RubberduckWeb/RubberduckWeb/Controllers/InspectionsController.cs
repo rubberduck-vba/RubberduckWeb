@@ -1,12 +1,11 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Moq;
 using Rubberduck.Parsing.VBA;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Rubberduck.Inspections;
+using Rubberduck.Inspections.Abstract;
 using Rubberduck.VBEditor.Application;
-using Rubberduck.VBEditor.Events;
 using Rubberduck.VBEditor.SafeComWrappers.Abstract;
 using RubberduckWeb.Mocks.Rubberduck.Inspections;
 
@@ -21,7 +20,7 @@ namespace RubberduckWeb.Controllers
         private readonly DefaultInspector _inspector;
         private readonly RubberduckParserState _state;
 
-        private List<IInspection> _inspections;
+        private readonly IReadOnlyList<IInspection> _inspections;
 
         public InspectionsController(IEnumerable<IInspection> inspections, DefaultInspector inspector, RubberduckParserState state)
         {

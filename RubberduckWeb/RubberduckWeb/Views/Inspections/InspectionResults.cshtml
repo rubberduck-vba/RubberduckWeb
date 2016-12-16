@@ -5,7 +5,8 @@
 }
 
 @using Rubberduck.Inspections
-@model List<ICodeInspectionResult>
+@using Rubberduck.Inspections.Resources
+@model List<Rubberduck.Inspections.Abstract.IInspectionResult>
 @{
     var severityIconUrls = new Dictionary<CodeInspectionSeverity, string>
     {
