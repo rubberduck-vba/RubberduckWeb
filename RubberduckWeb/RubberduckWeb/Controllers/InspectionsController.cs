@@ -1,10 +1,13 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using Moq;
 using Rubberduck.Parsing.VBA;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Rubberduck.Inspections;
 using Rubberduck.Inspections.Abstract;
+using Rubberduck.Parsing.Symbols;
+using Rubberduck.UI.Command.MenuItems.CommandBars;
 using Rubberduck.VBEditor.Application;
 using Rubberduck.VBEditor.SafeComWrappers.Abstract;
 using RubberduckWeb.Mocks.Rubberduck.Inspections;
@@ -66,6 +69,8 @@ namespace RubberduckWeb.Controllers
             mockHost.SetupAllProperties();
 
             var parser = MockParser.Create(vbe.Object, _state);
+            //LoadBuiltInReferences(parser.State); // loads fine, but then parser craps out
+
             Task.Run(() => parser.Parse(new System.Threading.CancellationTokenSource())).Wait();
             if (parser.State.Status >= ParserState.Error)
             {
@@ -80,6 +85,29 @@ namespace RubberduckWeb.Controllers
                     );
 
             return Task.FromResult(PartialView("InspectionResults", results));
+        }
+
+        private void LoadBuiltInReferences(RubberduckParserState state)
+        {
+            var files = Directory.GetFiles(Server.MapPath("~/Declarations"), "*.xml");
+            var reader = new XmlPersistableDeclarations();
+            foreach (var file in files)
+            {
+                var tree = reader.Load(file);
+                foreach (var declaration in UnwrapTree(tree))
+                {
+                    state.AddDeclaration(declaration);
+                }
+            }
+        }
+
+        private IEnumerable<Declaration> UnwrapTree(SerializableDeclarationTree tree)
+        {
+            yield return tree.Node.Unwrap(null);
+            foreach (var declaration in tree.Children.Select(UnwrapTree).SelectMany(child => child))
+            {
+                yield return declaration;
+            }
         }
 
         public static string FormatInspectionName(IInspection inspection)
