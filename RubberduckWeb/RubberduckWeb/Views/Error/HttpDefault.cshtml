@@ -1,9 +1,9 @@
-﻿@model HttpException
+﻿@model string
 @{
     ViewBag.Title = "HttpDefault";
 }
 
-<h2>HTTP Error (HTTP @Model.ErrorCode)</h2>
+<h2>HTTP Error (HTTP @Model)</h2>
 <div class="vbe-mock-debugger">
     <div class="code-area">
         <div class="code">
@@ -40,7 +40,7 @@
         <h1 class="modal-title">rubberduckvba.com</h1>
         <div class="body modal-body">
             <div class="message">
-                Run-time error '@Model.ErrorCode':<br />
+                Run-time error '@Model':<br />
                 <br />
                 The HTTP server encountered an error.<br />
                 <br />
