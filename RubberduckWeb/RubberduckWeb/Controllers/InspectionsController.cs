@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
+using System.Threading;
 using Moq;
 using Rubberduck.Parsing.VBA;
 using System.Threading.Tasks;
@@ -69,9 +71,16 @@ namespace RubberduckWeb.Controllers
             mockHost.SetupAllProperties();
 
             var parser = MockParser.Create(vbe.Object, _state);
-            //LoadBuiltInReferences(parser.State); // loads fine, but then parser craps out
+            LoadBuiltInReferences(parser.State); // loads fine, but then parser craps out
 
-            Task.Run(() => parser.Parse(new System.Threading.CancellationTokenSource())).Wait();
+            try
+            {
+                Task.Run(() => parser.Parse(new CancellationTokenSource())).Wait();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
             if (parser.State.Status >= ParserState.Error)
             {
                 return Task.FromResult(PartialView("InspectionResults", null));
@@ -101,12 +110,18 @@ namespace RubberduckWeb.Controllers
             }
         }
 
-        private IEnumerable<Declaration> UnwrapTree(SerializableDeclarationTree tree)
+        private IEnumerable<Declaration> UnwrapTree(SerializableDeclarationTree tree, Declaration parent = null)
         {
-            yield return tree.Node.Unwrap(null);
-            foreach (var declaration in tree.Children.Select(UnwrapTree).SelectMany(child => child))
+            var current = tree.Node.Unwrap(parent);
+            yield return current;
+
+            foreach (var serializableDeclarationTree in tree.Children)
             {
-                yield return declaration;
+                var unwrapped = UnwrapTree(serializableDeclarationTree, current);
+                foreach (var declaration in unwrapped)
+                {
+                    yield return declaration;
+                }
             }
         }
 
