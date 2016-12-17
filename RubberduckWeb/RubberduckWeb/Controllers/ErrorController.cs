@@ -8,31 +8,24 @@ namespace RubberduckWeb.Controllers
 {
     public class ErrorController : Controller
     {
-        // GET: Error
-        public ActionResult Generic(Exception error = null)
+        public ActionResult PageNotFound()
         {
-            return View(error);
+            return View();
         }
 
-        public ActionResult PageNotFound(HttpException error = null)
+        public ActionResult InternalServerError()
         {
-            return View(error);
+            return View();
         }
 
-        public ActionResult InternalServerError(HttpException error = null)
+        public ActionResult HttpDefault(string id = null)
         {
-            return View(error);
+            return View((object)id);
         }
 
-        public ActionResult HttpDefault(HttpException error = null)
+        public ActionResult Code418()
         {
-            return View(error);
-        }
-
-        public ActionResult Code418(HttpException error = null)
-        {
-            error = new HttpException(418, "I'm a rubber duck.");
-            return View(error);
+            return View();
         }
     }
 }
