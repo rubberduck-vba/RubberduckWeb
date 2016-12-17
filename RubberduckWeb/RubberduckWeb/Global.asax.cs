@@ -23,8 +23,6 @@ namespace RubberduckWeb
 
             // Log it here
 
-            Response.Clear();
-
             var httpException = exception as HttpException;
 
             var routeData = new RouteData();
@@ -32,34 +30,29 @@ namespace RubberduckWeb
 
             if (httpException == null)
             {
-                routeData.Values.Add("action", "Generic");
+                return;
             }
             else
             {
+                Response.Clear();
+
                 switch (httpException.GetHttpCode())
                 {
                     case 404:
-                        routeData.Values.Add("action", "PageNotFound");
+                        Response.Redirect("~/Error/PageNotFound");
                         break;
                     case 418:
                         // I don't know of any situation where "I'm a Teapot" will actually be an error code, but we'll add it just for fun.
-                        routeData.Values.Add("action", "Code418");
+                        Response.Redirect("~/Error/Code418");
                         break;
                     case 500:
-                        routeData.Values.Add("action", "InternalServerError");
+                        Response.Redirect("~/Error/InternalServerError");
                         break;
                     default:
-                        routeData.Values.Add("action", "HttpDefault");
+                        Response.Redirect(string.Format("~/Error/HttpDefault/{0}", httpException.GetHttpCode()));
                         break;
                 }
             }
-
-            routeData.Values.Add("error", exception);
-
-            Server.ClearError();
-
-            IController controller = new ErrorController();
-            controller.Execute(new RequestContext(new HttpContextWrapper(Context), routeData));
         }
     }
 }
