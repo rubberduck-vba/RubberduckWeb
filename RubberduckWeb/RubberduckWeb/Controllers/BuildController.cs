@@ -12,7 +12,7 @@ namespace RubberduckWeb.Controllers
         // GET: Build
         public ActionResult Index()
         {
-            return View();
+            return View("Version");
         }
 
         public ActionResult Version(string id)

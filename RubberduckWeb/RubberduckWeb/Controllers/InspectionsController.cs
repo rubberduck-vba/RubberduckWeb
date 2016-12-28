@@ -9,7 +9,6 @@ using System.Web.Mvc;
 using Rubberduck.Inspections;
 using Rubberduck.Inspections.Abstract;
 using Rubberduck.Parsing.Symbols;
-using Rubberduck.UI.Command.MenuItems.CommandBars;
 using Rubberduck.VBEditor.Application;
 using Rubberduck.VBEditor.SafeComWrappers.Abstract;
 using RubberduckWeb.Mocks.Rubberduck.Inspections;
@@ -71,7 +70,7 @@ namespace RubberduckWeb.Controllers
             mockHost.SetupAllProperties();
 
             var parser = MockParser.Create(vbe.Object, _state);
-            LoadBuiltInReferences(parser.State); // loads fine, but then parser craps out
+            LoadBuiltInReferences(parser.State);
 
             try
             {
@@ -103,24 +102,9 @@ namespace RubberduckWeb.Controllers
             foreach (var file in files)
             {
                 var tree = reader.Load(file);
-                foreach (var declaration in UnwrapTree(tree))
+                foreach (var declaration in tree.Unwrap())
                 {
                     state.AddDeclaration(declaration);
-                }
-            }
-        }
-
-        private IEnumerable<Declaration> UnwrapTree(SerializableDeclarationTree tree, Declaration parent = null)
-        {
-            var current = tree.Node.Unwrap(parent);
-            yield return current;
-
-            foreach (var serializableDeclarationTree in tree.Children)
-            {
-                var unwrapped = UnwrapTree(serializableDeclarationTree, current);
-                foreach (var declaration in unwrapped)
-                {
-                    yield return declaration;
                 }
             }
         }

@@ -250,11 +250,6 @@
     <Content Include="Content\Images\RenameRefactoring.png" />
     <Content Include="Content\Images\RubberduckHeaderLogo.png" />
     <Content Include="Content\Images\TestRunner.png" />
-    <Content Include="Declarations\Excel.xml" />
-    <Content Include="Declarations\MSForms.xml" />
-    <Content Include="Declarations\Office.xml" />
-    <Content Include="Declarations\stdole.xml" />
-    <Content Include="Declarations\VBA.xml" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -321,7 +316,9 @@
     <Content Include="Views\Error\Code418.cshtml" />
     <Content Include="Views\Build\Version.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Declarations\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
