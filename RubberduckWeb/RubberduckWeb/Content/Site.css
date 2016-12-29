@@ -196,6 +196,27 @@ tr:nth-child(even) {
     box-shadow: rgba(0, 0, 0, 0.08) 1px 0px, rgba(0, 0, 0, 0.08) -1px 0px, rgba(0, 0, 0, 0.08) 0px 1px, rgba(0, 0, 0, 0.08) 0px -1px, rgba(0, 0, 0, 0.05) 2px 0px, rgba(0, 0, 0, 0.05) -2px 0px, rgba(0, 0, 0, 0.05) 0px 2px, rgba(0, 0, 0, 0.05) 0px -2px, rgba(0, 0, 0, 0.03) 3px 0px, rgba(0, 0, 0, 0.03) -3px 0px, rgba(0, 0, 0, 0.03) 0px 3px, rgba(0, 0, 0, 0.03) 0px -3px, rgba(0, 0, 0, 0.02) 4px 0px, rgba(0, 0, 0, 0.02) -4px 0px, rgba(0, 0, 0, 0.02) 0px 4px, rgba(0, 0, 0, 0.02) 0px -4px, rgba(0, 0, 0, 0.04) 5px 0px, rgba(0, 0, 0, 0.04) -5px 0px, rgba(0, 0, 0, 0.04) 0px 5px, rgba(0, 0, 0, 0.04) 0px -5px;
 }
 
+@media only screen and (max-width: 450px) {
+    .vbe-mock-error-modal {
+        width: 100% !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        padding: 2px !important;
+        border-radius: 0 !important;
+    }
+
+        .vbe-mock-error-modal .body {
+            box-shadow: none !important;
+            height: auto !important;
+            padding-bottom: 6px !important;
+        }
+
+            .vbe-mock-error-modal .body .buttons {
+                position: static !important;
+                text-align: center !important;
+            }
+}
+
 .vbe-mock-error-modal .fade {
 
 }
