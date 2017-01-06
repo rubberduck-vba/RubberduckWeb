@@ -82,7 +82,7 @@ namespace RubberduckWeb
                 Assembly.GetAssembly(typeof(IHostApplication)), // Rubberduck.VBEditor
                 Assembly.GetAssembly(typeof(InspectionBase)),   // Rubberduck
                 Assembly.GetAssembly(typeof(IIndenter)),        // Rubberduck.SmartIndenter
-                Assembly.GetAssembly(typeof(IRubberduckParser)) // Rubberduck.Parsing
+                Assembly.GetAssembly(typeof(IParseCoordinator)) // Rubberduck.Parsing
             };
             ApplyDefaultInterfacesConvention(kernel, assemblies);
 
@@ -94,7 +94,7 @@ namespace RubberduckWeb
             kernel.Rebind<IIndenter>().ToConstant(new Indenter(vbe, () => new IndenterSettings()));
             kernel.Rebind<IPersistanceService<CodeInspectionSettings>>().To<XmlPersistanceService<CodeInspectionSettings>>().InCallScope();
             kernel.Bind<RubberduckParserState>().ToSelf().InRequestScope();
-            kernel.Bind<IRubberduckParser>().To<RubberduckParser>().InCallScope();
+            kernel.Bind<IParseCoordinator>().To<ParseCoordinator>().InCallScope();
 
             BindCodeInspectionTypes(kernel);
         }
