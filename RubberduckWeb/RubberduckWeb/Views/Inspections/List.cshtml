@@ -56,12 +56,12 @@
         <div class="inspections-form">
             <div>
                 <textarea id="code" type="text" rows="10" placeholder="Enter code to run the inspections against.">
-Sub Test()
-    Dim foo As String
-    foo = ""
-
-    If bar = 15 Then
-        MsgBox bar, vbCritical
+Sub Test(foo)
+    Dim oRange As Range
+    oRange = Range("A1:A10")
+    
+    If Application.Avg(oRange) > 0 Then
+        MsgBox foo, vbCritical
     End If
 End Sub
                 </textarea>
