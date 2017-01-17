@@ -65,14 +65,14 @@ namespace RubberduckWeb.Controllers
             // ensure line endings are \r\n
             code = code.Replace("\r\n", "\n").Replace("\n", "\r\n");
             var vbe = builder.ProjectBuilder("WebInspector", ProjectProtection.Unprotected)
-                             .AddReference("VBA", @"C:\Program Files\Common Files\microsoft shared\VBA\VBA7\VBE7.dll", true)
-                             .AddReference("Excel", @"C:\Program Files\Microsoft Office\Office14\EXCEL.EXE", true)
-                             .AddReference("Office", @"C:\Program Files\Common Files\microsoft shared\OFFICE14\MSO.DLL", true)
-                             .AddReference("Scripting", @"C:\Windows\SysWOW64\scrrun.dll", true)
+                             //.AddReference("VBA", @"C:\Program Files\Common Files\microsoft shared\VBA\VBA7\VBE7.dll", true)
+                             //.AddReference("Excel", @"C:\Program Files\Microsoft Office\Office14\EXCEL.EXE", true)
+                             //.AddReference("Office", @"C:\Program Files\Common Files\microsoft shared\OFFICE14\MSO.DLL", true)
+                             //.AddReference("Scripting", @"C:\Windows\SysWOW64\scrrun.dll", true)
                              .AddComponent("WebModule", ComponentType.StandardModule, code)
                              .MockVbeBuilder()
                              .Build();
-            
+
             var mockHost = new Mock<IHostApplication>();
             mockHost.SetupAllProperties();
 
@@ -95,9 +95,8 @@ namespace RubberduckWeb.Controllers
             var results = _inspector.Inspect(parser.State);
 
             // strip away module & project naming suggestions, they don't make sense in the web UI
-            results.RemoveAll(ir => ir.Inspection is UseMeaningfulNameInspection
-                        && (ir.QualifiedSelection.QualifiedName.Name == "TestProject1." || ir.QualifiedSelection.QualifiedName.Name == "TestProject1.TestModule1")
-                    );
+            //results.RemoveAll(ir => ir.Inspection is UseMeaningfulNameInspection
+            //            && (ir.QualifiedSelection.QualifiedName.Name == "TestProject1." || ir.QualifiedSelection.QualifiedName.Name == "TestProject1.TestModule1");
 
             return Task.FromResult(PartialView("InspectionResults", results));
         }
@@ -105,13 +104,11 @@ namespace RubberduckWeb.Controllers
         private void LoadBuiltInReferences(RubberduckParserState state)
         {
             var files = Directory.GetFiles(Server.MapPath("~/Declarations"), "*.xml");
-            var reader = new XmlPersistableDeclarations();
             foreach (var file in files)
             {
-                var tree = reader.Load(file);
-                foreach (var declaration in tree.Unwrap())
+                using (var stream = new FileStream(file, FileMode.Open))
                 {
-                    state.AddDeclaration(declaration);
+                    state.AddTestLibrary(stream);
                 }
             }
         }
