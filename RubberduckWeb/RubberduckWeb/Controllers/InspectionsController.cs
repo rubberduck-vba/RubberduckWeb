@@ -73,9 +73,6 @@ namespace RubberduckWeb.Controllers
                              .MockVbeBuilder()
                              .Build();
 
-            var mockHost = new Mock<IHostApplication>();
-            mockHost.SetupAllProperties();
-
             var parser = MockParser.Create(vbe.Object, _state);
             LoadBuiltInReferences(parser.State);
 
