@@ -65,10 +65,10 @@ namespace RubberduckWeb.Controllers
             // ensure line endings are \r\n
             code = code.Replace("\r\n", "\n").Replace("\n", "\r\n");
             var vbe = builder.ProjectBuilder("WebInspector", ProjectProtection.Unprotected)
-                             .AddReference("VBA", @"C:\Program Files\Common Files\microsoft shared\VBA\VBA7\VBE7.dll", true)
-                             .AddReference("Excel", @"C:\Program Files\Microsoft Office\Office14\EXCEL.EXE", true)
-                             .AddReference("Office", @"C:\Program Files\Common Files\microsoft shared\OFFICE14\MSO.DLL", true)
-                             .AddReference("Scripting", @"C:\Windows\SysWOW64\scrrun.dll", true)
+                             //.AddReference("VBA", @"C:\Program Files\Common Files\microsoft shared\VBA\VBA7\VBE7.dll", true)
+                             //.AddReference("Excel", @"C:\Program Files\Microsoft Office\Office14\EXCEL.EXE", true)
+                             //.AddReference("Office", @"C:\Program Files\Common Files\microsoft shared\OFFICE14\MSO.DLL", true)
+                             //.AddReference("Scripting", @"C:\Windows\SysWOW64\scrrun.dll", true)
                              .AddComponent("WebModule", ComponentType.StandardModule, code)
                              .MockVbeBuilder()
                              .Build();
