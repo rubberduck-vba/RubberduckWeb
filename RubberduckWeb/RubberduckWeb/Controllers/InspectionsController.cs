@@ -65,16 +65,18 @@ namespace RubberduckWeb.Controllers
             // ensure line endings are \r\n
             code = code.Replace("\r\n", "\n").Replace("\n", "\r\n");
             var vbe = builder.ProjectBuilder("WebInspector", ProjectProtection.Unprotected)
-                             //.AddReference("VBA", @"C:\Program Files\Common Files\microsoft shared\VBA\VBA7\VBE7.dll", true)
-                             //.AddReference("Excel", @"C:\Program Files\Microsoft Office\Office14\EXCEL.EXE", true)
-                             //.AddReference("Office", @"C:\Program Files\Common Files\microsoft shared\OFFICE14\MSO.DLL", true)
-                             //.AddReference("Scripting", @"C:\Windows\SysWOW64\scrrun.dll", true)
+                             .AddReference("VBA", MockVbeBuilder.LibraryPathVBA, 4, 1, true)
+                             .AddReference("Excel", MockVbeBuilder.LibraryPathMsExcel, 1, 7, true)
+                             .AddReference("Office", MockVbeBuilder.LibraryPathMsOffice, 2, 5, true)
+                             .AddReference("Scripting", MockVbeBuilder.LibraryPathScripting, 1, 0, true)
                              .AddComponent("WebModule", ComponentType.StandardModule, code)
-                             .MockVbeBuilder()
-                             .Build();
+                             .MockVbeBuilder().Build();
+            var mockHost = new Mock<IHostApplication>();
+            mockHost.SetupGet(m => m.ApplicationName).Returns("Excel");
+            vbe.Setup(m => m.HostApplication()).Returns(() => mockHost.Object);
 
-            var parser = MockParser.Create(vbe.Object, _state);
-            LoadBuiltInReferences(parser.State);
+            var path = Server.MapPath("~/Declarations");
+            var parser = MockParser.Create(vbe.Object, _state, path);
 
             try
             {
@@ -96,18 +98,6 @@ namespace RubberduckWeb.Controllers
             //            && (ir.QualifiedSelection.QualifiedName.Name == "TestProject1." || ir.QualifiedSelection.QualifiedName.Name == "TestProject1.TestModule1");
 
             return Task.FromResult(PartialView("InspectionResults", results));
-        }
-
-        private void LoadBuiltInReferences(RubberduckParserState state)
-        {
-            var files = Directory.GetFiles(Server.MapPath("~/Declarations"), "*.xml");
-            foreach (var file in files)
-            {
-                using (var stream = new FileStream(file, FileMode.Open))
-                {
-                    state.AddTestLibrary(stream);
-                }
-            }
         }
 
         public static string FormatInspectionName(IInspection inspection)
