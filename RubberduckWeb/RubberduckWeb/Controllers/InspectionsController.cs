@@ -65,10 +65,12 @@ namespace RubberduckWeb.Controllers
             // ensure line endings are \r\n
             code = code.Replace("\r\n", "\n").Replace("\n", "\r\n");
             var vbe = builder.ProjectBuilder("WebInspector", ProjectProtection.Unprotected)
+
                              .AddReference("VBA", MockVbeBuilder.LibraryPathVBA, 4, 1, true)
                              .AddReference("Excel", MockVbeBuilder.LibraryPathMsExcel, 1, 7, true)
                              .AddReference("Office", MockVbeBuilder.LibraryPathMsOffice, 2, 5, true)
                              .AddReference("Scripting", MockVbeBuilder.LibraryPathScripting, 1, 0, true)
+
                              .AddComponent("WebModule", ComponentType.StandardModule, code)
                              .MockVbeBuilder().Build();
             var mockHost = new Mock<IHostApplication>();
@@ -77,6 +79,11 @@ namespace RubberduckWeb.Controllers
 
             var path = Server.MapPath("~/Declarations");
             var parser = MockParser.Create(vbe.Object, _state, path);
+
+            parser.State.AddTestLibrary(path + "/Excel.1.7.xml");
+            parser.State.AddTestLibrary(path + "/VBA.4.1.xml");
+            parser.State.AddTestLibrary(path + "/Office.2.5.xml");
+            parser.State.AddTestLibrary(path + "/Scripting.1.0.xml");
 
             try
             {
