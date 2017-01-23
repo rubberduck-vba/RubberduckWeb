@@ -95,14 +95,7 @@ namespace RubberduckWeb
             kernel.Rebind<IIndenter>().ToConstant(new Indenter(vbe, () => new IndenterSettings())).InRequestScope();
             kernel.Rebind<IPersistanceService<CodeInspectionSettings>>().To<XmlPersistanceService<CodeInspectionSettings>>().InRequestScope();
 
-            var state = new RubberduckParserState(Sinks);
-            var path = System.Web.Hosting.HostingEnvironment.MapPath("~/Declarations");
-            state.AddTestLibrary(path + "/Excel.1.7.xml");
-            state.AddTestLibrary(path + "/VBA.4.1.xml");
-            state.AddTestLibrary(path + "/Office.2.5.xml");
-            state.AddTestLibrary(path + "/Scripting.1.0.xml");
-
-            kernel.Bind<RubberduckParserState>().ToConstant(state).InRequestScope();
+            kernel.Bind<RubberduckParserState>().ToSelf().InRequestScope();
             kernel.Bind<IParseCoordinator>().To<ParseCoordinator>().InRequestScope();
 
             BindCodeInspectionTypes(kernel);
