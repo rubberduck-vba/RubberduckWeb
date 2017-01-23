@@ -1,17 +1,13 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using Moq;
 using Rubberduck.Parsing.VBA;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using Rubberduck.Inspections;
 using Rubberduck.Inspections.Abstract;
-using Rubberduck.Parsing.Symbols;
 using Rubberduck.VBEditor.Application;
 using Rubberduck.VBEditor.SafeComWrappers;
-using Rubberduck.VBEditor.SafeComWrappers.Abstract;
 using RubberduckWeb.Mocks.Rubberduck.Inspections;
 
 namespace RubberduckWeb.Controllers
@@ -20,6 +16,7 @@ namespace RubberduckWeb.Controllers
     using System.Collections.Generic;
     using System.Text;
 
+    [OutputCache(VaryByParam = "*", Duration = 0, NoStore = true)]
     public class InspectionsController : Controller
     {
         private readonly DefaultInspector _inspector;
@@ -79,12 +76,6 @@ namespace RubberduckWeb.Controllers
 
             var path = Server.MapPath("~/Declarations");
             var parser = MockParser.Create(vbe.Object, _state, path);
-
-            parser.State.AddTestLibrary(path + "/Excel.1.7.xml");
-            parser.State.AddTestLibrary(path + "/VBA.4.1.xml");
-            parser.State.AddTestLibrary(path + "/Office.2.5.xml");
-            parser.State.AddTestLibrary(path + "/Scripting.1.0.xml");
-
             try
             {
                 Task.Run(() => parser.Parse(new CancellationTokenSource())).Wait();

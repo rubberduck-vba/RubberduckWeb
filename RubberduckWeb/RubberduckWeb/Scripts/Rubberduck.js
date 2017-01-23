@@ -18,6 +18,7 @@ function $hideImage() {
 };
 
 function $loadInspections() {
+    $("button#loadInspections").addClass("hidden");
     $("div#inspection-error-indicator").addClass("hidden");
     $("div#inspection-busy-indicator").removeClass("hidden");
     $.ajax({
@@ -25,17 +26,19 @@ function $loadInspections() {
         datatype: "json",
         data: { code: $("textarea#code").val() },
         type: "POST",
-        success: function (data) {
+        success: function(data) {
             console.log(data);
             console.log("success");
             $("div#inspection-results").html(data);
             $("div#inspection-busy-indicator").addClass("hidden");
+            $("button#loadInspections").removeClass("hidden");
         },
-        error: function (data) {
+        error: function(data) {
             console.log(data);
             console.log("error");
             $("div#inspection-busy-indicator").addClass("hidden");
             $("div#inspection-error-indicator").removeClass("hidden");
+            $("button#loadInspections").removeClass("hidden");
         }
     });
 }
