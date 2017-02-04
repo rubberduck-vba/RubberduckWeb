@@ -1,16 +1,13 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using Moq;
 using Rubberduck.Parsing.VBA;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using Rubberduck.Inspections;
 using Rubberduck.Inspections.Abstract;
-using Rubberduck.Parsing.Symbols;
 using Rubberduck.VBEditor.Application;
-using Rubberduck.VBEditor.SafeComWrappers.Abstract;
+using Rubberduck.VBEditor.SafeComWrappers;
 using RubberduckWeb.Mocks.Rubberduck.Inspections;
 
 namespace RubberduckWeb.Controllers
@@ -19,6 +16,7 @@ namespace RubberduckWeb.Controllers
     using System.Collections.Generic;
     using System.Text;
 
+    [OutputCache(VaryByParam = "*", Duration = 0, NoStore = true)]
     public class InspectionsController : Controller
     {
         private readonly DefaultInspector _inspector;
@@ -60,17 +58,28 @@ namespace RubberduckWeb.Controllers
         {
             //Arrange
             var builder = new MockVbeBuilder();
-            IVBComponent component;
 
             // ensure line endings are \r\n
             code = code.Replace("\r\n", "\n").Replace("\n", "\r\n");
-            var vbe = builder.BuildFromSingleStandardModule(code, out component);
+            var vbe = builder.ProjectBuilder("WebInspector", ProjectProtection.Unprotected)
 
+                             .AddReference("VBA", MockVbeBuilder.LibraryPathVBA, 4, 1, true)
+                             .AddReference("Excel", MockVbeBuilder.LibraryPathMsExcel, 1, 7, true)
+                             .AddReference("Office", MockVbeBuilder.LibraryPathMsOffice, 2, 5, true)
+                             .AddReference("Scripting", MockVbeBuilder.LibraryPathScripting, 1, 0, true)
+
+                             .AddComponent("WebModule", ComponentType.StandardModule, code)
+                             .MockVbeBuilder().Build();
             var mockHost = new Mock<IHostApplication>();
-            mockHost.SetupAllProperties();
+            mockHost.SetupGet(m => m.ApplicationName).Returns("Excel");
+            vbe.Setup(m => m.HostApplication()).Returns(() => mockHost.Object);
 
-            var parser = MockParser.Create(vbe.Object, _state);
-            LoadBuiltInReferences(parser.State);
+            var path = Server.MapPath("~/Declarations");
+            var parser = MockParser.Create(vbe.Object, _state, path);
+            parser.State.AddTestLibrary(path + "/VBA.4.1.xml");
+            parser.State.AddTestLibrary(path + "/Excel.1.7.xml");
+            parser.State.AddTestLibrary(path + "/Office.2.5.xml");
+            parser.State.AddTestLibrary(path + "/Scripting.1.0.xml");
 
             try
             {
@@ -88,25 +97,10 @@ namespace RubberduckWeb.Controllers
             var results = _inspector.Inspect(parser.State);
 
             // strip away module & project naming suggestions, they don't make sense in the web UI
-            results.RemoveAll(ir => ir.Inspection is UseMeaningfulNameInspection
-                        && (ir.QualifiedSelection.QualifiedName.Name == "TestProject1." || ir.QualifiedSelection.QualifiedName.Name == "TestProject1.TestModule1")
-                    );
+            //results.RemoveAll(ir => ir.Inspection is UseMeaningfulNameInspection
+            //            && (ir.QualifiedSelection.QualifiedName.Name == "TestProject1." || ir.QualifiedSelection.QualifiedName.Name == "TestProject1.TestModule1");
 
             return Task.FromResult(PartialView("InspectionResults", results));
-        }
-
-        private void LoadBuiltInReferences(RubberduckParserState state)
-        {
-            var files = Directory.GetFiles(Server.MapPath("~/Declarations"), "*.xml");
-            var reader = new XmlPersistableDeclarations();
-            foreach (var file in files)
-            {
-                var tree = reader.Load(file);
-                foreach (var declaration in tree.Unwrap())
-                {
-                    state.AddDeclaration(declaration);
-                }
-            }
         }
 
         public static string FormatInspectionName(IInspection inspection)

@@ -19,6 +19,7 @@ using Rubberduck.SmartIndenter;
 using Rubberduck.VBEditor.SafeComWrappers.Abstract;
 using Rubberduck.SettingsProvider;
 using Rubberduck.Settings;
+using RubberduckTests.Mocks;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(NinjectWebCommon), "Stop")]
@@ -82,19 +83,20 @@ namespace RubberduckWeb
                 Assembly.GetAssembly(typeof(IHostApplication)), // Rubberduck.VBEditor
                 Assembly.GetAssembly(typeof(InspectionBase)),   // Rubberduck
                 Assembly.GetAssembly(typeof(IIndenter)),        // Rubberduck.SmartIndenter
-                Assembly.GetAssembly(typeof(IRubberduckParser)) // Rubberduck.Parsing
+                Assembly.GetAssembly(typeof(IParseCoordinator)) // Rubberduck.Parsing
             };
             ApplyDefaultInterfacesConvention(kernel, assemblies);
 
             IVBComponent component; // discard, not needed
-            var vbe = new RubberduckTests.Mocks.MockVbeBuilder().BuildFromSingleStandardModule("", out component).Object;
+            var vbe = new MockVbeBuilder().BuildFromSingleStandardModule("", out component).Object;
 
-            kernel.Rebind<ISinks>().ToConstant(Sinks);
-            kernel.Rebind<IVBE>().ToConstant(vbe);
-            kernel.Rebind<IIndenter>().ToConstant(new Indenter(vbe, () => new IndenterSettings()));
-            kernel.Rebind<IPersistanceService<CodeInspectionSettings>>().To<XmlPersistanceService<CodeInspectionSettings>>().InCallScope();
+            kernel.Rebind<ISinks>().ToConstant(Sinks).InRequestScope();
+            kernel.Rebind<IVBE>().ToConstant(vbe).InRequestScope();
+            kernel.Rebind<IIndenter>().ToConstant(new Indenter(vbe, () => new IndenterSettings())).InRequestScope();
+            kernel.Rebind<IPersistanceService<CodeInspectionSettings>>().To<XmlPersistanceService<CodeInspectionSettings>>().InRequestScope();
+
             kernel.Bind<RubberduckParserState>().ToSelf().InRequestScope();
-            kernel.Bind<IRubberduckParser>().To<RubberduckParser>().InCallScope();
+            kernel.Bind<IParseCoordinator>().To<ParseCoordinator>().InRequestScope();
 
             BindCodeInspectionTypes(kernel);
         }
@@ -106,7 +108,7 @@ namespace RubberduckWeb
                 // inspections & factories have their own binding rules
                 .Where(type => !type.Name.EndsWith("Factory") && !type.Name.EndsWith("ConfigProvider") && !type.GetInterfaces().Contains(typeof(IInspection)))
                 .BindDefaultInterface()
-                .Configure(binding => binding.InCallScope())); // TransientScope wouldn't dispose disposables
+                .Configure(binding => binding.InRequestScope()));
         }
 
         private static void BindCodeInspectionTypes(IKernel kernel)
@@ -114,7 +116,6 @@ namespace RubberduckWeb
             var assembly = Assembly.GetAssembly(typeof(InspectionBase));
             var inspections = assembly.GetTypes().Where(type => type.BaseType == typeof(InspectionBase));
 
-            // skip inspections with undesirable dependencies
             foreach (var inspection in inspections)
             {
                 kernel.Bind<IInspection>().To(inspection).InRequestScope();

@@ -56,12 +56,12 @@
         <div class="inspections-form">
             <div>
                 <textarea id="code" type="text" rows="10" placeholder="Enter code to run the inspections against.">
-Sub Test()
-    Dim foo As String
-    foo = ""
-
-    If bar = 15 Then
-        Baz()
+Sub Test(foo)
+    Dim oRange As Range
+    oRange = Range("A1:A10")
+    
+    If Application.Avg(oRange) > 0 Then
+        MsgBox foo, vbCritical
     End If
 End Sub
                 </textarea>
@@ -73,7 +73,7 @@ End Sub
         <div id="inspection-error-indicator" class="alert alert-danger hidden">
             Rubberduck failed to either parse or resolve this code.  Please verify that it works, then report this problem at our <a href="https://github.com/rubberduck-vba/Rubberduck">GitHub repository</a> if necessary.
         </div>
-        <div id="inspection-busy-indicator" class="alert alert-info hidden">Working on it, hold tight. :)</div>
+        <div id="inspection-busy-indicator" class="alert alert-info hidden">Working on it, hold tight! :)</div>
         <div id="inspection-results"></div>
     </div>
     <div class="row"></div>

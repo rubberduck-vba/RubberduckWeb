@@ -280,6 +280,7 @@
     <Content Include="libs\Rubberduck.SmartIndenter.dll" />
     <Content Include="libs\Rubberduck.SourceControl.dll" />
     <Content Include="libs\Rubberduck.VBEditor.dll" />
+    <Content Include="libs\RubberduckTests.dll" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Rubberduck.js" />
