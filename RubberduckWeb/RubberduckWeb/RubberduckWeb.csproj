@@ -201,6 +201,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BuildController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\IndenterController.cs" />
     <Compile Include="Controllers\InspectionsController.cs" />
     <Compile Include="Mocks\DefaultInspector.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -325,6 +326,7 @@
     <Content Include="Views\Error\HttpDefault.cshtml" />
     <Content Include="Views\Error\Code418.cshtml" />
     <Content Include="Views\Build\Version.cshtml" />
+    <Content Include="Views\Indenter\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
