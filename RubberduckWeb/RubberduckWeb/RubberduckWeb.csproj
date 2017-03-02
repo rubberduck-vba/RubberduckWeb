@@ -53,6 +53,10 @@
       <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <HintPath>..\packages\AvalonEdit.5.0.3\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -251,13 +255,12 @@
     <Content Include="Content\Images\RubberduckHeaderLogo.png" />
     <Content Include="Content\Images\TestRunner.png" />
     <Content Include="Declarations\ADODB.6.1.xml" />
-    <Content Include="Declarations\ADOR.6.0.xml" />
-    <Content Include="Declarations\Excel.1.7.xml" />
+    <Content Include="Declarations\Excel.1.8.xml" />
     <Content Include="Declarations\MSForms.2.0.xml" />
-    <Content Include="Declarations\Office.2.5.xml" />
+    <Content Include="Declarations\Office.2.7.xml" />
     <Content Include="Declarations\Scripting.1.0.xml" />
     <Content Include="Declarations\stdole.2.0.xml" />
-    <Content Include="Declarations\VBA.4.1.xml" />
+    <Content Include="Declarations\VBA.4.2.xml" />
     <Content Include="Declarations\VBIDE.5.3.xml" />
     <Content Include="Declarations\VBScript_RegExp_55.5.5.xml" />
     <Content Include="favicon.ico" />

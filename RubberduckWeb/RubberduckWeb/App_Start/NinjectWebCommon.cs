@@ -7,18 +7,17 @@ using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Moq;
 using Ninject;
 using Ninject.Extensions.Conventions;
-using Ninject.Extensions.NamedScope;
 using Ninject.Web.Common;
 using Rubberduck.Inspections.Abstract;
 using Rubberduck.Parsing;
 using Rubberduck.Parsing.VBA;
 using Rubberduck.VBEditor.Application;
-using Rubberduck.VBEditor.Events;
 using RubberduckWeb;
 using Rubberduck.SmartIndenter;
 using Rubberduck.VBEditor.SafeComWrappers.Abstract;
 using Rubberduck.SettingsProvider;
 using Rubberduck.Settings;
+using Rubberduck.UI.Refactorings;
 using RubberduckTests.Mocks;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
@@ -29,7 +28,6 @@ namespace RubberduckWeb
     public static class NinjectWebCommon
     {
         private static readonly Bootstrapper Bootstrapper = new Bootstrapper();
-        private static readonly ISinks Sinks = new Mock<ISinks>().Object;
 
         /// <summary>
         /// Starts the application
@@ -90,11 +88,10 @@ namespace RubberduckWeb
             IVBComponent component; // discard, not needed
             var vbe = new MockVbeBuilder().BuildFromSingleStandardModule("", out component).Object;
 
-            kernel.Rebind<ISinks>().ToConstant(Sinks).InRequestScope();
             kernel.Rebind<IVBE>().ToConstant(vbe).InRequestScope();
             kernel.Rebind<IIndenter>().ToConstant(new Indenter(vbe, () => new IndenterSettings())).InRequestScope();
             kernel.Rebind<IPersistanceService<CodeInspectionSettings>>().To<XmlPersistanceService<CodeInspectionSettings>>().InRequestScope();
-
+            kernel.Bind<IAssignedByValParameterQuickFixDialogFactory>().ToConstant(new Mock<IAssignedByValParameterQuickFixDialogFactory>().Object);
             kernel.Bind<RubberduckParserState>().ToSelf().InRequestScope();
             kernel.Bind<IParseCoordinator>().To<ParseCoordinator>().InRequestScope();
 

@@ -76,9 +76,9 @@ namespace RubberduckWeb.Controllers
 
             var path = Server.MapPath("~/Declarations");
             var parser = MockParser.Create(vbe.Object, _state, path);
-            parser.State.AddTestLibrary(path + "/VBA.4.1.xml");
-            parser.State.AddTestLibrary(path + "/Excel.1.7.xml");
-            parser.State.AddTestLibrary(path + "/Office.2.5.xml");
+            parser.State.AddTestLibrary(path + "/VBA.4.2.xml");
+            parser.State.AddTestLibrary(path + "/Excel.1.8.xml");
+            parser.State.AddTestLibrary(path + "/Office.2.7.xml");
             parser.State.AddTestLibrary(path + "/Scripting.1.0.xml");
 
             try
