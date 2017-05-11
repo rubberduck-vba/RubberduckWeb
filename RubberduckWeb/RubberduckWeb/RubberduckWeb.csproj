@@ -116,6 +116,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libs\Rubberduck.dll</HintPath>
     </Reference>
+    <Reference Include="Rubberduck.Inspections">
+      <HintPath>libs\Rubberduck.Inspections.dll</HintPath>
+    </Reference>
     <Reference Include="Rubberduck.Parsing, Version=2.0.6045.23972, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libs\Rubberduck.Parsing.dll</HintPath>

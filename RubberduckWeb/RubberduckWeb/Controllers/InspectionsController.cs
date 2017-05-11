@@ -5,7 +5,6 @@ using Moq;
 using Rubberduck.Parsing.VBA;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using Rubberduck.Inspections.Abstract;
 using Rubberduck.VBEditor.Application;
 using Rubberduck.VBEditor.SafeComWrappers;
 using RubberduckWeb.Mocks.Rubberduck.Inspections;
@@ -15,6 +14,7 @@ namespace RubberduckWeb.Controllers
     using RubberduckTests.Mocks;
     using System.Collections.Generic;
     using System.Text;
+    using Rubberduck.Parsing.Inspections.Abstract;
 
     [OutputCache(VaryByParam = "*", Duration = 0, NoStore = true)]
     public class InspectionsController : Controller

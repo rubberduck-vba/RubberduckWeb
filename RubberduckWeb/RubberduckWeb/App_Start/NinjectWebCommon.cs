@@ -19,6 +19,8 @@ using Rubberduck.SettingsProvider;
 using Rubberduck.Settings;
 using Rubberduck.UI.Refactorings;
 using RubberduckTests.Mocks;
+using Rubberduck.Parsing.Inspections.Abstract;
+using Rubberduck;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(NinjectWebCommon), "Stop")]
@@ -79,14 +81,15 @@ namespace RubberduckWeb
             {
                 Assembly.GetExecutingAssembly(),
                 Assembly.GetAssembly(typeof(IHostApplication)), // Rubberduck.VBEditor
-                Assembly.GetAssembly(typeof(InspectionBase)),   // Rubberduck
+                Assembly.GetAssembly(typeof(InspectionBase)),   // Rubberduck.Inspections
+                Assembly.GetAssembly(typeof(App)),              // Rubberduck
                 Assembly.GetAssembly(typeof(IIndenter)),        // Rubberduck.SmartIndenter
                 Assembly.GetAssembly(typeof(IParseCoordinator)) // Rubberduck.Parsing
             };
             ApplyDefaultInterfacesConvention(kernel, assemblies);
 
-            IVBComponent component; // discard, not needed
-            var vbe = new MockVbeBuilder().BuildFromSingleStandardModule("", out component).Object;
+            IVBComponent component;
+            var vbe = MockVbeBuilder.BuildFromSingleStandardModule("", out component).Object;
 
             kernel.Rebind<IVBE>().ToConstant(vbe).InRequestScope();
             kernel.Rebind<IIndenter>().ToConstant(new Indenter(vbe, () => new IndenterSettings())).InRequestScope();

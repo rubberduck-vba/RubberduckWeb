@@ -4,9 +4,9 @@
     ViewBag.Title = "InspectionResults";
 }
 
-@using Rubberduck.Inspections
-@using Rubberduck.Inspections.Resources
-@model List<Rubberduck.Inspections.Abstract.IInspectionResult>
+@using Rubberduck.Parsing.Inspections.Abstract
+@using Rubberduck.Parsing.Inspections.Resources
+@model List<IInspectionResult>
 @{
     var severityIconUrls = new Dictionary<CodeInspectionSeverity, string>
     {
