@@ -1,0 +1,124 @@
+﻿@using RubberduckWeb.Mocks
+@using RubberduckWeb.Models
+
+@model IndenterSettingsModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3>Live Rubberduck Indenter</h3>
+
+@using (Html.BeginForm())
+{
+    <div class="vbe-mock-indenter col-md-12">
+        <div class="col-md-6">
+            <div>
+                <h4>Alignment Options</h4>
+                <div class="form-group">
+                    @Html.CheckBoxFor(model => model.AlignCommentsWithCode)
+                    Align comments with code
+                </div>
+                <div class="form-group">
+                    @Html.CheckBoxFor(model => model.AlignContinuations)
+                    Align continuations
+                </div>
+                <div class="form-group">
+                    @Html.CheckBoxFor(model => model.IgnoreOperatorsInContinuations)
+                    Ignore operators
+                </div>
+                <div class="form-group">
+                    @Html.CheckBoxFor(model => model.AlignDims)
+                    Align dims
+                    <div class="number-selector">
+                        @Html.TextBoxFor(model => model.AlignDimColumn, new { type = "number" })
+                        <input type="button" class="number-down" value="v" />
+                        <input type="button" class="number-up" value="^" />
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h4>Special Options</h4>
+                <div class="form-group">
+                    @Html.CheckBoxFor(model => model.ForceDebugStatementsInColumn1)
+                    Force debug directives to column 1
+                </div>
+                <div class="form-group">
+                    @Html.CheckBoxFor(model => model.ForceCompilerDirectivesInColumn1)
+                    Force compiler directives to column 1
+                </div>
+            </div>
+            <div>
+                <h4>End-of-line comment style:</h4>
+                <div class="form-group">
+                    @Html.DropDownListFor(model => model.EndOfLineCommentStyle, Model.EndOfLineCommentStyleSelectList)
+                    <div class="number-selector">
+                        @Html.TextBoxFor(model => model.EndOfLineCommentColumnSpaceAlignment, new { type = "number" })
+                        <input type="button" class="number-down" value="v" />
+                        <input type="button" class="number-up" value="^" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div>
+                <h4>Indent Options</h4>
+                <div class="form-group">
+                    @Html.CheckBoxFor(model => model.IndentEntireProcedureBody)
+                    Indent entire procedure body
+                </div>
+                <div class="form-group indent-4">
+                    @Html.CheckBoxFor(model => model.IndentFirstCommentBlock)
+                    Indent first comment block
+                </div>
+                <div class="form-group indent-4">
+                    @Html.CheckBoxFor(model => model.IndentFirstDeclarationBlock)
+                    Indent first declaration block
+                </div>
+                <div class="form-group">
+                    @Html.CheckBoxFor(model => model.IndentEnumTypeAsProcedure)
+                    Indent comments in Enum and Type blocks like in procedures
+                </div>
+                <div class="form-group">
+                    @Html.CheckBoxFor(model => model.IndentCase)
+                    Indent case
+                </div>
+                <div class="form-group">
+                    @Html.CheckBoxFor(model => model.IndentCompilerDirectives)
+                    Indent compiler directives
+                </div>
+                <div class="form-group">
+                    Indent spaces:
+                    <div class="number-selector">
+                        @Html.TextBoxFor(model => model.IndentSpaces, new { type = "number" })
+                        <input type="button" class="number-down" value="v" />
+                        <input type="button" class="number-up" value="^" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            @Html.TextAreaFor(model => model.Code)
+        </div>
+        <div class="col-md-12">
+            <input type="submit" value="Run Indenter" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        function updateNeighborTextBox(item, offset) {
+            var box = $("input[type=number]", item.parent());
+            box.val(parseInt(box.val()) + offset);
+        }
+
+        $(".number-selector .number-down").click(function () {
+            updateNeighborTextBox($(this), -1);
+        });
+
+        $(".number-selector .number-up").click(function () {
+            updateNeighborTextBox($(this), 1);
+        });
+    </script>
+}

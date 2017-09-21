@@ -26,6 +26,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -208,12 +209,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BuildController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\IndenterController.cs" />
     <Compile Include="Controllers\InspectionsController.cs" />
     <Compile Include="Mocks\DefaultInspector.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mocks\MockIndenterSettings.cs" />
+    <Compile Include="Models\IndenterSettingsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -332,6 +336,7 @@
     <Content Include="Views\Error\HttpDefault.cshtml" />
     <Content Include="Views\Error\Code418.cshtml" />
     <Content Include="Views\Build\Version.cshtml" />
+    <Content Include="Views\Indenter\Preview.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
