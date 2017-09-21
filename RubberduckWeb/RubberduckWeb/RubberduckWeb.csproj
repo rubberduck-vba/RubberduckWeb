@@ -336,7 +336,7 @@
     <Content Include="Views\Error\HttpDefault.cshtml" />
     <Content Include="Views\Error\Code418.cshtml" />
     <Content Include="Views\Build\Version.cshtml" />
-    <Content Include="Views\Indenter\Index.cshtml" />
+    <Content Include="Views\Indenter\Preview.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

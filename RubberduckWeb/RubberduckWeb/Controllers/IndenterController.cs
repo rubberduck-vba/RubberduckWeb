@@ -11,16 +11,22 @@ namespace RubberduckWeb.Controllers
 {
     public class IndenterController : Controller
     {
-        // GET: Indenter
-        public ActionResult Index()
+        // GET: Indenter/Preview
+        public ActionResult Preview()
         {
             return View(new IndenterSettingsModel());
         }
 
+        // POST: Indenter/Preview
         [HttpPost]
-        public ActionResult Index(IndenterSettingsModel model)
+        public ActionResult Preview(IndenterSettingsModel model)
         {
             var code = model.Code;
+
+            if (string.IsNullOrEmpty(code))
+            {
+                return View(model);
+            }
 
             // Mat says this is how it works, and he seems to be right.
             var indenter = new Indenter(null, () => model);
