@@ -4,14 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Antlr4.Runtime.Tree;
 using Moq;
-using Rubberduck.Inspections;
-using Rubberduck.Inspections.Abstract;
-using Rubberduck.Inspections.Resources;
-using Rubberduck.Parsing;
+using Rubberduck.Inspections.Concrete;
+using Rubberduck.Parsing.Inspections.Abstract;
+using Rubberduck.Parsing.Inspections.Resources;
 using Rubberduck.Parsing.VBA;
 using Rubberduck.Settings;
 using Rubberduck.SettingsProvider;
-using Rubberduck.UI;
+using Rubberduck.UI.Inspections;
 
 namespace RubberduckWeb.Mocks
 {
@@ -19,23 +18,19 @@ namespace RubberduckWeb.Mocks
     {
         public class DefaultInspector
         {
+            private const int AGGREGATION_THRESHOLD = 128;
             private readonly List<IInspection> _inspections;
 
             public DefaultInspector(IEnumerable<IInspection> inspections, RubberduckParserState state)
             {
                 _inspections = inspections.ToList();
 
-                if (_inspections.All(i => i.Name != nameof(ParameterNotUsedInspection)))
-                {
-                    _inspections.Add(new ParameterNotUsedInspection(state, null));
-                }
-
                 if (_inspections.All(i => i.Name != nameof(UseMeaningfulNameInspection)))
                 {
                     var settings = new Mock<IPersistanceService<CodeInspectionSettings>>();
                     settings.Setup(s => s.Load(It.IsAny<CodeInspectionSettings>()))
                         .Returns(new CodeInspectionSettings());
-                    _inspections.Add(new UseMeaningfulNameInspection(null, state, settings.Object));
+                    _inspections.Add(new UseMeaningfulNameInspection(state, settings.Object));
                 }
             }
 
@@ -46,23 +41,17 @@ namespace RubberduckWeb.Mocks
                     return new List<IInspectionResult>();
                 }
 
-                state.OnStatusMessageUpdate(RubberduckUI.CodeInspections_Inspecting);
-
                 var allIssues = new ConcurrentBag<IInspectionResult>();
 
                 // Prepare ParseTreeWalker based inspections
-                var parseTreeWalkResults = GetParseTreeResults(state);
-                foreach (var parseTreeInspection in _inspections.Where(inspection => inspection.Severity != CodeInspectionSeverity.DoNotShow && inspection is IParseTreeInspection))
-                {
-                    ((IParseTreeInspection)parseTreeInspection).SetResults(parseTreeWalkResults);
-                }
+                WalkTrees(state, _inspections.OfType<IParseTreeInspection>());
 
                 var inspections = _inspections.Where(inspection => inspection.Severity != CodeInspectionSeverity.DoNotShow)
                     .Select(inspection =>
                         new Task(() =>
                         {
                             var inspectionResults = inspection.GetInspectionResults();
-                            
+
                             foreach (var inspectionResult in inspectionResults)
                             {
                                 allIssues.Add(inspectionResult);
@@ -76,42 +65,37 @@ namespace RubberduckWeb.Mocks
 
                 Task.WaitAll(inspections);
 
-                return allIssues.ToList();
+                var issuesByType = allIssues.GroupBy(issue => issue.Inspection.Name)
+                            .ToDictionary(grouping => grouping.Key, grouping => grouping.ToList());
+                var results = issuesByType.Where(kv => kv.Value.Count <= AGGREGATION_THRESHOLD)
+                    .SelectMany(kv => kv.Value)
+                    .Union(issuesByType.Where(kv => kv.Value.Count > AGGREGATION_THRESHOLD)
+                    .Select(kv => new AggregateInspectionResult(kv.Value.OrderBy(i => i.QualifiedSelection).First(), kv.Value.Count)))
+                    .ToList();
+
+                return results;
             }
 
-            private IEnumerable<QualifiedContext> GetParseTreeResults(RubberduckParserState state)
+            private void WalkTrees(RubberduckParserState state, IEnumerable<IParseTreeInspection> inspections)
             {
-                var result = new List<QualifiedContext>();
+                var listeners =
+                    inspections.Where(i => i.Severity != CodeInspectionSeverity.DoNotShow)
+                        .Select(inspection =>
+                        {
+                            inspection.Listener.ClearContexts();
+                            return inspection.Listener;
+                        })
+                        .ToList();
 
                 foreach (var componentTreePair in state.ParseTrees)
                 {
-                    /*
-                    Need to reinitialize these for each and every ParseTree we process, since the results are aggregated in the instances themselves 
-                    before moving them into the ParseTreeResults after qualifying them 
-                    */
-                    var obsoleteCallStatementListener = new ObsoleteCallStatementInspection.ObsoleteCallStatementListener();
-                    var obsoleteLetStatementListener = new ObsoleteLetStatementInspection.ObsoleteLetStatementListener();
-                    var emptyStringLiteralListener = new EmptyStringLiteralInspection.EmptyStringLiteralListener();
-                    var argListWithOneByRefParamListener = new ProcedureCanBeWrittenAsFunctionInspection.SingleByRefParamArgListListener();
-                    var malformedAnnotationListener = new MissingAnnotationArgumentInspection.InvalidAnnotationStatementListener();
+                    foreach (var listener in listeners)
+                    {
+                        listener.CurrentModuleName = componentTreePair.Key;
+                    }
 
-                    var combinedListener = new CombinedParseTreeListener(new IParseTreeListener[]{
-                        obsoleteCallStatementListener,
-                        obsoleteLetStatementListener,
-                        emptyStringLiteralListener,
-                        argListWithOneByRefParamListener,
-                        malformedAnnotationListener
-                    });
-
-                    ParseTreeWalker.Default.Walk(combinedListener, componentTreePair.Value);
-
-                    result.AddRange(argListWithOneByRefParamListener.Contexts.Select(context => new QualifiedContext(componentTreePair.Key, context)));
-                    result.AddRange(emptyStringLiteralListener.Contexts.Select(context => new QualifiedContext(componentTreePair.Key, context)));
-                    result.AddRange(obsoleteLetStatementListener.Contexts.Select(context => new QualifiedContext(componentTreePair.Key, context)));
-                    result.AddRange(obsoleteCallStatementListener.Contexts.Select(context => new QualifiedContext(componentTreePair.Key, context)));
-                    result.AddRange(malformedAnnotationListener.Contexts.Select(context => new QualifiedContext(componentTreePair.Key, context)));
+                    ParseTreeWalker.Default.Walk(new CombinedParseTreeListener(listeners), componentTreePair.Value);
                 }
-                return result;
             }
         }
     }

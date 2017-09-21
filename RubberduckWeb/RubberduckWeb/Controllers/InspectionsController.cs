@@ -5,7 +5,6 @@ using Moq;
 using Rubberduck.Parsing.VBA;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using Rubberduck.Inspections.Abstract;
 using Rubberduck.VBEditor.Application;
 using Rubberduck.VBEditor.SafeComWrappers;
 using RubberduckWeb.Mocks.Rubberduck.Inspections;
@@ -15,6 +14,7 @@ namespace RubberduckWeb.Controllers
     using RubberduckTests.Mocks;
     using System.Collections.Generic;
     using System.Text;
+    using Rubberduck.Parsing.Inspections.Abstract;
 
     [OutputCache(VaryByParam = "*", Duration = 0, NoStore = true)]
     public class InspectionsController : Controller
@@ -76,9 +76,9 @@ namespace RubberduckWeb.Controllers
 
             var path = Server.MapPath("~/Declarations");
             var parser = MockParser.Create(vbe.Object, _state, path);
-            parser.State.AddTestLibrary(path + "/VBA.4.1.xml");
-            parser.State.AddTestLibrary(path + "/Excel.1.7.xml");
-            parser.State.AddTestLibrary(path + "/Office.2.5.xml");
+            parser.State.AddTestLibrary(path + "/VBA.4.2.xml");
+            parser.State.AddTestLibrary(path + "/Excel.1.8.xml");
+            parser.State.AddTestLibrary(path + "/Office.2.7.xml");
             parser.State.AddTestLibrary(path + "/Scripting.1.0.xml");
 
             try
