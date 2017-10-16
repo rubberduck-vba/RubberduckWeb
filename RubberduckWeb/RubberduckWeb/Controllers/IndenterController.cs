@@ -28,7 +28,6 @@ namespace RubberduckWeb.Controllers
                 return View(model);
             }
 
-            // Mat says this is how it works, and he seems to be right.
             var indenter = new Indenter(null, () => model);
             var lines = code.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
             lines = indenter.Indent(lines, false).ToArray();

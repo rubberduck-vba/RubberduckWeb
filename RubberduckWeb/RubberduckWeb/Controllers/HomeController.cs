@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.ServiceModel.Syndication;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Xml;
+using Rubberduck.SmartIndenter;
+using RubberduckWeb.Models;
 
 namespace RubberduckWeb.Controllers
 {
@@ -37,7 +40,7 @@ namespace RubberduckWeb.Controllers
 
         public ActionResult Indentation()
         {
-            return View();
+            return View(new IndenterSettingsModel {Code = "Sub DoSomething()\n'Try it! Paste your unindented VBA code here.\nEnd Sub"});
         }
 
         public ActionResult About()
@@ -87,9 +90,32 @@ namespace RubberduckWeb.Controllers
                 using (var reader = XmlReader.Create(await response.Content.ReadAsStreamAsync()))
                 {
                     var feed = SyndicationFeed.Load(reader);
-                    return feed?.Items;
+                    return feed.Items;
                 }
             }
+        }
+
+        [HttpPost]
+        public ActionResult Indentation(IndenterSettingsModel model)
+        {
+            var code = model.Code;
+
+            if (string.IsNullOrEmpty(code))
+            {
+                return View(model);
+            }
+
+            var indenter = new Indenter(null, () => model);
+            var lines = code.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            lines = indenter.Indent(lines, false).ToArray();
+            var result = string.Join(Environment.NewLine, lines);
+
+            // Required to update Code textarea
+            // Otherwise it reloads the POSTed data
+            ModelState.Clear();
+
+            model.Code = result + Environment.NewLine;
+            return View(model);
         }
     }
 }

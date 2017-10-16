@@ -1,13 +1,13 @@
-﻿@using RubberduckWeb.Mocks
-@using RubberduckWeb.Models
+﻿@using RubberduckWeb.Models
 
 @model IndenterSettingsModel
 
 @{
     ViewBag.Title = "Index";
+    Model.Code = "Sub DoSomething()\n'paste some VBA code here to indent.\nEnd Sub";
 }
 
-<h3>Live Rubberduck Indenter</h3>
+<h3>Rubberduck Smart Indenter</h3>
 
 @using (Html.BeginForm())
 {
@@ -101,7 +101,7 @@
             @Html.TextAreaFor(model => model.Code)
         </div>
         <div class="col-md-12">
-            <input type="submit" value="Run Indenter" />
+            <input type="submit" value="Indent!" />
         </div>
     </div>
 }

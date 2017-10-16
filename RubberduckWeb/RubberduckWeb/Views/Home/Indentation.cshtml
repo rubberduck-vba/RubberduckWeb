@@ -1,27 +1,125 @@
-﻿@{
+﻿@using RubberduckWeb.Models
+
+@model IndenterSettingsModel
+@{
     ViewBag.Title = "Features";
 }
 
 <section id="indentation">
-    <h3>
-        Smart Indenter
-    </h3>
     <div class="col-lg-12">
-        The Rubberduck Smart Indenter can be previewed @Html.ActionLink("on this very site", "Preview", "Indenter"), this allows you to see <em>just exactly</em> what Rubberduck is capable of.
-    </div>
-    <div class="col-lg-12">
-        <p>
-            The original author and current maintainer of the popular <a href="http://www.oaltd.co.uk/indenter/indentpage.asp" target="_blank">Smart Indenter</a> add-in have graciously offered the latest version of their source code to the Rubberduck project. Thanks to Rob Bovey and Stephen Bullen, Rubberduck 2.0 has the smartest automagic indentation built-in.
-        </p>
+        <p>The original author and current maintainer of the popular <a href="http://www.oaltd.co.uk/indenter/indentpage.asp" target="_blank">Smart Indenter</a> add-in have graciously offered the latest version of their source code to the Rubberduck project. Thanks to Rob Bovey and Stephen Bullen, Rubberduck 2.0 has the smartest automagic indentation built-in.</p>
         <p>...with all your favorite settings:</p>
-        <div>
-            <img alt="Rubberduck intenter settings" src="../../Content/Images/IndenterSettings.png" />
-        </div>
-        <p>
-            The <em>Undo Indent</em> feature is not implemented... but it's not needed either, because Rubberduck performs only two operations on code modules when indenting: it first deletes the content, then writes the indented code back in one single operation. The VBE's native <em>undo</em> shortcut (Ctrl+Z) is therefore not overwhelmed, and you can effectively <em>undo indent</em> by simply pressing Ctrl+Z twice.
-        </p>
+        @using (Html.BeginForm())
+        {
+            <div class="vbe-mock-indenter col-md-12">
+                <div class="col-md-6">
+                    <div>
+                        <h4>Alignment Options</h4>
+                        <div class="form-group">
+                            @Html.CheckBoxFor(model => model.AlignCommentsWithCode)
+                            Align comments with code
+                        </div>
+                        <div class="form-group">
+                            @Html.CheckBoxFor(model => model.AlignContinuations)
+                            Align continuations
+                        </div>
+                        <div class="form-group">
+                            @Html.CheckBoxFor(model => model.IgnoreOperatorsInContinuations)
+                            Ignore operators
+                        </div>
+                        <div class="form-group">
+                            @Html.CheckBoxFor(model => model.AlignDims)
+                            Align dims
+                            <div class="number-selector">
+                                @Html.TextBoxFor(model => model.AlignDimColumn, new { type = "number" })
+                                <input type="button" class="number-down" value="v" />
+                                <input type="button" class="number-up" value="^" />
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4>Special Options</h4>
+                        <div class="form-group">
+                            @Html.CheckBoxFor(model => model.ForceDebugStatementsInColumn1)
+                            Force debug directives to column 1
+                        </div>
+                        <div class="form-group">
+                            @Html.CheckBoxFor(model => model.ForceCompilerDirectivesInColumn1)
+                            Force compiler directives to column 1
+                        </div>
+                    </div>
+                    <div>
+                        <h4>End-of-line comment style:</h4>
+                        <div class="form-group">
+                            @Html.DropDownListFor(model => model.EndOfLineCommentStyle, Model.EndOfLineCommentStyleSelectList)
+                            <div class="number-selector">
+                                @Html.TextBoxFor(model => model.EndOfLineCommentColumnSpaceAlignment, new { type = "number" })
+                                <input type="button" class="number-down" value="v" />
+                                <input type="button" class="number-up" value="^" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div>
+                        <h4>Indent Options</h4>
+                        <div class="form-group">
+                            @Html.CheckBoxFor(model => model.IndentEntireProcedureBody)
+                            Indent entire procedure body
+                        </div>
+                        <div class="form-group indent-4">
+                            @Html.CheckBoxFor(model => model.IndentFirstCommentBlock)
+                            Indent first comment block
+                        </div>
+                        <div class="form-group indent-4">
+                            @Html.CheckBoxFor(model => model.IndentFirstDeclarationBlock)
+                            Indent first declaration block
+                        </div>
+                        <div class="form-group">
+                            @Html.CheckBoxFor(model => model.IndentEnumTypeAsProcedure)
+                            Indent comments in Enum and Type blocks like in procedures
+                        </div>
+                        <div class="form-group">
+                            @Html.CheckBoxFor(model => model.IndentCase)
+                            Indent case
+                        </div>
+                        <div class="form-group">
+                            @Html.CheckBoxFor(model => model.IndentCompilerDirectives)
+                            Indent compiler directives
+                        </div>
+                        <div class="form-group">
+                            Indent spaces:
+                            <div class="number-selector">
+                                @Html.TextBoxFor(model => model.IndentSpaces, new { type = "number" })
+                                <input type="button" class="number-down" value="v" />
+                                <input type="button" class="number-up" value="^" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    @Html.TextAreaFor(model => model.Code)
+                </div>
+                <div class="col-md-12">
+                    <input type="submit" value="Indent!" />
+                </div>
+            </div>
+        }
+        @section Scripts {
+            <script type="text/javascript">
+                function updateNeighborTextBox(item, offset) {
+                    var box = $("input[type=number]", item.parent());
+                    box.val(parseInt(box.val()) + offset);
+                }
+
+                $(".number-selector .number-down").click(function () {
+                    updateNeighborTextBox($(this), -1);
+                });
+
+                $(".number-selector .number-up").click(function () {
+                    updateNeighborTextBox($(this), 1);
+                });
+            </script>
+        }
     </div>
-    <div class="row"></div>
 </section>
-
-
