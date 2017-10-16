@@ -274,21 +274,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="libs\NLog.dll.nlog" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\rubberduckvba.com - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="libs\Microsoft.VB6.Interop.VBIDE.dll" />
     <Content Include="libs\Microsoft.Vbe.Interop.dll" />
     <Content Include="libs\Microsoft.Vbe.Interop.Forms.dll" />
     <Content Include="libs\Office.dll" />
     <Content Include="libs\Rubberduck.dll" />
+    <Content Include="libs\Rubberduck.Inspections.dll" />
     <Content Include="libs\Rubberduck.Parsing.dll" />
     <Content Include="libs\Rubberduck.RegexAssistant.dll" />
     <Content Include="libs\Rubberduck.SettingsProvider.dll" />
     <Content Include="libs\Rubberduck.SmartIndenter.dll" />
     <Content Include="libs\Rubberduck.SourceControl.dll" />
     <Content Include="libs\Rubberduck.VBEditor.dll" />
+    <Content Include="libs\Rubberduck.XML" />
     <Content Include="libs\RubberduckTests.dll" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

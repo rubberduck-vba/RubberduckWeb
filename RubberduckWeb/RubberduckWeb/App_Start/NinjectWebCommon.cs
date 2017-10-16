@@ -21,6 +21,7 @@ using Rubberduck.UI.Refactorings;
 using RubberduckTests.Mocks;
 using Rubberduck.Parsing.Inspections.Abstract;
 using Rubberduck;
+using Rubberduck.Parsing.Symbols;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(NinjectWebCommon), "Stop")]
@@ -93,6 +94,7 @@ namespace RubberduckWeb
 
             kernel.Rebind<IVBE>().ToConstant(vbe).InRequestScope();
             kernel.Rebind<IIndenter>().ToConstant(new Indenter(vbe, () => new IndenterSettings())).InRequestScope();
+            kernel.Bind<IDeclarationFinderFactory>().ToMethod(context => new DeclarationFinderFactory());
             kernel.Rebind<IPersistanceService<CodeInspectionSettings>>().To<XmlPersistanceService<CodeInspectionSettings>>().InRequestScope();
             kernel.Bind<IAssignedByValParameterQuickFixDialogFactory>().ToConstant(new Mock<IAssignedByValParameterQuickFixDialogFactory>().Object);
             kernel.Bind<RubberduckParserState>().ToSelf().InRequestScope();
@@ -114,11 +116,28 @@ namespace RubberduckWeb
         private static void BindCodeInspectionTypes(IKernel kernel)
         {
             var assembly = Assembly.GetAssembly(typeof(InspectionBase));
-            var inspections = assembly.GetTypes().Where(type => type.BaseType == typeof(InspectionBase));
+            var inspections = assembly.GetTypes()
+                .Where(type => type.IsClass
+                               && !type.IsAbstract
+                               && type.GetInterfaces().Contains(typeof(IInspection)));
 
             foreach (var inspection in inspections)
             {
-                kernel.Bind<IInspection>().To(inspection).InRequestScope();
+                var iParseTreeInspection = inspection.GetInterfaces().SingleOrDefault(i => i.Name == nameof(IParseTreeInspection));
+                if (iParseTreeInspection != null)
+                {
+                    var localInspection = inspection;
+                    var binding = kernel.Bind(iParseTreeInspection)
+                        .To(inspection)
+                        .InRequestScope()
+                        .Named(localInspection.FullName);
+
+                    kernel.Bind<IInspection>().ToMethod(c => (IInspection)c.Kernel.Get(iParseTreeInspection, localInspection.FullName)).InRequestScope();
+                }
+                else
+                {
+                    var binding = kernel.Bind<IInspection>().To(inspection).InRequestScope();
+                }
             }
         }
     }

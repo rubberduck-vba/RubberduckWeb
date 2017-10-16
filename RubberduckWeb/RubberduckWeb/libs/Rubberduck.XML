@@ -4,12 +4,12 @@
         <name>Rubberduck</name>
     </assembly>
     <members>
-        <member name="M:Rubberduck.API.ParserState.Parse">
+        <member name="M:Rubberduck.API.VBA.ParserState.Parse">
             <summary>
             Blocking call, for easier unit-test code
             </summary>
         </member>
-        <member name="M:Rubberduck.API.ParserState.BeginParse">
+        <member name="M:Rubberduck.API.VBA.ParserState.BeginParse">
             <summary>
             Begins asynchronous parsing
             </summary>
@@ -417,26 +417,6 @@
             Contains data about a method parameter for the Reorder Parameters refactoring.
             </summary>
         </member>
-        <member name="T:Rubberduck.Root.EnumerableCounterInterceptAttribute">
-            <summary>
-            An attribute that makes an intercepted method call log the number of items returned.
-            </summary>
-        </member>
-        <member name="T:Rubberduck.Root.EnumerableCounterInterceptor`1">
-            <summary>
-            An interceptor that logs the number of items returned by an intercepted invocation that returns any IEnumerable{T}.
-            </summary>
-        </member>
-        <member name="T:Rubberduck.Root.TimedCallInterceptAttribute">
-            <summary>
-            An attribute that makes an intercepted method call log the duration of its execution.
-            </summary>
-        </member>
-        <member name="T:Rubberduck.Root.TimedCallLoggerInterceptor">
-            <summary>
-            An interceptor that logs the duration of an intercepted invocation.
-            </summary>
-        </member>
         <member name="P:Rubberduck.Settings.HotkeySetting.Key2">
             <summary>
             For 2-step hotkeys, the 2nd key to press. Note: hidden until 2-step hotkeys are an actual thing.
@@ -765,6 +745,11 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="T:Rubberduck.UI.Command.FormDesignerFindAllReferencesCommand">
+            <summary>
+            A command that locates all references to the active form designer component.
+            </summary>
+        </member>
         <member name="M:Rubberduck.UI.Command.MenuItems.CommandBars.IContextFormatter.Format(Rubberduck.VBEditor.SafeComWrappers.Abstract.ICodePane,Rubberduck.Parsing.Symbols.Declaration)">
             <summary>
             Determines the formatting of the contextual selection caption when a codepane is active.
@@ -867,13 +852,13 @@
             A command that runs all active code inspections for the active VBAProject.
             </summary>
         </member>
-        <member name="M:Rubberduck.UI.Command.InspectionResultsCommand.ExecuteImpl(System.Object)">
+        <member name="M:Rubberduck.UI.Command.InspectionResultsCommand.OnExecute(System.Object)">
             <summary>
             Runs code inspections 
             </summary>
             <param name="parameter"></param>
         </member>
-        <member name="T:Rubberduck.UI.Command.ShowSourceControlPanelCommand">
+        <member name="T:Rubberduck.UI.Command.SourceControlCommand">
             <summary>
             A command that displays the Source Control panel.
             </summary>
@@ -883,12 +868,15 @@
             A command that displays the To-Do explorer window.
             </summary>
         </member>
-        <member name="T:Rubberduck.UI.Controls.SelectableTreeView">
+        <member name="T:Rubberduck.UI.Controls.EmptyUIRefresh">
             <summary>
-            SelectableTreeView
+            Interaction logic for Refresh.xaml
+            </summary>
+            <summary>
+            EmptyUIRefresh
             </summary>
         </member>
-        <member name="M:Rubberduck.UI.Controls.SelectableTreeView.InitializeComponent">
+        <member name="M:Rubberduck.UI.Controls.EmptyUIRefresh.InitializeComponent">
             <summary>
             InitializeComponent
             </summary>
@@ -992,6 +980,11 @@
             Implement this interface in ViewModel classes that can be double-click-navigated.
             </summary>
         </member>
+        <member name="T:Rubberduck.UI.Controls.BindableSelectedItemBehavior">
+            <summary>
+            http://stackoverflow.com/a/5118406/1188513
+            </summary>
+        </member>
         <member name="T:Rubberduck.UI.Inspections.InspectionResultsControl">
             <summary>
             Interaction logic for InspectionResultsControl.xaml
@@ -1005,18 +998,23 @@
             InitializeComponent
             </summary>
         </member>
-        <member name="F:Rubberduck.UI.Inspections.CodeInspectionsWindow.components">
+        <member name="P:Rubberduck.UI.Inspections.InspectionResultsViewModel.IsRefreshing">
+            <summary>
+            Gets/sets a flag indicating whether the parser state changes are a result of our RefreshCommand.
+            </summary>
+        </member>
+        <member name="F:Rubberduck.UI.Inspections.InspectionResultsWindow.components">
             <summary> 
             Required designer variable.
             </summary>
         </member>
-        <member name="M:Rubberduck.UI.Inspections.CodeInspectionsWindow.Dispose(System.Boolean)">
+        <member name="M:Rubberduck.UI.Inspections.InspectionResultsWindow.Dispose(System.Boolean)">
             <summary> 
             Clean up any resources being used.
             </summary>
             <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
-        <member name="M:Rubberduck.UI.Inspections.CodeInspectionsWindow.InitializeComponent">
+        <member name="M:Rubberduck.UI.Inspections.InspectionResultsWindow.InitializeComponent">
             <summary> 
             Required method for Designer support - do not modify 
             the contents of this method with the code editor.
@@ -1486,7 +1484,7 @@
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.Assert_VerifyParameterNonNumeric">
             <summary>
-              Looks up a localized string similar to Parameter {0} was not a numeric value on invocatoin {1}. {2}.
+              Looks up a localized string similar to Parameter {0} was not a numeric value on invocation {1}. {2}.
             </summary>
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.Assert_VerifyParameterNotPassed">
@@ -1556,7 +1554,12 @@
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.CodeExplorer_AddFormText">
             <summary>
-              Looks up a localized string similar to User form (.frm).
+              Looks up a localized string similar to UserForm (.frm).
+            </summary>
+        </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.CodeExplorer_AddModule">
+            <summary>
+              Looks up a localized string similar to Add Module.
             </summary>
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.CodeExplorer_AddStdModuleText">
@@ -1567,6 +1570,11 @@
         <member name="P:Rubberduck.UI.RubberduckUI.CodeExplorer_AddTestModuleText">
             <summary>
               Looks up a localized string similar to Test module.
+            </summary>
+        </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.CodeExplorer_AddTestModuleWithStubsText">
+            <summary>
+              Looks up a localized string similar to Test module with stubs.
             </summary>
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.CodeExplorer_CollapseSubnodesToolTip">
@@ -1609,6 +1617,11 @@
               Looks up a localized string similar to Export....
             </summary>
         </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.CodeExplorer_ExportAll">
+            <summary>
+              Looks up a localized string similar to Export Project....
+            </summary>
+        </member>
         <member name="P:Rubberduck.UI.RubberduckUI.CodeExplorer_FindAllImplementationsText">
             <summary>
               Looks up a localized string similar to Find All Implementations....
@@ -1642,6 +1655,16 @@
         <member name="P:Rubberduck.UI.RubberduckUI.CodeExplorer_NewToolTip">
             <summary>
               Looks up a localized string similar to Add a component to the active project.
+            </summary>
+        </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.CodeExplorer_Open">
+            <summary>
+              Looks up a localized string similar to Open.
+            </summary>
+        </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.CodeExplorer_OpenDesigner">
+            <summary>
+              Looks up a localized string similar to Open Designer.
             </summary>
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.CodeExplorer_OpenProjectProperties">
@@ -1687,6 +1710,21 @@
         <member name="P:Rubberduck.UI.RubberduckUI.CodeExplorer_Sort">
             <summary>
               Looks up a localized string similar to Sort.
+            </summary>
+        </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.CodeExplorer_SortStyle_ByCodeOrder">
+            <summary>
+              Looks up a localized string similar to As in module.
+            </summary>
+        </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.CodeExplorer_SortStyle_ByName">
+            <summary>
+              Looks up a localized string similar to by Name.
+            </summary>
+        </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.CodeExplorer_SortStyle_ByType">
+            <summary>
+              Looks up a localized string similar to Group by Type.
             </summary>
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.CodeExplorer_Undo">
@@ -1806,24 +1844,9 @@
               Looks up a localized string similar to Run code inspections.
             </summary>
         </member>
-        <member name="P:Rubberduck.UI.RubberduckUI.CodeInspectionSettings_CodeQualityIssues">
-            <summary>
-              Looks up a localized string similar to Code Quality Issues.
-            </summary>
-        </member>
         <member name="P:Rubberduck.UI.RubberduckUI.CodeInspectionSettings_InspectionSeveritySettingsLabel">
             <summary>
               Looks up a localized string similar to Inspection Severities.
-            </summary>
-        </member>
-        <member name="P:Rubberduck.UI.RubberduckUI.CodeInspectionSettings_LanguageOpportunities">
-            <summary>
-              Looks up a localized string similar to Language Opportunities.
-            </summary>
-        </member>
-        <member name="P:Rubberduck.UI.RubberduckUI.CodeInspectionSettings_MaintainabilityAndReadabilityIssues">
-            <summary>
-              Looks up a localized string similar to Maintainability and Readability Issues.
             </summary>
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.CodeInspectionSettings_Misc">
@@ -1844,31 +1867,6 @@
         <member name="P:Rubberduck.UI.RubberduckUI.CodeInspectionSettings_WhitelistedIdentifiersLabel">
             <summary>
               Looks up a localized string similar to Whitelisted Identifiers.
-            </summary>
-        </member>
-        <member name="P:Rubberduck.UI.RubberduckUI.CodeInspectionSeverity_DoNotShow">
-            <summary>
-              Looks up a localized string similar to Do Not Show.
-            </summary>
-        </member>
-        <member name="P:Rubberduck.UI.RubberduckUI.CodeInspectionSeverity_Error">
-            <summary>
-              Looks up a localized string similar to Error.
-            </summary>
-        </member>
-        <member name="P:Rubberduck.UI.RubberduckUI.CodeInspectionSeverity_Hint">
-            <summary>
-              Looks up a localized string similar to Hint.
-            </summary>
-        </member>
-        <member name="P:Rubberduck.UI.RubberduckUI.CodeInspectionSeverity_Suggestion">
-            <summary>
-              Looks up a localized string similar to Suggestion.
-            </summary>
-        </member>
-        <member name="P:Rubberduck.UI.RubberduckUI.CodeInspectionSeverity_Warning">
-            <summary>
-              Looks up a localized string similar to Warning.
             </summary>
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.CommonHotkey_HookAttached">
@@ -1973,7 +1971,7 @@
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.DeclarationType_LibraryProcedure">
             <summary>
-              Looks up a localized string similar to Library procedure.
+              Looks up a localized string similar to library procedure.
             </summary>
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.DeclarationType_LineLabel">
@@ -2106,6 +2104,16 @@
               Looks up a localized string similar to You&apos;ve earned the &quot;Continuator&quot; badge!.
             </summary>
         </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.EmptyUIRefreshMessage">
+            <summary>
+              Looks up a localized string similar to to parse and process the projects in the VBE..
+            </summary>
+        </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.EmptyUIRefreshMessage_Title">
+            <summary>
+              Looks up a localized string similar to Rubberduck doesn&apos;t see anything yet..
+            </summary>
+        </member>
         <member name="P:Rubberduck.UI.RubberduckUI.EncapsulateField_Caption">
             <summary>
               Looks up a localized string similar to Rubberduck - Encapsulate Field.
@@ -2159,6 +2167,11 @@
         <member name="P:Rubberduck.UI.RubberduckUI.EndOfLineCommentStyle_StandardGap">
             <summary>
               Looks up a localized string similar to Standard Gap.
+            </summary>
+        </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.ExportAllCommand_SaveAsDialog_Title">
+            <summary>
+              Looks up a localized string similar to Choose a folder to export the source of {0} to:.
             </summary>
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.ExtractInterface_Caption">
@@ -2261,9 +2274,24 @@
               Looks up a localized string similar to Debug.
             </summary>
         </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.GeneralSettings_EnableSourceControl">
+            <summary>
+              Looks up a localized string similar to Enable Source Control. Requires a restart to take effect..
+            </summary>
+        </member>
         <member name="P:Rubberduck.UI.RubberduckUI.GeneralSettings_ErrorLogLevel">
             <summary>
               Looks up a localized string similar to Error.
+            </summary>
+        </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.GeneralSettings_ExperimentalFeatures">
+            <summary>
+              Looks up a localized string similar to Experimental Features:.
+            </summary>
+        </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.GeneralSettings_ExperimentalFeaturesWarning">
+            <summary>
+              Looks up a localized string similar to Only enable these if you know what you&apos;re doing. Enabling and/or using features from this section may result in things breaking unexpectedly and irrevocable data loss..
             </summary>
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.GeneralSettings_FatalLogLevel">
@@ -2406,6 +2434,11 @@
               Looks up a localized string similar to Code Explorer.
             </summary>
         </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.HotkeyDescription_ExportActiveProject">
+            <summary>
+              Looks up a localized string similar to Export Active Project.
+            </summary>
+        </member>
         <member name="P:Rubberduck.UI.RubberduckUI.HotkeyDescription_FindSymbol">
             <summary>
               Looks up a localized string similar to Find symbol.
@@ -2469,6 +2502,21 @@
         <member name="P:Rubberduck.UI.RubberduckUI.ImplementInterface_InvalidSelectionMessage">
             <summary>
               Looks up a localized string similar to The current selection is not valid..
+            </summary>
+        </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.ImportCommand_OpenDialog_Filter_AllFiles">
+            <summary>
+              Looks up a localized string similar to All Files.
+            </summary>
+        </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.ImportCommand_OpenDialog_Filter_VBFiles">
+            <summary>
+              Looks up a localized string similar to VB Files.
+            </summary>
+        </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.ImportCommand_OpenDialog_Title">
+            <summary>
+              Looks up a localized string similar to Import Source Files.
             </summary>
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.IndentCurrentModule">
@@ -3114,6 +3162,11 @@
               Looks up a localized string similar to Please ensure that exactly 1 control is selected before renaming..
             </summary>
         </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.RenameDialog_BuiltInNameError">
+            <summary>
+              Looks up a localized string similar to {0} {1} cannot be changed..
+            </summary>
+        </member>
         <member name="P:Rubberduck.UI.RubberduckUI.RenameDialog_Caption">
             <summary>
               Looks up a localized string similar to Rubberduck - Rename.
@@ -3125,19 +3178,9 @@
             Are you sure you want to proceed with this rename?.
              </summary>
         </member>
-        <member name="P:Rubberduck.UI.RubberduckUI.RenameDialog_ControlRenameError">
-            <summary>
-              Looks up a localized string similar to Could not rename Control {0}..
-            </summary>
-        </member>
         <member name="P:Rubberduck.UI.RubberduckUI.RenameDialog_DefaultRenameError">
             <summary>
-              Looks up a localized string similar to Coult not rename {0}..
-            </summary>
-        </member>
-        <member name="P:Rubberduck.UI.RubberduckUI.RenameDialog_EventRenameError">
-            <summary>
-              Looks up a localized string similar to Could not rename Event Handler {0}..
+              Looks up a localized string similar to Could not rename {0}..
             </summary>
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.RenameDialog_InstructionsLabelText">
@@ -3150,29 +3193,19 @@
               Looks up a localized string similar to Could not rename Interface Member {0}..
             </summary>
         </member>
-        <member name="P:Rubberduck.UI.RubberduckUI.RenameDialog_ModuleRenameError">
-            <summary>
-              Looks up a localized string similar to Could not rename module..
-            </summary>
-        </member>
-        <member name="P:Rubberduck.UI.RubberduckUI.RenameDialog_ProjectRenameError">
-            <summary>
-              Looks up a localized string similar to Could not rename project..
-            </summary>
-        </member>
-        <member name="P:Rubberduck.UI.RubberduckUI.RenameDialog_PropertyParameterRenameError">
-            <summary>
-              Looks up a localized string similar to Could not rename Parameter {0} for Property {1}..
-            </summary>
-        </member>
-        <member name="P:Rubberduck.UI.RubberduckUI.RenameDialog_PropertyRenameError">
-            <summary>
-              Looks up a localized string similar to Could not rename Property {0}..
-            </summary>
-        </member>
         <member name="P:Rubberduck.UI.RubberduckUI.RenameDialog_TitleText">
             <summary>
               Looks up a localized string similar to Rename identifier.
+            </summary>
+        </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.RenamePresenter_TargetIsControlEventHandler">
+            <summary>
+              Looks up a localized string similar to Method &apos;{0}&apos; is an EventHandler for control &apos;{1}&apos;.  Only the control can be renamed.  Rename &apos;{1}&apos; instead?.
+            </summary>
+        </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.RenamePresenter_TargetIsEventHandlerImplementation">
+            <summary>
+              Looks up a localized string similar to Method &apos;{0}&apos; is an implementation of event &apos;{1}.{2}&apos;.  Rename event &apos;{2}&apos; instead?.
             </summary>
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.RenamePresenter_TargetIsInterfaceMemberImplementation">
@@ -3293,6 +3326,11 @@
         <member name="P:Rubberduck.UI.RubberduckUI.RubberduckMenu_Refactor">
             <summary>
               Looks up a localized string similar to &amp;Refactor.
+            </summary>
+        </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.RubberduckMenu_Refresh">
+            <summary>
+              Looks up a localized string similar to Refresh.
             </summary>
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.RubberduckMenu_RegexSearchReplace">
@@ -3481,21 +3519,6 @@
               Looks up a localized string similar to In&amp;dent.
             </summary>
         </member>
-        <member name="P:Rubberduck.UI.RubberduckUI.SortStyle_ByCodeOrder">
-            <summary>
-              Looks up a localized string similar to As in module.
-            </summary>
-        </member>
-        <member name="P:Rubberduck.UI.RubberduckUI.SortStyle_ByName">
-            <summary>
-              Looks up a localized string similar to By name.
-            </summary>
-        </member>
-        <member name="P:Rubberduck.UI.RubberduckUI.SortStyle_ByType">
-            <summary>
-              Looks up a localized string similar to By type.
-            </summary>
-        </member>
         <member name="P:Rubberduck.UI.RubberduckUI.SourceControl_ActivateProject">
             <summary>
               Looks up a localized string similar to Please open or activate a project and try again..
@@ -3533,7 +3556,7 @@
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.SourceControl_CloneRepositoryDescription">
             <summary>
-              Looks up a localized string similar to Clones remote repository from provided URI. Have an (empty) project active in the editor..
+              Looks up a localized string similar to Clone a remote repository from a provided URL to the local disk. The repository will then be loaded into the active project..
             </summary>
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.SourceControl_CloneRepositoryTitle">
@@ -3808,12 +3831,12 @@
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.SourceControl_InitializeRepositoryDescription">
             <summary>
-              Looks up a localized string similar to Creates a new repository from the active project..
+              Looks up a localized string similar to Creates a new local repository from the active project..
             </summary>
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.SourceControl_InitializeRepositoryTitle">
             <summary>
-              Looks up a localized string similar to Initialize New Repository.
+              Looks up a localized string similar to Create New Local Repository.
             </summary>
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.SourceControl_LocalDirectoryLabel">
@@ -3903,12 +3926,12 @@
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.SourceControl_OpenRepositoryDescription">
             <summary>
-              Looks up a localized string similar to Open repository from disk. The active project will host the source code..
+              Looks up a localized string similar to Open local repository from disk. The active project will host the source code..
             </summary>
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.SourceControl_OpenRepositoryTitle">
             <summary>
-              Looks up a localized string similar to Open Existing Repository.
+              Looks up a localized string similar to Open Local Repository.
             </summary>
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.SourceControl_OpenWorkingDirectory">
@@ -4241,6 +4264,11 @@
               Looks up a localized string similar to Todo Explorer.
             </summary>
         </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.ToDoExplorer_CopyToolTip">
+            <summary>
+              Looks up a localized string similar to Copy to clipboard.
+            </summary>
+        </member>
         <member name="P:Rubberduck.UI.RubberduckUI.TodoExplorer_Description">
             <summary>
               Looks up a localized string similar to Description.
@@ -4249,6 +4277,23 @@
         <member name="P:Rubberduck.UI.RubberduckUI.TodoExplorer_LineNumber">
             <summary>
               Looks up a localized string similar to Line Number.
+            </summary>
+        </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.ToDoExplorer_NumberOfIssuesFound_Plural">
+             <summary>
+               Looks up a localized string similar to Rubberduck ToDo Items - {0}
+            {1} items found..
+             </summary>
+        </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.ToDoExplorer_NumberOfIssuesFound_Singular">
+             <summary>
+               Looks up a localized string similar to Rubberduck ToDo Items - {0}
+            {1} items found..
+             </summary>
+        </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.ToDoExplorerToDoItemFormat">
+            <summary>
+              Looks up a localized string similar to {0}: {1} - {2}.{3} line {4}..
             </summary>
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.TodoMarkerBug">
@@ -4294,6 +4339,11 @@
         <member name="P:Rubberduck.UI.RubberduckUI.ToolsMenu">
             <summary>
               Looks up a localized string similar to T&amp;ools.
+            </summary>
+        </member>
+        <member name="P:Rubberduck.UI.RubberduckUI.ToolsMenu_ExportProject">
+            <summary>
+              Looks up a localized string similar to Export Active Project....
             </summary>
         </member>
         <member name="P:Rubberduck.UI.RubberduckUI.ToolsMenu_RegexAssistant">
