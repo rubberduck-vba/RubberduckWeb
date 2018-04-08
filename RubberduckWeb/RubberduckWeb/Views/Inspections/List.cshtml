@@ -1,5 +1,4 @@
 ﻿@using RubberduckWeb.Controllers
-@using System.Reflection
 @using Rubberduck.Parsing.Inspections.Abstract
 @using Rubberduck.Parsing.Inspections.Resources
 
@@ -7,7 +6,6 @@
 
 @{
     ViewBag.Title = "Index";
-    ViewBag.Build = Assembly.GetAssembly(typeof(Rubberduck.App)).GetName().Version.ToString();
 }
 
 <div class="lead">
@@ -23,58 +21,13 @@
             <img alt="Code Inspections" src="~/Content/Images/CodeInspections.png" class="border-image" />
             <br />
         </p>
-        <div class="col-md-4">
-            <h4>Code Quality Issues</h4>
+        <div>
             <ul>
-                @foreach (var item in Model.Where(x => x.InspectionType == CodeInspectionType.CodeQualityIssues))
-                {
-                    <li>@Html.ActionLink(InspectionsController.FormatInspectionName(item), "Details", new { id = item.Name })</li>
-                }
-            </ul>
-        </div>
-        <div class="col-md-4">
-            <h4>Language Opportunities</h4>
-            <ul>
-                @foreach (var item in Model.Where(x => x.InspectionType == CodeInspectionType.LanguageOpportunities))
-                {
-                    <li>@Html.ActionLink(InspectionsController.FormatInspectionName(item), "Details", new { id = item.Name })</li>
-                }
-            </ul>
-        </div>
-        <div class="col-md-4">
-            <h4>Maintainability/Readability</h4>
-            <ul>
-                @foreach (var item in Model.Where(x => x.InspectionType == CodeInspectionType.MaintainabilityAndReadabilityIssues))
+                @foreach (var item in Model)
                 {
                     <li>@Html.ActionLink(InspectionsController.FormatInspectionName(item), "Details", new { id = item.Name })</li>
                 }
             </ul>
         </div>
     </div>
-    <div class="col-lg-12">
-        <div><strong>Try it!</strong> (build: @ViewBag.Build)</div>
-        <div class="inspections-form">
-            <div>
-                <textarea id="code" type="text" rows="10" placeholder="Enter code to run the inspections against.">
-Sub Test(foo)
-    Dim oRange As Range
-    oRange = Range("A1:A10")
-    
-    If Application.Avg(oRange) > 0 Then
-        MsgBox foo, vbCritical
-    End If
-End Sub
-                </textarea>
-            </div>
-            <div>
-                <button id="loadInspections" class="btn btn-primary" onclick="$loadInspections()">Inspect</button>
-            </div>
-        </div>
-        <div id="inspection-error-indicator" class="alert alert-danger hidden">
-            Rubberduck failed to either parse or resolve this code.  Please verify that it works, then report this problem at our <a href="https://github.com/rubberduck-vba/Rubberduck">GitHub repository</a> if necessary.
-        </div>
-        <div id="inspection-busy-indicator" class="alert alert-info hidden">Working on it, hold tight! :)</div>
-        <div id="inspection-results"></div>
-    </div>
-    <div class="row"></div>
 </section>

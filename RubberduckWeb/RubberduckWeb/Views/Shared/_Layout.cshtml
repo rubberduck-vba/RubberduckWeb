@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rubberduck - @ViewBag.Title</title>
     @Styles.Render("~/Content/css")
-    <script src="/Scripts/Rubberduck.js" asp-append-version="true"></script> <!-- Styles.Render("~/Scripts/Rubberduck.js") -->
+    <script src="~/Scripts/Rubberduck.js" asp-append-version="true"></script> <!-- Styles.Render("~/Scripts/Rubberduck.js") -->
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body onmousedown="$hideImage()">
@@ -28,7 +28,6 @@
                         <li>@Html.ActionLink("Inspections", "List", "Inspections")</li>
                         <li>@Html.ActionLink("Navigation", "Navigation", "Home")</li>
                         <li>@Html.ActionLink("Unit Testing", "UnitTesting", "Home")</li>
-                        <li>@Html.ActionLink("Source Control", "SourceControl", "Home")</li>
                         <li>@Html.ActionLink("Indentation", "Indentation", "Home")</li>
                     </ul>
                 </li>

@@ -112,19 +112,6 @@ namespace RubberduckWeb.Tests.Controllers
         }
         
         [TestMethod]
-        public void SourceControl()
-        {
-            // Arrange
-            var controller = new HomeController();
-
-            // Act
-            var result = controller.SourceControl() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
-        
-        [TestMethod]
         public void Indentation()
         {
             // Arrange

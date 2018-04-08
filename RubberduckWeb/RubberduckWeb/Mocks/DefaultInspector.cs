@@ -1,16 +1,13 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Antlr4.Runtime.Tree;
-using Moq;
 using Rubberduck.Inspections.Concrete;
 using Rubberduck.Parsing.Inspections.Abstract;
 using Rubberduck.Parsing.Inspections.Resources;
 using Rubberduck.Parsing.VBA;
-using Rubberduck.Settings;
-using Rubberduck.SettingsProvider;
-using Rubberduck.UI.Inspections;
 
 namespace RubberduckWeb.Mocks
 {
@@ -18,20 +15,12 @@ namespace RubberduckWeb.Mocks
     {
         public class DefaultInspector
         {
-            private const int AGGREGATION_THRESHOLD = 128;
+            //private const int AGGREGATION_THRESHOLD = 128;
             private readonly List<IInspection> _inspections;
 
-            public DefaultInspector(IEnumerable<IInspection> inspections, RubberduckParserState state)
+            public DefaultInspector(IEnumerable<IInspection> inspections)
             {
-                _inspections = inspections.ToList();
-
-                if (_inspections.All(i => i.Name != nameof(UseMeaningfulNameInspection)))
-                {
-                    var settings = new Mock<IPersistanceService<CodeInspectionSettings>>();
-                    settings.Setup(s => s.Load(It.IsAny<CodeInspectionSettings>()))
-                        .Returns(new CodeInspectionSettings());
-                    _inspections.Add(new UseMeaningfulNameInspection(state, settings.Object));
-                }
+                _inspections = inspections.Where(e => e.GetType().Name != nameof(HungarianNotationInspection)).ToList();
             }
 
             public List<IInspectionResult> Inspect(RubberduckParserState state)
@@ -50,7 +39,7 @@ namespace RubberduckWeb.Mocks
                     .Select(inspection =>
                         new Task(() =>
                         {
-                            var inspectionResults = inspection.GetInspectionResults();
+                            var inspectionResults = inspection.GetInspectionResults(CancellationToken.None);
 
                             foreach (var inspectionResult in inspectionResults)
                             {
@@ -65,18 +54,14 @@ namespace RubberduckWeb.Mocks
 
                 Task.WaitAll(inspections);
 
-                var issuesByType = allIssues.GroupBy(issue => issue.Inspection.Name)
-                            .ToDictionary(grouping => grouping.Key, grouping => grouping.ToList());
-                var results = issuesByType.Where(kv => kv.Value.Count <= AGGREGATION_THRESHOLD)
+                return allIssues
+                    .GroupBy(issue => issue.Inspection.Name)
+                    .ToDictionary(grouping => grouping.Key, grouping => grouping.ToList())
                     .SelectMany(kv => kv.Value)
-                    .Union(issuesByType.Where(kv => kv.Value.Count > AGGREGATION_THRESHOLD)
-                    .Select(kv => new AggregateInspectionResult(kv.Value.OrderBy(i => i.QualifiedSelection).First(), kv.Value.Count)))
                     .ToList();
-
-                return results;
             }
 
-            private void WalkTrees(RubberduckParserState state, IEnumerable<IParseTreeInspection> inspections)
+            private void WalkTrees(IParseTreeProvider state, IEnumerable<IParseTreeInspection> inspections)
             {
                 var listeners =
                     inspections.Where(i => i.Severity != CodeInspectionSeverity.DoNotShow)

@@ -33,11 +33,6 @@ namespace RubberduckWeb.Controllers
             return View();
         }
 
-        public ActionResult SourceControl()
-        {
-            return View();
-        }
-
         public ActionResult Indentation()
         {
             return View(new IndenterSettingsModel {Code = "Sub DoSomething()\n'Try it! Paste your unindented VBA code here.\nEnd Sub"});

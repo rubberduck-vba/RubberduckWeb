@@ -1,17 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
-using Moq;
-using Rubberduck.Parsing.VBA;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Web.Mvc;
-using Rubberduck.VBEditor.Application;
-using Rubberduck.VBEditor.SafeComWrappers;
-using RubberduckWeb.Mocks.Rubberduck.Inspections;
 
 namespace RubberduckWeb.Controllers
 {
-    using RubberduckTests.Mocks;
+    //using RubberduckTests.Mocks;
     using System.Collections.Generic;
     using System.Text;
     using Rubberduck.Parsing.Inspections.Abstract;
@@ -19,16 +11,20 @@ namespace RubberduckWeb.Controllers
     [OutputCache(VaryByParam = "*", Duration = 0, NoStore = true)]
     public class InspectionsController : Controller
     {
+        /*
         private readonly DefaultInspector _inspector;
         private readonly RubberduckParserState _state;
+        */
 
         private readonly IReadOnlyList<IInspection> _inspections;
 
-        public InspectionsController(IEnumerable<IInspection> inspections, DefaultInspector inspector, RubberduckParserState state)
+        public InspectionsController(IEnumerable<IInspection> inspections/*, DefaultInspector inspector, RubberduckParserState state*/)
         {
             _inspections = inspections.ToList();
+            /*
             _inspector = inspector;
             _state = state;
+            */
         }
 
         public ActionResult Index()
@@ -53,55 +49,56 @@ namespace RubberduckWeb.Controllers
             return View(inspection);
         }
 
-        [HttpPost]
-        public Task<PartialViewResult> GetInspectionResults(string code)
-        {
-            //Arrange
-            var builder = new MockVbeBuilder();
+        //[HttpPost]
+        //public Task<PartialViewResult> GetInspectionResults(string code)
+        //{
+        //    //Arrange
+        //    var builder = new MockVbeBuilder();
 
-            // ensure line endings are \r\n
-            code = code.Replace("\r\n", "\n").Replace("\n", "\r\n");
-            var vbe = builder.ProjectBuilder("WebInspector", ProjectProtection.Unprotected)
+        //    // ensure line endings are \r\n
+        //    code = code.Replace("\r\n", "\n").Replace("\n", "\r\n");
+        //    var project = builder.ProjectBuilder("WebInspector", ProjectProtection.Unprotected)
 
-                             .AddReference("VBA", MockVbeBuilder.LibraryPathVBA, 4, 1, true)
-                             .AddReference("Excel", MockVbeBuilder.LibraryPathMsExcel, 1, 7, true)
-                             .AddReference("Office", MockVbeBuilder.LibraryPathMsOffice, 2, 5, true)
-                             .AddReference("Scripting", MockVbeBuilder.LibraryPathScripting, 1, 0, true)
+        //                     .AddReference("VBA", MockVbeBuilder.LibraryPathVBA, 4, 1, true)
+        //                     .AddReference("Excel", MockVbeBuilder.LibraryPathMsExcel, 1, 7, true)
+        //                     .AddReference("Office", MockVbeBuilder.LibraryPathMsOffice, 2, 5, true)
+        //                     .AddReference("Scripting", MockVbeBuilder.LibraryPathScripting, 1, 0, true)
 
-                             .AddComponent("WebModule", ComponentType.StandardModule, code)
-                             .MockVbeBuilder().Build();
-            var mockHost = new Mock<IHostApplication>();
-            mockHost.SetupGet(m => m.ApplicationName).Returns("Excel");
-            vbe.Setup(m => m.HostApplication()).Returns(() => mockHost.Object);
+        //                     .AddComponent("WebModule", ComponentType.StandardModule, code)
+        //                     .Build();
+        //    var vbe = builder.AddProject(project).Build();
+        //    var mockHost = new Mock<IHostApplication>();
+        //    mockHost.SetupGet(m => m.ApplicationName).Returns("Excel");
+        //    vbe.Setup(m => m.HostApplication()).Returns(() => mockHost.Object);
 
-            var path = Server.MapPath("~/Declarations");
-            var parser = MockParser.Create(vbe.Object, _state, path);
-            parser.State.AddTestLibrary(path + "/VBA.4.2.xml");
-            parser.State.AddTestLibrary(path + "/Excel.1.8.xml");
-            parser.State.AddTestLibrary(path + "/Office.2.7.xml");
-            parser.State.AddTestLibrary(path + "/Scripting.1.0.xml");
+        //    var path = Server.MapPath("~/Declarations");
+        //    var parser = MockParser.Create(vbe.Object, _state, null, path);
+        //    parser.State.AddTestLibrary(path + "/VBA.4.2.xml");
+        //    parser.State.AddTestLibrary(path + "/Excel.1.8.xml");
+        //    parser.State.AddTestLibrary(path + "/Office.2.7.xml");
+        //    parser.State.AddTestLibrary(path + "/Scripting.1.0.xml");
 
-            try
-            {
-                Task.Run(() => parser.Parse(new CancellationTokenSource())).Wait();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-            if (parser.State.Status >= ParserState.Error)
-            {
-                return Task.FromResult(PartialView("InspectionResults", null));
-            }
+        //    try
+        //    {
+        //        Task.Run(() => parser.Parse(new CancellationTokenSource())).Wait();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine(e);
+        //    }
+        //    if (parser.State.Status >= ParserState.Error)
+        //    {
+        //        return Task.FromResult(PartialView("InspectionResults", null));
+        //    }
 
-            var results = _inspector.Inspect(parser.State);
+        //    var results = _inspector.Inspect(parser.State);
 
-            // strip away module & project naming suggestions, they don't make sense in the web UI
-            //results.RemoveAll(ir => ir.Inspection is UseMeaningfulNameInspection
-            //            && (ir.QualifiedSelection.QualifiedName.Name == "TestProject1." || ir.QualifiedSelection.QualifiedName.Name == "TestProject1.TestModule1");
+        //    // strip away module & project naming suggestions, they don't make sense in the web UI
+        //    //results.RemoveAll(ir => ir.Inspection is UseMeaningfulNameInspection
+        //    //            && (ir.QualifiedSelection.QualifiedName.Name == "TestProject1." || ir.QualifiedSelection.QualifiedName.Name == "TestProject1.TestModule1");
 
-            return Task.FromResult(PartialView("InspectionResults", results));
-        }
+        //    return Task.FromResult(PartialView("InspectionResults", results));
+        //}
 
         public static string FormatInspectionName(IInspection inspection)
         {

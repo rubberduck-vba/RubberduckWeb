@@ -46,9 +46,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr4.Runtime.net45, Version=4.3.0.0, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Antlr4.Runtime.4.3.0\lib\net45\Antlr4.Runtime.net45.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Antlr4.Runtime, Version=4.6.0.0, Culture=neutral, PublicKeyToken=09abb75b9ed49849, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr4.Runtime.4.6.4\lib\net45\Antlr4.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
@@ -116,6 +115,9 @@
     <Reference Include="Rubberduck, Version=2.0.6.26123, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libs\Rubberduck.dll</HintPath>
+    </Reference>
+    <Reference Include="Rubberduck.Core">
+      <HintPath>libs\Rubberduck.Core.dll</HintPath>
     </Reference>
     <Reference Include="Rubberduck.Inspections">
       <HintPath>libs\Rubberduck.Inspections.dll</HintPath>
@@ -329,7 +331,6 @@
     <Content Include="Views\Home\BlogFeed.cshtml" />
     <Content Include="Views\Home\Refactorings.cshtml" />
     <Content Include="Views\Home\Navigation.cshtml" />
-    <Content Include="Views\Home\SourceControl.cshtml" />
     <Content Include="Views\Home\Indentation.cshtml" />
     <Content Include="Views\Inspections\InspectionResults.cshtml" />
     <Content Include="Views\Home\UnitTesting.cshtml" />

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-using Moq;
 using Ninject;
 using Ninject.Extensions.Conventions;
 using Ninject.Web.Common;
@@ -15,13 +14,14 @@ using Rubberduck.VBEditor.Application;
 using RubberduckWeb;
 using Rubberduck.SmartIndenter;
 using Rubberduck.VBEditor.SafeComWrappers.Abstract;
-using Rubberduck.SettingsProvider;
-using Rubberduck.Settings;
-using Rubberduck.UI.Refactorings;
 using RubberduckTests.Mocks;
 using Rubberduck.Parsing.Inspections.Abstract;
-using Rubberduck;
 using Rubberduck.Parsing.Symbols;
+using Rubberduck;
+using Rubberduck.VBEditor.Events;
+using Moq;
+using Rubberduck.SettingsProvider;
+using Rubberduck.Settings;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(NinjectWebCommon), "Stop")]
@@ -91,12 +91,12 @@ namespace RubberduckWeb
 
             IVBComponent component;
             var vbe = MockVbeBuilder.BuildFromSingleStandardModule("", out component).Object;
-
+            var events = new Mock<IVBEEvents>();
+            kernel.Bind<IPersistanceService<CodeInspectionSettings>>().To<XmlPersistanceService<CodeInspectionSettings>>();
             kernel.Rebind<IVBE>().ToConstant(vbe).InRequestScope();
             kernel.Rebind<IIndenter>().ToConstant(new Indenter(vbe, () => new IndenterSettings())).InRequestScope();
+            kernel.Rebind<IVBEEvents>().ToConstant(events.Object);
             kernel.Bind<IDeclarationFinderFactory>().ToMethod(context => new DeclarationFinderFactory());
-            kernel.Rebind<IPersistanceService<CodeInspectionSettings>>().To<XmlPersistanceService<CodeInspectionSettings>>().InRequestScope();
-            kernel.Bind<IAssignedByValParameterQuickFixDialogFactory>().ToConstant(new Mock<IAssignedByValParameterQuickFixDialogFactory>().Object);
             kernel.Bind<RubberduckParserState>().ToSelf().InRequestScope();
             kernel.Bind<IParseCoordinator>().To<ParseCoordinator>().InRequestScope();
 

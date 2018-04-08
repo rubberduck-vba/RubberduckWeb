@@ -21,7 +21,7 @@ namespace RubberduckWeb.Controllers
 
             if (string.Equals(id, "stable", StringComparison.OrdinalIgnoreCase))
             {
-                version = Assembly.GetAssembly(typeof(Rubberduck.App)).GetName().Version.ToString();
+                version = Assembly.GetAssembly(typeof(Rubberduck._Extension)).GetName().Version.ToString();
             }
 
             // If we leave `version` without casting to an `object`, it'll try to find a view with that name.

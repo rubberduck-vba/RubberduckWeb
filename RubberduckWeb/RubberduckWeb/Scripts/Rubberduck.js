@@ -11,11 +11,11 @@ function $displayImage(path) {
 
     $("div.image-div").css("margin-left", -1 * (imgPreload.width / 2));
     $("div.image-div").css("margin-top", -1 * (imgPreload.height / 2));
-};
+}
 
 function $hideImage() {
     $("div.image-div").css("display", "none");
-};
+}
 
 function $loadInspections() {
     $("button#loadInspections").addClass("hidden");
