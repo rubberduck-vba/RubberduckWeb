@@ -247,6 +247,8 @@
     <Content Include="Content\Images\Hint.png" />
     <Content Include="Content\Images\icon_ReSharper.png" />
     <Content Include="Content\Images\IndenterSettings.png" />
+    <Content Include="Content\Images\RD2018-ducky.png" />
+    <Content Include="Content\Images\RD2018-Splash.png" />
     <Content Include="Content\Images\RefactorCropped.png" />
     <Content Include="Content\Images\SourceControlPanel.png" />
     <Content Include="Content\Images\Suggestion.png" />
