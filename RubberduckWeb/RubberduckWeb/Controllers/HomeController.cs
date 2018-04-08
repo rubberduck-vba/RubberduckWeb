@@ -91,6 +91,7 @@ namespace RubberduckWeb.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Indentation(IndenterSettingsModel model)
         {
             var code = model.Code;
