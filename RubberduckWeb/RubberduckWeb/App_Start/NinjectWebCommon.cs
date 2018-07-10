@@ -10,7 +10,6 @@ using Ninject.Web.Common;
 using Rubberduck.Inspections.Abstract;
 using Rubberduck.Parsing;
 using Rubberduck.Parsing.VBA;
-using Rubberduck.VBEditor.Application;
 using RubberduckWeb;
 using Rubberduck.SmartIndenter;
 using Rubberduck.VBEditor.SafeComWrappers.Abstract;
@@ -20,6 +19,7 @@ using Rubberduck.Parsing.Symbols;
 using Rubberduck;
 using Rubberduck.VBEditor.Events;
 using Moq;
+using Ninject.Web.Common.WebHost;
 using Rubberduck.SettingsProvider;
 using Rubberduck.Settings;
 

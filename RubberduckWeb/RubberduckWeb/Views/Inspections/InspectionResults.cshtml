@@ -1,11 +1,11 @@
-﻿@using RubberduckWeb.Controllers
+﻿@using Rubberduck.Parsing.Inspections
+@using RubberduckWeb.Controllers
 
 @{
     ViewBag.Title = "InspectionResults";
 }
 
-@using Rubberduck.Parsing.Inspections.Abstract
-@using Rubberduck.Parsing.Inspections.Resources
+@using Rubberduck.Parsing.Inspections.Abstract;
 @model List<IInspectionResult>
 @{
     var severityIconUrls = new Dictionary<CodeInspectionSeverity, string>

@@ -145,11 +145,11 @@ td, th {
 }
 
 tr:nth-child(even) {
-    background-color: aliceblue;
+    background-color: #e8e8e8;
 }
 
-.inspection-results-table {
-    border: 1px solid #202020;
+.inspection-list-table {
+    border: 1px solid steelblue;
     border-radius: 2px;
     -o-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -215,9 +215,6 @@ tr:nth-child(even) {
                 position: static !important;
                 text-align: center !important;
             }
-}
-
-.vbe-mock-error-modal .fade {
 }
 
 .vbe-mock-error-modal h1 {

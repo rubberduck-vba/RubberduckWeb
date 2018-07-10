@@ -16,17 +16,34 @@
             Most code inspections propose at least one quick fix that can be applied with a single click. Severity levels range from Do Not Show to Error and are completely configurable, for every single inspection.
         </p>
         <p>
+            Always review inspection results before applying a quick fix.
+        </p>
+        <p>
             <br />
             <img alt="Code Inspections" src="~/Content/Images/CodeInspections.png" class="border-image" />
             <br />
         </p>
         <div>
-            <ul>
-                @foreach (var item in Model)
-                {
-                    <li>@Html.ActionLink(InspectionsController.FormatInspectionName(item), "Details", new { id = item.Name })</li>
-                }
-            </ul>
+            <table class="inspection-list-table">
+                <thead>
+                    <tr>
+                        <th>Name / Message</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.OrderBy(i => i.Name))
+                    {
+                        <tr>
+                            <td id=@item.Name>
+                                <a href="#@item.Name"><strong>@item.AnnotationName</strong></a>
+                                <p>@item.Description</p>
+                            </td>
+                            <td>@item.Meta</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
 </section>

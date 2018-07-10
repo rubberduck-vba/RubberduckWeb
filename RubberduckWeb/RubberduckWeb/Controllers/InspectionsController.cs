@@ -1,13 +1,11 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Web.Mvc;
+using Rubberduck.Parsing.Inspections.Abstract;
 
 namespace RubberduckWeb.Controllers
 {
-    //using RubberduckTests.Mocks;
-    using System.Collections.Generic;
-    using System.Text;
-    using Rubberduck.Parsing.Inspections.Abstract;
-
     [OutputCache(VaryByParam = "*", Duration = 0, NoStore = true)]
     public class InspectionsController : Controller
     {
@@ -37,17 +35,17 @@ namespace RubberduckWeb.Controllers
             return View(_inspections);
         }
 
-        public ActionResult Details(string id)
-        {
-            var inspection = _inspections.FirstOrDefault(x => x.Name == id);
+        //public ActionResult Details(string id)
+        //{
+        //    var inspection = _inspections.FirstOrDefault(x => x.Name == id);
 
-            if (inspection == null)
-            {
-                return RedirectToAction("List");
-            }
+        //    if (inspection == null)
+        //    {
+        //        return RedirectToAction("List");
+        //    }
 
-            return View(inspection);
-        }
+        //    return View(inspection);
+        //}
 
         //[HttpPost]
         //public Task<PartialViewResult> GetInspectionResults(string code)

@@ -5,8 +5,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Antlr4.Runtime.Tree;
 using Rubberduck.Inspections.Concrete;
+using Rubberduck.Parsing.Inspections;
 using Rubberduck.Parsing.Inspections.Abstract;
-using Rubberduck.Parsing.Inspections.Resources;
 using Rubberduck.Parsing.VBA;
 
 namespace RubberduckWeb.Mocks
