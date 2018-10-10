@@ -36,7 +36,6 @@
                 {
                     <tr>
                         <td width="50"><img alt="@item.Inspection.Severity" src="@severityIconUrls[item.Inspection.Severity]" /></td>
-                        <td>@Html.ActionLink(InspectionsController.FormatInspectionName(item.Inspection), "Details", new { id = item.Inspection.Name })</td>
                         <td>@item.Description</td>
                         <td>@item.Inspection.Meta</td>
                         <td>@string.Format("L{0}C{1}", item.QualifiedSelection.Selection.StartLine, item.QualifiedSelection.Selection.StartColumn)</td>
