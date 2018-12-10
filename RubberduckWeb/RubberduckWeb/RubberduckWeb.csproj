@@ -323,9 +323,20 @@
     <Content Include="libs\Rubberduck.API.dll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="libs\Rubberduck.API.h" />
+    <Content Include="libs\Rubberduck.API.pdb" />
+    <Content Include="libs\Rubberduck.API_i.c" />
+    <Content Include="libs\Rubberduck.CodeAnalysis.dll" />
+    <Content Include="libs\Rubberduck.CodeAnalysis.pdb" />
     <Content Include="libs\Rubberduck.Core.dll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="libs\Rubberduck.API.x32.tlb" />
+    <Content Include="libs\Rubberduck.API.x64.tlb" />
+    <Content Include="libs\Rubberduck.CodeAnalysis.dll.config" />
+    <Content Include="libs\Rubberduck.RegisterAddIn.bat" />
+    <Content Include="libs\Rubberduck.RegisterAddIn.reg" />
+    <Content Include="libs\Rubberduck.VBEditor.VBA.dll.config" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -347,48 +358,64 @@
     <Content Include="libs\Rubberduck.Core.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="libs\Rubberduck.Core.pdb" />
+    <Content Include="libs\Rubberduck.Core.xml" />
     <Content Include="libs\Rubberduck.Deployment.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="libs\Rubberduck.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="libs\Rubberduck.h" />
     <Content Include="libs\Rubberduck.Inspections.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="libs\Rubberduck.Interaction.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="libs\Rubberduck.Interaction.pdb" />
     <Content Include="libs\Rubberduck.Parsing.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="libs\Rubberduck.Parsing.pdb" />
+    <Content Include="libs\Rubberduck.pdb" />
     <Content Include="libs\Rubberduck.Refactorings.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="libs\Rubberduck.Refactorings.pdb" />
     <Content Include="libs\Rubberduck.RegexAssistant.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="libs\Rubberduck.RegexAssistant.pdb" />
     <Content Include="libs\Rubberduck.Resources.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="libs\Rubberduck.Resources.pdb" />
     <Content Include="libs\Rubberduck.SettingsProvider.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="libs\Rubberduck.SettingsProvider.pdb" />
     <Content Include="libs\Rubberduck.SmartIndenter.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="libs\Rubberduck.SmartIndenter.pdb" />
     <Content Include="libs\Rubberduck.SourceControl.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="libs\Rubberduck.UnitTesting.dll" />
+    <Content Include="libs\Rubberduck.UnitTesting.pdb" />
     <Content Include="libs\Rubberduck.VBEditor.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="libs\Rubberduck.VBEditor.pdb" />
     <Content Include="libs\Rubberduck.VBEditor.VB6.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="libs\Rubberduck.VBEditor.VB6.pdb" />
     <Content Include="libs\Rubberduck.VBEditor.VBA.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="libs\Rubberduck.VBEditor.VBA.pdb" />
     <Content Include="libs\Rubberduck.XML" />
     <Content Include="libs\RubberduckTests.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

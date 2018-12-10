@@ -9,6 +9,7 @@ namespace RubberduckWeb.Models
     public class IndenterSettingsModel : Mocks.MockIndenterSettings
     {
         public SelectList EndOfLineCommentStyleSelectList { get; } = new SelectList(Enum.GetNames(typeof(Rubberduck.SmartIndenter.EndOfLineCommentStyle)));
+        public SelectList EmptyLineHandlingMethodSelectList { get; } = new SelectList(Enum.GetNames(typeof(Rubberduck.SmartIndenter.EmptyLineHandling)));
         public string Code { get; set; }
     }
 }
