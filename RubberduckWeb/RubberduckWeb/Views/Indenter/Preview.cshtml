@@ -36,6 +36,17 @@
                         <input type="button" class="number-up" value="^" />
                     </div>
                 </div>
+                <div>
+                    <h4>End-of-line comment style:</h4>
+                    <div class="form-group">
+                        @Html.DropDownListFor(model => model.EndOfLineCommentStyle, Model.EndOfLineCommentStyleSelectList)
+                        <div class="number-selector">
+                            @Html.TextBoxFor(model => model.EndOfLineCommentColumnSpaceAlignment, new { type = "number" })
+                            <input type="button" class="number-down" value="v" />
+                            <input type="button" class="number-up" value="^" />
+                        </div>
+                    </div>
+                </div>
             </div>
             <div>
                 <h4>Special Options</h4>
@@ -44,16 +55,28 @@
                     Force debug directives to column 1
                 </div>
                 <div class="form-group">
+                    @Html.CheckBoxFor(model => model.ForceDebugPrintInColumn1)
+                    Force Debug.Print statements to column 1
+                </div>
+                <div class="form-group">
+                    @Html.CheckBoxFor(model => model.ForceDebugAssertInColumn1)
+                    Force Debug.Assert statements to column 1
+                </div>
+                <div class="form-group">
+                    @Html.CheckBoxFor(model => model.ForceStopInColumn1)
+                    Force Stop statements to column 1
+                </div>
+                <div class="form-group">
                     @Html.CheckBoxFor(model => model.ForceCompilerDirectivesInColumn1)
                     Force compiler directives to column 1
                 </div>
             </div>
             <div>
-                <h4>End-of-line comment style:</h4>
+                <h4>Empty line handling:</h4>
                 <div class="form-group">
-                    @Html.DropDownListFor(model => model.EndOfLineCommentStyle, Model.EndOfLineCommentStyleSelectList)
+                    @Html.DropDownListFor(model => model.EmptyLineHandlingMethod, Model.EmptyLineHandlingMethodSelectList)
                     <div class="number-selector">
-                        @Html.TextBoxFor(model => model.EndOfLineCommentColumnSpaceAlignment, new { type = "number" })
+                        @Html.TextBoxFor(model => model.EmptyLineHandlingMethod)
                         <input type="button" class="number-down" value="v" />
                         <input type="button" class="number-up" value="^" />
                     </div>
@@ -74,6 +97,10 @@
                 <div class="form-group indent-4">
                     @Html.CheckBoxFor(model => model.IndentFirstDeclarationBlock)
                     Indent first declaration block
+                </div>
+                <div class="form-group">
+                    @Html.CheckBoxFor(model => model.IgnoreEmptyLinesInFirstBlocks)
+                    Ignore empty lines in first blocks
                 </div>
                 <div class="form-group">
                     @Html.CheckBoxFor(model => model.IndentEnumTypeAsProcedure)

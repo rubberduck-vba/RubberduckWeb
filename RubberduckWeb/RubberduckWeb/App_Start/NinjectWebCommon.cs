@@ -20,6 +20,7 @@ using Rubberduck;
 using Rubberduck.VBEditor.Events;
 using Moq;
 using Ninject.Web.Common.WebHost;
+using Rubberduck.Parsing.VBA.DeclarationCaching;
 using Rubberduck.SettingsProvider;
 using Rubberduck.Settings;
 

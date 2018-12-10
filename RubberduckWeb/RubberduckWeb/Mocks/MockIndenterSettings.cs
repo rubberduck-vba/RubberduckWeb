@@ -1,9 +1,12 @@
-﻿using Rubberduck.SmartIndenter;
+﻿using System.Collections;
+using Rubberduck.SmartIndenter;
 
 namespace RubberduckWeb.Mocks
 {
     public class MockIndenterSettings : IIndenterSettings
     {
+        public bool IgnoreEmptyLinesInFirstBlocks { get; set; } = false;
+
         public bool AlignCommentsWithCode { get; set; } = true;
 
         public bool AlignContinuations { get; set; } = true;
@@ -12,13 +15,19 @@ namespace RubberduckWeb.Mocks
 
         public bool AlignDims { get; set; } = false;
 
+        public EmptyLineHandling EmptyLineHandlingMethod { get; set; } = EmptyLineHandling.Ignore;
+
         public int EndOfLineCommentColumnSpaceAlignment { get; set; } = 50;
 
         public EndOfLineCommentStyle EndOfLineCommentStyle { get; set; } = EndOfLineCommentStyle.AlignInColumn;
 
+        public bool ForceStopInColumn1 { get; set; } = false;
+
         public bool ForceCompilerDirectivesInColumn1 { get; set; } = false;
 
         public bool ForceDebugStatementsInColumn1 { get; set; } = false;
+        public bool ForceDebugPrintInColumn1 { get; set; } = false;
+        public bool ForceDebugAssertInColumn1 { get; set; } = false;
 
         public bool IgnoreOperatorsInContinuations { get; set; } = true;
 
