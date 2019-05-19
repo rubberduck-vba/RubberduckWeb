@@ -1,29 +1,68 @@
-﻿@using RubberduckWeb.Controllers
+﻿@using RubberduckWeb.Models
+@using RubberduckWeb.VBA
 
-@model Rubberduck.Parsing.Inspections.Abstract.IInspection
+@model InspectionInfo
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Inspection Details</h2>
+<h4>Inspection Details</h4>
 
 <div>
-    <h4>@InspectionsController.FormatInspectionName(Model)</h4>
+    <h3>@Model.InspectionName</h3>
     <hr />
-    @{
-        <dl class="dl-horizontal">
-            <dt>Description</dt>
-            <dd>@Model.Meta</dd>
-            <dt>Message</dt>
-            <dd>@Model.Description</dd>
-            <dt>Type</dt>
-            <dd>@InspectionsController.InsertOnCharacter(Model.InspectionType.ToString(), InspectionsController.CharacterType.UpperLetter, " ")</dd>
-            <dt>Default Severity</dt>
-            <dd>@Model.Severity</dd>
-        </dl>
-    }
+    <div>
+        @{
+            <dl class="dl-horizontal">
+                <dt>Description</dt>
+                <dd>@Model.Summary</dd>
+                <dt>Message</dt>
+                <dd>@Model.Reasoning</dd>
+                @if (Model.References.Length > 0)
+                {
+                    <dt>This inspection will only run with the following libraries referenced:</dt>
+                    foreach (var reference in Model.References)
+                    {
+                    <dd>@reference</dd>
+                    }
+                }
+            </dl>
+            if (Model.Examples.Length > 0)
+            {
+                <strong>Examples</strong>
+                <p>The following code would trigger this inspection:</p>
+                <div class="vbe-mock-debugger">
+                    <div class="code-area">
+                        <div class="code">
+                            <div class="block">
+                                @Html.Raw(Model.Examples[0])
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                if (Model.Examples.Length > 1)
+                {
+                    <p>The following code would <strong>not</strong> trigger this inspection:
+                    </p>
+                    foreach (var example in Model.Examples.Skip(1))
+                    {
+                        <div class="vbe-mock-debugger">
+                            <div class="code-area">
+                                <div class="code">
+                                    <div class="block">
+                                        @Html.Raw(example)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+        }
+    </div>
 </div>
-<p>
+<p><br/>
     @Html.ActionLink("Back to List", "List")
 </p>
