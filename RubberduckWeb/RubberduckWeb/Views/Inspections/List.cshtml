@@ -34,10 +34,10 @@
                         @foreach (var info in item)
                         {
                             <td id=@info.InspectionName>
-                                <a href="Details/@info.InspectionName"><strong>@info.InspectionName</strong></a>
+                                <span><a href="Details/@info.InspectionName"><strong>@info.InspectionName</strong></a></span>
                                 @if (info.IsPreRelease)
                                 {
-                                    <p><strong><em>Pre-Release</em></strong></p>
+                                    <span>Pre-Release</span>
                                 }
                                 <p>@info.Summary</p>
                             </td>

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using RubberduckWeb.Models;
 
 namespace RubberduckWeb.Controllers
 {
@@ -15,13 +17,22 @@ namespace RubberduckWeb.Controllers
             return View("Version");
         }
 
-        public ActionResult Version(string id)
+        public ActionResult Version(string id = null)
         {
             var version = string.Empty;
-
-            if (string.Equals(id, "stable", StringComparison.OrdinalIgnoreCase))
+            if (RubberduckReleaseBuilds.ShouldInvalidate)
             {
-                version = Assembly.GetAssembly(typeof(Rubberduck._Extension)).GetName().Version.ToString();
+                var task = Task.Run(async () => await RubberduckReleaseBuilds.InvalidateAsync());
+                task.Wait();
+            }
+
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                version = RubberduckReleaseBuilds.LatestPreReleaseVersion.ToString();
+            }
+            else if (string.Equals(id, "stable", StringComparison.OrdinalIgnoreCase))
+            {
+                version = RubberduckReleaseBuilds.LatestStableVersion.ToString();
             }
 
             // If we leave `version` without casting to an `object`, it'll try to find a view with that name.
