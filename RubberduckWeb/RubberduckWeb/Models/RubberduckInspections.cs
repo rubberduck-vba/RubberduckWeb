@@ -2,52 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Octokit;
 
 namespace RubberduckWeb.Models
 {
-    public static class RubberduckReleaseBuilds
-    {
-        private const string GitHubOrg = "rubberduck-vba";
-        private const string RepositoryName = "Rubberduck";
-
-        private static readonly string VersionPattern = @"v(?<major>\d+)\.(?<minor>\d+)\.(?<revision>\d+)\.(?<build>\d+)";
-
-        private static DateTime _lastInvalalidated;
-
-        public static async Task InvalidateAsync()
-        {
-            var client = new GitHubClient(new ProductHeaderValue("rubberduck-vba_RubberduckWEB"));
-            var releases = await client.Repository.Release.GetAll(GitHubOrg, RepositoryName);
-            var stable = releases.FirstOrDefault(e => !e.Prerelease);
-            var pre = releases.FirstOrDefault(e => e.Prerelease);
-
-            var stableVersion = Regex.Match(stable.Name, VersionPattern);
-            LatestStableVersion = new Version(
-                int.Parse(stableVersion.Groups["major"].Value), 
-                int.Parse(stableVersion.Groups["minor"].Value), 
-                int.Parse(stableVersion.Groups["revision"].Value), 
-                int.Parse(stableVersion.Groups["build"].Value));
-
-            var preVersion = Regex.Match(pre.Name, VersionPattern);
-            LatestPreReleaseVersion = new Version(
-                int.Parse(preVersion.Groups["major"].Value),
-                int.Parse(preVersion.Groups["minor"].Value),
-                int.Parse(preVersion.Groups["revision"].Value),
-                int.Parse(preVersion.Groups["build"].Value));
-
-            _lastInvalalidated = DateTime.UtcNow;
-        }
-
-        public static Version LatestStableVersion { get; private set; }
-        public static Version LatestPreReleaseVersion { get; private set; }
-
-        public static bool ShouldInvalidate => _lastInvalalidated == default(DateTime) || DateTime.UtcNow > _lastInvalalidated.AddDays(1);
-    }
-
     public static class RubberduckInspections
     {
         private const string GitHubOrg = "rubberduck-vba";

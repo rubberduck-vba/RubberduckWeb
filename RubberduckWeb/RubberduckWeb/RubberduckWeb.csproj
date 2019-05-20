@@ -242,6 +242,7 @@
     <Compile Include="Models\IndenterSettingsModel.cs" />
     <Compile Include="Models\InspectionInfo.cs" />
     <Compile Include="Models\RubberduckInspections.cs" />
+    <Compile Include="Models\RubberduckReleaseBuilds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VBA\FormattedCodeBlockBuilder.cs" />
   </ItemGroup>

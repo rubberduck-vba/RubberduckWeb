@@ -17,7 +17,7 @@ namespace RubberduckWeb.Controllers
             return View("Version");
         }
 
-        public ActionResult Version(string id = null)
+        public ActionResult Version(string id)
         {
             var version = string.Empty;
             if (RubberduckReleaseBuilds.ShouldInvalidate)
@@ -26,7 +26,7 @@ namespace RubberduckWeb.Controllers
                 task.Wait();
             }
 
-            if (string.IsNullOrWhiteSpace(id))
+            if (string.Equals(id, "prerelease", StringComparison.OrdinalIgnoreCase))
             {
                 version = RubberduckReleaseBuilds.LatestPreReleaseVersion.ToString();
             }
