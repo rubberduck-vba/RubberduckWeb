@@ -10,13 +10,6 @@
 </head>
 <body onmousedown="$hideImage()">
     <div class="navbar navbar-inverse navbar-static-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a href='@Url.Action("Index", "Home")' class="navbar-brand">
-                    <img src='@Url.Content("~/Content/Images/Banner-transparent.png")' alt="Rubberduck" width="280"/>
-                </a>
-            </div>
-        </div>
         <nav class="container">
             <ul class="nav navbar-nav">
                 <li><div>@Html.ActionLink("Home", "Index", "Home")</div></li>
