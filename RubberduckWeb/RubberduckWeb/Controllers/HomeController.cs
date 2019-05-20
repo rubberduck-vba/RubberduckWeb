@@ -35,7 +35,8 @@ namespace RubberduckWeb.Controllers
 
         public ActionResult Indentation()
         {
-            return View(new IndenterSettingsModel {Code = "Sub DoSomething()\n'Try it! Paste your unindented VBA code here.\nEnd Sub"});
+            var initialCode = "Sub DoSomething()\n'Try it! Paste your unindented VBA code here.\nEnd Sub";
+            return View(new IndenterSettingsModel {Code = initialCode});
         }
 
         public ActionResult About()

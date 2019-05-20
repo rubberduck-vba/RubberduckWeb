@@ -49,10 +49,6 @@ h3, .h3 {
         float: right;
     }
 
-h4, .h4 {
-    padding-left: 15px;
-}
-
 section#codeInspections img {
     display: block;
     margin-left: auto;
@@ -81,12 +77,12 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
 }
 
 .nav > li {
-    display: inline-block;
-    vertical-align: top;
+    display: inline;
+    margin: 5px;
 }
 
 .nav {
-    margin-left: -15px;
+    flex-direction: row;
 }
 
 nav {
@@ -135,11 +131,17 @@ section {
             margin-top: 0px;
         }
 
+.pre-release {
+    color: maroon;
+    
+}
+
 #code {
     width: 100%;
 }
 
 td, th {
+    vertical-align: text-top;
     padding: 5px;
     margin: 5px;
 }
@@ -296,8 +298,28 @@ tr:nth-child(even) {
         position: relative;
     }
 
+    .vbe-mock-debugger .comment {
+        color: #008000;
+    }
+
     .vbe-mock-debugger .keyword {
-        color: #000080;
+        color: #000096;
+    }
+
+    .vbe-mock-debugger .string-literal {
+        color: #800000;
+    }
+
+    .vbe-mock-debugger .annotation {
+        color: #008000;
+    }
+
+    .vbe-mock-debugger .attribute {
+        color: #4e4e4e;
+    }
+
+    .vbe-mock-debugger .attribute-value {
+        color: #3e3e3e;
     }
 
     .vbe-mock-debugger .code {

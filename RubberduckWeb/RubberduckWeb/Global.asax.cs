@@ -7,7 +7,7 @@ using System.Web.Routing;
 
 namespace RubberduckWeb
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         protected void Application_Start()
         {
@@ -28,12 +28,8 @@ namespace RubberduckWeb
             var routeData = new RouteData();
             routeData.Values.Add("controller", "Error");
 
-            if (httpException == null)
-            {
-                return;
-            }
-            else
-            {
+            if (httpException != null)
+            { 
                 Response.Clear();
 
                 switch (httpException.GetHttpCode())
@@ -49,7 +45,7 @@ namespace RubberduckWeb
                         Response.Redirect("~/Error/InternalServerError");
                         break;
                     default:
-                        Response.Redirect(string.Format("~/Error/HttpDefault/{0}", httpException.GetHttpCode()));
+                        Response.Redirect($"~/Error/HttpDefault/{httpException.GetHttpCode()}");
                         break;
                 }
             }

@@ -19,22 +19,15 @@
         </div>
         <nav class="container">
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Home", "Index", "Home")</li>
-
-                <li class="dropdown">
-                    <a href="#">Features</a>
-                    <ul class="dropdown-menu">
-                        <li>@Html.ActionLink("Refactorings", "Refactorings", "Home")</li>
-                        <li>@Html.ActionLink("Inspections", "List", "Inspections")</li>
-                        <li>@Html.ActionLink("Navigation", "Navigation", "Home")</li>
-                        <li>@Html.ActionLink("Unit Testing", "UnitTesting", "Home")</li>
-                        <li>@Html.ActionLink("Indentation", "Indentation", "Home")</li>
-                    </ul>
-                </li>
-
-                <li>@Html.ActionLink("News", "News", "Home")</li>
-                <li>@Html.ActionLink("About", "About", "Home")</li>
-                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                <li><div>@Html.ActionLink("Home", "Index", "Home")</div></li>
+                <li><div>@Html.ActionLink("Inspections", "List", "Inspections")</div></li>
+                <li><div>@Html.ActionLink("Indentation", "Indentation", "Home")</div></li>
+                <li><div>@Html.ActionLink("Refactorings", "Refactorings", "Home")</div></li>
+                <li><div>@Html.ActionLink("Navigation", "Navigation", "Home")</div></li>
+                <li><div>@Html.ActionLink("Unit Testing", "UnitTesting", "Home")</div></li>
+                <li><div>@Html.ActionLink("News", "News", "Home")</div></li>
+                <li><div>@Html.ActionLink("About", "About", "Home")</div></li>
+                <li><div>@Html.ActionLink("Contact", "Contact", "Home")</div></li>
             </ul>
         </nav>
     </div>
