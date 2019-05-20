@@ -90,7 +90,6 @@ namespace RubberduckWeb.Models
             var nextUrl = next?.Assets.SingleOrDefault(a => a.Name == AssetName)?.BrowserDownloadUrl;
 
             var masterDocsTask = /*await*/ Task.Run(async () => await DownloadXmlDocAssetAsync(masterUrl, isPreRelease: false));
-            var nextDocsTask = /*await*/ Task.Run(async () => await DownloadXmlDocAssetAsync(nextUrl, isPreRelease: true));
 
             masterDocsTask.Wait();
             if (masterDocsTask.IsFaulted)
@@ -98,6 +97,7 @@ namespace RubberduckWeb.Models
                 var e = masterDocsTask.Exception;
             }
             var masterDocs = masterDocsTask.Result;
+            var nextDocsTask = /*await*/ Task.Run(async () => await DownloadXmlDocAssetAsync(nextUrl, isPreRelease: masterDocs.Any()));
 
             nextDocsTask.Wait();
             var nextDocs = nextDocsTask.Result;
