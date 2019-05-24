@@ -232,10 +232,14 @@
     <Content Include="Content\Images\Hint.png" />
     <Content Include="Content\Images\icon_ReSharper.png" />
     <Content Include="Content\Images\IndenterSettings.png" />
+    <Content Include="Content\Images\Navigation.png" />
     <Content Include="Content\Images\RD2018-ducky.png" />
     <Content Include="Content\Images\RefactorCropped.png" />
+    <Content Include="Content\Images\ReferenceExplorer.png" />
+    <Content Include="Content\Images\SmartIndenter.png" />
     <Content Include="Content\Images\SourceControlPanel.png" />
     <Content Include="Content\Images\Suggestion.png" />
+    <Content Include="Content\Images\TestExplorer.png" />
     <Content Include="Content\Images\TestExplorer01.png" />
     <Content Include="Content\Images\TestExplorer01Cropped.png" />
     <Content Include="Content\Images\TestExplorer02.png" />
