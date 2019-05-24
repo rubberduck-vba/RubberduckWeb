@@ -9,25 +9,18 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body onmousedown="$hideImage()">
-    <div class="navbar navbar-inverse navbar-static-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a href='@Url.Action("Index", "Home")' class="navbar-brand">
-                    <img src='@Url.Content("~/Content/Images/Banner-transparent.png")' alt="Rubberduck" width="280"/>
-                </a>
-            </div>
-        </div>
+    <div class="navbar">
         <nav class="container">
             <ul class="nav navbar-nav">
-                <li><div>@Html.ActionLink("Home", "Index", "Home")</div></li>
-                <li><div>@Html.ActionLink("Inspections", "List", "Inspections")</div></li>
-                <li><div>@Html.ActionLink("Indentation", "Indentation", "Home")</div></li>
-                <li><div>@Html.ActionLink("Refactorings", "Refactorings", "Home")</div></li>
-                <li><div>@Html.ActionLink("Navigation", "Navigation", "Home")</div></li>
-                <li><div>@Html.ActionLink("Unit Testing", "UnitTesting", "Home")</div></li>
-                <li><div>@Html.ActionLink("News", "News", "Home")</div></li>
-                <li><div>@Html.ActionLink("About", "About", "Home")</div></li>
-                <li><div>@Html.ActionLink("Contact", "Contact", "Home")</div></li>
+                <li>@Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-sm btn-outline-dark" })</li>
+                <li>@Html.ActionLink("Inspections", "List", "Inspections", null, new { @class = "btn btn-sm btn-outline-dark" })</li>
+                <li>@Html.ActionLink("Indentation", "Indentation", "Home", null, new { @class = "btn btn-sm btn-outline-dark" })</li>
+                <li>@Html.ActionLink("Refactorings", "Refactorings", "Home", null, new { @class = "btn btn-sm btn-outline-dark" })</li>
+                <li>@Html.ActionLink("Navigation", "Navigation", "Home", null, new { @class = "btn btn-sm btn-outline-dark" })</li>
+                <li>@Html.ActionLink("Unit Testing", "UnitTesting", "Home", null, new { @class = "btn btn-sm btn-outline-dark" })</li>
+                <li>@Html.ActionLink("News", "News", "Home", null, new { @class = "btn btn-sm btn-outline-dark" })</li>
+                <li>@Html.ActionLink("About", "About", "Home", null, new { @class = "btn btn-sm btn-outline-dark" })</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "btn btn-sm btn-outline-dark" })</li>
             </ul>
         </nav>
     </div>
@@ -35,7 +28,7 @@
         @RenderBody()
         <hr/>
         <footer>
-            <p>Copyright &copy; @DateTime.Now.Year Rubberduck VBA - All rights reserved.</p>
+            <p><small>Copyright &copy; @DateTime.Now.Year Rubberduck Project Contributors</small></p>
         </footer>
     </div>
     @Scripts.Render("~/bundles/jquery")

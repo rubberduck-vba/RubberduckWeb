@@ -13,15 +13,18 @@
 <section id="codeInspections">
     <div class="col-lg-12">
         <p>
-            By default (it can be configured not to), Rubberduck automatically runs the code through all inspections after successfully parsing all modules. There are multiple types of inspections, including <em>code quality</em>, <em>readability and maintainability</em>, <em>language opportunities</em>, and a number of <em>Rubberduck opportunities</em>.
-            The list of inspections on this page (as well as their respective content and code examples) is generated directly from XML documentation in the source code; inspections marked "pre-release" have not been "green-released" yet.
+            By default (it can be configured not to), Rubberduck automatically runs the code through all enabled inspections after successfully parsing all modules. There are multiple types of inspections, including <em>code quality</em>, <em>readability and maintainability</em>, <em>language opportunities</em>, and a number of <em>Rubberduck opportunities</em>.
+            The list of inspections on this page (as well as their respective content and code examples) is generated directly from XML documentation in the source code.
         </p>
         <p>
-            Most code inspections propose at least one quick-fix action that can be applied with a single click. Severity levels range from <em>Do Not Show</em> to <em>Error</em> and are completely configurable, for every single inspection.
+            Most code inspections propose at least one quick-fix action that can be applied with a single click. Please review inspection results carefully before blanket-applying a "quick fix" across an entire project at once: a dozen modules modified is all it takes to fill up the <em>undo stack</em>.
+            As with any static code analysis tool, the accuracy of the results highly depends on how well the tool is understanding the code: you will get better results by avoiding late-bound member calls against <code>Variant</code> or <code>Object</code>, most notably.
         </p>
         <p>
-            As with any static code analysis tool, the accuracy of the results highly depends on how well the tool is understanding the code: late-bound meber calls against <code>Variant</code> or <code>Object</code>, variables being passed <code>ByRef</code> to a procedure that assigns the parameter, and various other hard-to-analyze scenarios may produce false positives. 
-            <strong>Never blindly apply automated code fixes without first reviewing the affected code!</strong>
+            You can make inspections ignore a specific module by adding an <code>@@IgnoreModule</code> annotation to that module's <code>(declarations)</code> section:
+        </p>
+        <p>
+            Severity levels range from <code>DoNotShow</code> to <code>Error</code> and are completely configurable, for every single inspection. Inspections with their severity level set to <code>DoNotShow</code> do not execute at all: speed up Rubberduck static code analysis by reviewing which inspections you want to run and disabling the others! 
         </p>
         <div>
             <table class="inspection-list-table">

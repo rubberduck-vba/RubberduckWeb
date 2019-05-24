@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -15,6 +16,11 @@ namespace RubberduckWeb.Controllers
         public ActionResult Index()
         {
             return View("Version");
+        }
+
+        public ActionResult CacheStatus()
+        {
+            return View((object)RubberduckReleaseBuilds.LastInvalidated.ToString(CultureInfo.InvariantCulture));
         }
 
         public ActionResult Version(string id)

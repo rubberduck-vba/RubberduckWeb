@@ -283,6 +283,7 @@ namespace RubberduckWeb.VBA
             VBAParser.VARIANT,
             VBAParser.VERSION,
             VBAParser.WEND,
+            VBAParser.WHILE,
             VBAParser.WITH,
             VBAParser.WITHEVENTS,
             VBAParser.WRITE,

@@ -6,42 +6,22 @@ using RubberduckWeb.Models;
 namespace RubberduckWeb.Controllers
 {
     [OutputCache(VaryByParam = "*", Duration = 0, NoStore = true)]
-    public class InspectionsController : Controller
+    public class InspectionsController : AsyncController
     {
-        public ActionResult Index() =>  RedirectToAction("List");
+        public ActionResult Index() =>  RedirectToAction(nameof(List));
 
-        public ActionResult List()
+        public async Task<ActionResult> List()
         {
-            if (RubberduckInspections.ShouldInvalidate)
+            if (RubberduckAssets.ShouldInvalidate)
             {
-                // todo async controller method to await the invalidate task?
-                try
-                {
-                    Task.Delay(0).ContinueWith(t => ValidateInspectionsCache()).Wait();
-                }
-                catch (Exception e)
-                {
-                    throw;
-                }
+                await RubberduckAssets.InvalidateAsync();
             }
-            return View(RubberduckInspections.Inspections.Values);
-        }
-
-        private async Task ValidateInspectionsCache()
-        {
-            try
-            {
-                await RubberduckInspections.InvalidateAsync();
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
+            return View(RubberduckAssets.Inspections.Values);
         }
 
         public ActionResult Details(string id)
         {
-            if (RubberduckInspections.Inspections.TryGetValue(id, out var info))
+            if (RubberduckAssets.Inspections.TryGetValue(id, out var info))
             {
                 return View(info);
             }
