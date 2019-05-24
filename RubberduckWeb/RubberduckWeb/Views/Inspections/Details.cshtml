@@ -12,54 +12,69 @@
 <div>
     <h3>@Model.InspectionName</h3>
     <hr />
+    @if (Model.IsPreRelease)
+    {
+        <strong>Try it in the <a href="https://github.com/rubberduck-vba/Rubberduck/releases">latest pre-release build</a>!</strong>
+    }
     <div>
         @{
             <dl class="dl-horizontal">
-                <dt>Description</dt>
+                <dt>Summary</dt>
                 <dd>@Model.Summary</dd>
-                <dt>Message</dt>
+                <dt>Reasoning</dt>
                 <dd>@Model.Reasoning</dd>
-                @if (Model.References.Length > 0)
+                @if (!string.IsNullOrEmpty(Model.HostApp))
                 {
-                    <dt>This inspection will only run with the following libraries referenced:</dt>
-                    foreach (var reference in Model.References)
-                    {
-                    <dd>@reference</dd>
-                    }
+                <dt>Required Host Application</dt>
+                <dd>@Model.HostApp</dd>
                 }
-            </dl>
-            if (Model.Examples.Length > 0)
-            {
-                <strong>Examples</strong>
-                <p>The following code would trigger this inspection:</p>
-                <div class="vbe-mock-debugger">
-                    <div class="code-area">
-                        <div class="code">
-                            <div class="block">
-                                @Html.Raw(Model.Examples[0])
+                @if (Model.References.Any())
+                {
+                <dt>This inspection will only run if the following libraries referenced:</dt>
+                <dd>
+                @foreach (var reference in Model.References)
+                {
+                    @reference
+                }
+                </dd>
+                }
+                @if (Model.ResultExamples.Any())
+                {
+                <dt>The following code example(s) would trigger this inspection:</dt>
+                <dd>
+                @foreach (var example in Model.ResultExamples)
+                {
+                <p>
+                    <div class="vbe-mock-debugger">
+                        <div class="code-area">
+                            <div class="code">
+                                <div class="block">@Html.Raw(example)</div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <br/>
-                if (Model.Examples.Length > 1)
+                </p>
+                }
+                </dd>
+                }
+                @if (Model.NoResultExamples.Any())
                 {
-                    <p>The following code would <strong>not</strong> trigger this inspection:
-                    </p>
-                    foreach (var example in Model.Examples.Skip(1))
-                    {
-                        <div class="vbe-mock-debugger">
-                            <div class="code-area">
-                                <div class="code">
-                                    <div class="block">
-                                        @Html.Raw(example)
-                                    </div>
-                                </div>
+                <dt>The following code example(s) would <strong>not</strong> trigger this inspection:</dt>
+                <dd>
+                @foreach (var example in Model.NoResultExamples)
+                {
+                <p>
+                    <div class="vbe-mock-debugger">
+                        <div class="code-area">
+                            <div class="code">
+                                <div class="block">@Html.Raw(example)</div>
                             </div>
                         </div>
-                    }
+                    </div>
+                </p>
                 }
-            }
+                </dd>
+                }
+            </dl>
         }
     </div>
 </div>

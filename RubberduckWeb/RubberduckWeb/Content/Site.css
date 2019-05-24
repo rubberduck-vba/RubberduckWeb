@@ -185,6 +185,12 @@ tr:nth-child(even) {
     border-radius: 2px;
 }
 
+.feature-highlight {
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+}
+
 /* This is all for the mock VBE Error modal bit, it takes a lot of CSS to even get close to the VBE error dialogue, but we did it */
 .vbe-mock-error-modal {
     width: 379px;

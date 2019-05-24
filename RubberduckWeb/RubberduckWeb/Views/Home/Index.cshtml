@@ -1,4 +1,6 @@
-﻿@{
+﻿@model RubberduckWeb.Models.HomePageModel
+
+@{
     ViewBag.Title = "Home";
 }
 
@@ -9,41 +11,35 @@
         From unit testing to code inspections and refactorings, programming in VBA will never be the same.
     </p>
 </div>
-
 <div class="row">
-    <div class="col-md-4">
-        <h2>Unit Testing</h2>
-        <p>Rubberduck gives you a powerful and fully integrated test environment for your VBA code.</p>
-        <p class="text-center"><img src="~/Content/Images/TestExplorer01Cropped.png" alt="Test Explorer dockable toolwindow" class="border-image" /></p>
-        <p>That's right. Unit testing. In VBA.</p>
-        <p>@Html.ActionLink("Learn more »", "UnitTesting", "Home", null, null, "unit-testing", null, new { @class = "btn btn-default" })</p> 
-    </div>
-    <div class="col-md-4">
-        <h2>Code Inspections</h2>
-        <p>Rubberduck warns you about potential quality issues by inspecting your code base.</p>
-        <p class="text-center"><img src="~/Content/Images/CodeInspectionsCropped.png" alt="Inspection Results dockable toolwindow" class="border-image" /></p>
-        <p>...and provides quick fixes for many of them too!</p>
-        <p>@Html.ActionLink("Learn more »", "List", "Inspections", null, null, null, null, new { @class = "btn btn-default" })</p>
-    </div>
-    <div class="col-md-4">
-        <h2>Refactorings</h2>
-        <p>Clean up your code by easily renaming existing, or extracting new methods.</p>
-        <p class="text-center"><img src="~/Content/Images/RefactorCropped.png" alt="Refactorings context menu" class="border-image" /></p>
-        <p>Real refactorings, one click away. Hmm ok, make that two.</p>
-        <p>@Html.ActionLink("Learn more »", "Refactorings", "Home", null, null, null, null, new {@class = "btn btn-default"})</p> 
-    </div>
+    @foreach (var highlight in Model.Highlights)
+    {
+        <div class="col-md-4">
+            <h2>@highlight.Title</h2>
+            <p>@highlight.Description</p>
+            <p class="text-center">
+                <a href="@highlight.ActionLink">
+                    <div class="feature-highlight">
+                        <img class="border-image" src="@highlight.ImageUrl" alt="@highlight.ImageAltText"/>
+                    </div>
+                </a>
+            </p>
+            <p>@highlight.ImageCaption</p>
+            <p><a class="btn btn-info" href="@highlight.ActionLink">Learn more »</a></p>
+        </div>
+    }
 </div>
-<div>
+<hr/>
+<div class="row">
     <div>
         <img src="~/Content/Images/ducky-color.png" alt="Rubberduck"/>
     </div>
     <div>
         <p>Are you running the latest version?</p>
-        <p>
-            <a class="btn btn-primary btn-lg" href="https://github.com/rubberduck-vba/Rubberduck/releases">Download</a>
-        </p>
+        <p><a class="btn btn-success btn-lg" href="https://github.com/rubberduck-vba/Rubberduck/releases">Download</a></p>
+        <p><small>@Model.TotalReleaseDownloads.ToString("N0") total downloads</small></p>
         <p>View the source code on GitHub. Star us if you like!</p>
-        <p><a class="btn btn-default btn-lg" href="https://github.com/rubberduck-vba/Rubberduck/">Repository</a>
+        <p><a class="btn btn-outline-dark btn-lg" href="https://github.com/rubberduck-vba/Rubberduck/">Repository</a>
         </p>
     </div>
 </div>
