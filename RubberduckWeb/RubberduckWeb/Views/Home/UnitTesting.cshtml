@@ -1,33 +1,30 @@
 ﻿@{
-    ViewBag.Title = "Unit Test";
+    ViewBag.Title = "Unit Testing";
 }
 
 <section id="unit-testing">
-    <div class="image-div col-md-push-4">
-        <img class="image" />
-    </div>
-    <h3>
-        Unit Testing
-    </h3>
-    <div class="col-lg-12">
-        <div>
-            <p>
-                The Test Explorer helps you create, run, and manage unit tests with minimal boilerplate.
-                Just add a test module and test stub through the UI, write your test using Rubberduck's
-                <em>Assert</em> or <em>PermissiveAssert</em> API, and run it.
-            </p>
-            <p>
-                Rubberduck uses <em>annotations</em> (special comments), to discover the test modules and methods in your VBA project.
-            </p>
-            <p>
-                Procedures marked with the <em>'&#64;ModuleInitialize</em> and <em>'&#64;ModuleCleanup</em> annotations run
-                respectively before and after the tests in a module are executed; methods marked with the
-                <em>'&#64;TestInitialize</em> and <em>'&#64;TestCleanup</em> annotations run before and after each test, respectively.
-            </p>
-            <p>
-                Test methods only need to be public, parameterless, and marked with the <em>'&#64;TestMethod</em> annotation.
-                Tests can be ignored using the <em>'&#64;IgnoreTest</em> annotation, and the module as a whole is marked as a test module with the <em>'&#64;TestModule</em> annotation.
-            </p>
+    <h3>Unit Testing</h3>
+    <div class="row">
+        <div class="col-lg-12">
+            <div>
+                <p>
+                    The Test Explorer helps you create, run, and manage unit tests with minimal boilerplate.
+                    Just add a test module and test stub through the UI, write your test using Rubberduck's
+                    <em>Assert</em> or <em>PermissiveAssert</em> API, and run it.
+                </p>
+                <p>
+                    Rubberduck uses <em>annotations</em> (special comments), to discover the test modules and methods in your VBA project.
+                </p>
+                <p>
+                    Procedures marked with the <em>'&#64;ModuleInitialize</em> and <em>'&#64;ModuleCleanup</em> annotations run
+                    respectively before and after the tests in a module are executed; methods marked with the
+                    <em>'&#64;TestInitialize</em> and <em>'&#64;TestCleanup</em> annotations run before and after each test, respectively.
+                </p>
+                <p>
+                    Test methods only need to be public, parameterless, and marked with the <em>'&#64;TestMethod</em> annotation.
+                    Tests can be ignored using the <em>'&#64;IgnoreTest</em> annotation, and the module as a whole is marked as a test module with the <em>'&#64;TestModule</em> annotation.
+                </p>
+            </div>
         </div>
     </div>
     <div class="row">
