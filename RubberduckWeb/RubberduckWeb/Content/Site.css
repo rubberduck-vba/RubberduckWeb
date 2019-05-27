@@ -1,8 +1,8 @@
 ﻿body {
     padding-bottom: 20px;
 }
-
 /* Set padding to keep content from hitting the edges */
+
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -11,6 +11,7 @@
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
+
 .dl-horizontal dt {
     white-space: normal;
 }
@@ -29,14 +30,20 @@ section {
     margin-bottom: 10px;
 }
 
-h3, .h3 {
+h3,
+.h3 {
     padding: 15px;
     /* Fade from light blue on left to transparent on right */
-    background: #7697bd; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(left, #7697bd, rgba(255, 255, 255, 0)); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(right, #7697bd, rgba(255, 255, 255, 0)); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(right, #7697bd, rgba(255, 255, 255, 0)); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to right, #7697bd, rgba(255, 255, 255, 0)); /* Standard syntax */
+    background: #7697bd;
+    /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left, #7697bd, rgba(255, 255, 255, 0));
+    /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, #7697bd, rgba(255, 255, 255, 0));
+    /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, #7697bd, rgba(255, 255, 255, 0));
+    /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, #7697bd, rgba(255, 255, 255, 0));
+    /* Standard syntax */
     /* round the borders off*/
     -ms-border-radius: 15px;
     border-radius: 15px;
@@ -44,10 +51,11 @@ h3, .h3 {
     color: white;
 }
 
-    h3 small, .h3 small {
-        color: #5E5D5D;
-        float: right;
-    }
+h3 small,
+.h3 small {
+    color: #5E5D5D;
+    float: right;
+}
 
 section#codeInspections img {
     display: block;
@@ -61,16 +69,15 @@ section#codeInspections img {
     background-color: #222;
 }
 
-    .dropdown-menu > li > a {
-        color: #999;
-    }
+.dropdown-menu > li > a {
+    color: #999;
+}
 
-        .dropdown-menu > li > a:hover,
-        .dropdown-menu > li > a:focus {
-            color: #ffffff;
-            text-decoration: none;
-            background-color: #222;
-        }
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #222;
+}
 
 ul.nav li.dropdown:hover > ul.dropdown-menu {
     display: block;
@@ -123,24 +130,24 @@ section {
     width: 100%;
 }
 
-    .inspections-form div {
-        margin-top: 10px;
-    }
+.inspections-form div {
+    margin-top: 10px;
+}
 
-        .inspections-form div:first-child {
-            margin-top: 0px;
-        }
+.inspections-form div:first-child {
+    margin-top: 0px;
+}
 
 .pre-release {
     color: maroon;
-    
 }
 
 #code {
     width: 100%;
 }
 
-td, th {
+td,
+th {
     vertical-align: text-top;
     padding: 5px;
     margin: 5px;
@@ -166,7 +173,7 @@ tr:nth-child(even) {
 
 #code {
     font-size: 12pt;
-    font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+    font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
 }
 
 .no-round-corners {
@@ -176,7 +183,8 @@ tr:nth-child(even) {
     -moz-border-radius: 0px;
 }
 
-#inspection-busy-indicator, #inspection-error-indicator {
+#inspection-busy-indicator,
+#inspection-error-indicator {
     margin: 10px 0;
 }
 
@@ -213,16 +221,16 @@ tr:nth-child(even) {
         border-radius: 0 !important;
     }
 
-        .vbe-mock-error-modal .body {
-            box-shadow: none !important;
-            height: auto !important;
-            padding-bottom: 6px !important;
-        }
+    .vbe-mock-error-modal .body {
+        box-shadow: none !important;
+        height: auto !important;
+        padding-bottom: 6px !important;
+    }
 
-            .vbe-mock-error-modal .body .buttons {
-                position: static !important;
-                text-align: center !important;
-            }
+    .vbe-mock-error-modal .body .buttons {
+        position: static !important;
+        text-align: center !important;
+    }
 }
 
 .vbe-mock-error-modal h1 {
@@ -240,55 +248,56 @@ tr:nth-child(even) {
     position: relative;
 }
 
-    .vbe-mock-error-modal .body .buttons {
-        position: absolute;
-        bottom: 10px;
-    }
+.vbe-mock-error-modal .body .buttons {
+    position: absolute;
+    bottom: 10px;
+}
 
-        .vbe-mock-error-modal .body .buttons div:first-child {
-            margin-left: 0px;
-        }
+.vbe-mock-error-modal .body .buttons div:first-child {
+    margin-left: 0px;
+}
 
-        .vbe-mock-error-modal .body .buttons div {
-            display: inline-block;
-            margin-left: 12px;
-            background-color: #f0f0f0;
-            border-top: 1px solid #ffffff;
-            border-left: 1px solid #ffffff;
-            border-right: 1px solid #696969;
-            border-bottom: 1px solid #696969;
-        }
-            .vbe-mock-error-modal .body .buttons div:hover {
-                background-color: #f0f0f0;
-                border-top: 1px solid #696969;
-                border-left: 1px solid #696969;
-                border-right: 1px solid #ffffff;
-                border-bottom: 1px solid #ffffff;
-            }
+.vbe-mock-error-modal .body .buttons div {
+    display: inline-block;
+    margin-left: 12px;
+    background-color: #f0f0f0;
+    border-top: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #696969;
+    border-bottom: 1px solid #696969;
+}
 
-                .vbe-mock-error-modal .body .buttons div:hover a {
-                    border-top: 1px solid #a0a0a0;
-                    border-left: 1px solid #a0a0a0;
-                    border-right: 1px solid #e3e3e3;
-                    border-bottom: 1px solid #e3e3e3;
-                }
+.vbe-mock-error-modal .body .buttons div:hover {
+    background-color: #f0f0f0;
+    border-top: 1px solid #696969;
+    border-left: 1px solid #696969;
+    border-right: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+}
 
-            .vbe-mock-error-modal .body .buttons div a {
-                color: #202020;
-                display: block;
-                width: 71px;
-                height: 19px;
-                text-align: center;
-                border-top: 1px solid #e3e3e3;
-                border-left: 1px solid #e3e3e3;
-                border-right: 1px solid #a0a0a0;
-                border-bottom: 1px solid #a0a0a0;
-                padding-top: 2px;
-            }
+.vbe-mock-error-modal .body .buttons div:hover a {
+    border-top: 1px solid #a0a0a0;
+    border-left: 1px solid #a0a0a0;
+    border-right: 1px solid #e3e3e3;
+    border-bottom: 1px solid #e3e3e3;
+}
 
-                .vbe-mock-error-modal .body .buttons div a:hover {
-                    text-decoration: none;
-                }
+.vbe-mock-error-modal .body .buttons div a {
+    color: #202020;
+    display: block;
+    width: 71px;
+    height: 19px;
+    text-align: center;
+    border-top: 1px solid #e3e3e3;
+    border-left: 1px solid #e3e3e3;
+    border-right: 1px solid #a0a0a0;
+    border-bottom: 1px solid #a0a0a0;
+    padding-top: 2px;
+}
+
+.vbe-mock-error-modal .body .buttons div a:hover {
+    text-decoration: none;
+}
 
 /* This is all for the mock VBE debugger bit */
 .vbe-mock-debugger {
@@ -297,67 +306,67 @@ tr:nth-child(even) {
     padding: 0;
 }
 
-    .vbe-mock-debugger .code-area {
-        border-left: 20px solid #f0f0f0;
-        font-family: monospace;
-        font-size: 12px;
-        position: relative;
-    }
+.vbe-mock-debugger .code-area {
+    border-left: 20px solid #f0f0f0;
+    font-family: monospace;
+    font-size: 12px;
+    position: relative;
+}
 
-    .vbe-mock-debugger .comment {
-        color: #008000;
-    }
+.vbe-mock-debugger .comment {
+    color: #008000;
+}
 
-    .vbe-mock-debugger .keyword {
-        color: #000096;
-    }
+.vbe-mock-debugger .keyword {
+    color: #000096;
+}
 
-    .vbe-mock-debugger .string-literal {
-        color: #800000;
-    }
+.vbe-mock-debugger .string-literal {
+    color: #800000;
+}
 
-    .vbe-mock-debugger .annotation {
-        color: #008000;
-    }
+.vbe-mock-debugger .annotation {
+    color: #008000;
+}
 
-    .vbe-mock-debugger .attribute {
-        color: #4e4e4e;
-    }
+.vbe-mock-debugger .attribute {
+    color: #4e4e4e;
+}
 
-    .vbe-mock-debugger .attribute-value {
-        color: #3e3e3e;
-    }
+.vbe-mock-debugger .attribute-value {
+    color: #3e3e3e;
+}
 
-    .vbe-mock-debugger .code {
-        border-left: 1px solid #000;
-    }
+.vbe-mock-debugger .code {
+    border-left: 1px solid #000;
+}
 
-        .vbe-mock-debugger .code .block {
-            padding-left: 12px;
-            margin-top: 12px;
-            border-bottom: 1px solid #808080;
-        }
+.vbe-mock-debugger .code .block {
+    padding-left: 12px;
+    margin-top: 12px;
+    border-bottom: 1px solid #808080;
+}
 
-            .vbe-mock-debugger .code .block:first-child {
-                margin-top: 0;
-            }
+.vbe-mock-debugger .code .block:first-child {
+    margin-top: 0;
+}
 
-            .vbe-mock-debugger .code .block:last-child {
-                border-bottom: none;
-            }
+.vbe-mock-debugger .code .block:last-child {
+    border-bottom: none;
+}
 
-            .vbe-mock-debugger .code .block .error {
-                background-color: #ff0;
-                position: relative;
-                padding: 0;
-                margin: 0;
-            }
+.vbe-mock-debugger .code .block .error {
+    background-color: #ff0;
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
 
-                .vbe-mock-debugger .code .block .error img {
-                    background-color: #f0f0f0;
-                    top: 1px;
-                    position: absolute;
-                }
+.vbe-mock-debugger .code .block .error img {
+    background-color: #f0f0f0;
+    top: 1px;
+    position: absolute;
+}
 
 .vbe-mock-indenter {
     font-family: 'Microsoft Sans Serif', 'Segoe UI', Arial, sans-serif;
@@ -369,137 +378,139 @@ tr:nth-child(even) {
     border: 1px solid #dddddd;
 }
 
-    .vbe-mock-indenter * {
-        margin: 0;
-        padding: 0 0 3px 0;
-        line-height: 12px;
-        vertical-align: text-bottom;
-    }
+.vbe-mock-indenter * {
+    margin: 0;
+    padding: 0 0 3px 0;
+    line-height: 12px;
+    vertical-align: text-bottom;
+}
 
-    .vbe-mock-indenter input[type=text] {
-        vertical-align: text-top;
-        width: 50px;
-        display: inline-block;
-    }
+.vbe-mock-indenter input[type=text] {
+    vertical-align: text-top;
+    width: 50px;
+    display: inline-block;
+}
 
-    .vbe-mock-indenter select {
-        width: 210px;
-        height: 20px;
-    }
+.vbe-mock-indenter select {
+    width: 210px;
+    height: 20px;
+}
 
-    .vbe-mock-indenter input[type=number] {
-        width: 50px;
-        height: 20px;
-    }
+.vbe-mock-indenter input[type=number] {
+    width: 50px;
+    height: 20px;
+}
 
-    .vbe-mock-indenter .number-selector {
-        display: inline-block;
-        height: 20px;
-        position: relative;
-        padding-right: 20px;
-    }
+.vbe-mock-indenter .number-selector {
+    display: inline-block;
+    height: 20px;
+    position: relative;
+    padding-right: 20px;
+}
 
-        .vbe-mock-indenter .number-selector .number-up:hover,
-        .vbe-mock-indenter .number-selector .number-down:hover {
-            background-color: #f0f0f0;
-            border-top: 1px solid #a0a0a0;
-            border-left: 1px solid #a0a0a0;
-            border-right: 1px solid #e3e3e3;
-            border-bottom: 1px solid #e3e3e3;
-        }
-        
-        .vbe-mock-indenter .number-selector .number-up,
-        .vbe-mock-indenter .number-selector .number-down {
-            display: inline-block;
-            width: 20px;
-            height: 10px;
-            position: absolute;
-            margin: 0;
-            padding: 0;
-            right: 0;
-            text-align: center;
-            border: 1px solid #707070;
-            background-color: #dddddd;
-        }
+.vbe-mock-indenter .number-selector .number-up:hover, .vbe-mock-indenter .number-selector .number-down:hover {
+    background-color: #f0f0f0;
+    border-top: 1px solid #a0a0a0;
+    border-left: 1px solid #a0a0a0;
+    border-right: 1px solid #e3e3e3;
+    border-bottom: 1px solid #e3e3e3;
+}
 
-        .vbe-mock-indenter .number-selector .number-up {
-            top: 0;
-            font-size: 10px;
-        }
+.vbe-mock-indenter .number-selector .number-up,
+.vbe-mock-indenter .number-selector .number-down {
+    display: inline-block;
+    width: 20px;
+    height: 10px;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    right: 0;
+    text-align: center;
+    border: 1px solid #707070;
+    background-color: #dddddd;
+}
 
-        .vbe-mock-indenter .number-selector .number-down {
-            top: 10px;
-            font-size: 7px;
-        }
+.vbe-mock-indenter .number-selector .number-up {
+    top: 0;
+    font-size: 10px;
+}
 
-    .vbe-mock-indenter textarea {
-        width: 100%;
-        height: 200px;
-        font-family: monospace;
-    }
+.vbe-mock-indenter .number-selector .number-down {
+    top: 10px;
+    font-size: 7px;
+}
 
-    .vbe-mock-indenter input[type=button],
-    .vbe-mock-indenter input[type=submit] {
-        display: inline-block;
-        background-color: #f0f0f0;
-        border-top: 1px solid #ffffff;
-        border-left: 1px solid #ffffff;
-        border-right: 1px solid #696969;
-        border-bottom: 1px solid #696969;
-        color: #202020;
-        display: block;
-        width: 91px;
-        height: 19px;
-        text-align: center;
-        border-top: 1px solid #e3e3e3;
-        border-left: 1px solid #e3e3e3;
-        border-right: 1px solid #a0a0a0;
-        border-bottom: 1px solid #a0a0a0;
-        padding: 2px;
-    }
+.vbe-mock-indenter textarea {
+    width: 100%;
+    height: 200px;
+    font-family: monospace;
+}
 
-        .vbe-mock-indenter input[type=button]:hover,
-        .vbe-mock-indenter input[type=submit]:hover {
-            background-color: #f0f0f0;
-            border-top: 1px solid #696969;
-            border-left: 1px solid #696969;
-            border-right: 1px solid #ffffff;
-            border-bottom: 1px solid #ffffff;
-            border-top: 1px solid #a0a0a0;
-            border-left: 1px solid #a0a0a0;
-            border-right: 1px solid #e3e3e3;
-            border-bottom: 1px solid #e3e3e3;
-        }
+.vbe-mock-indenter input[type=button],
+.vbe-mock-indenter input[type=submit] {
+    display: inline-block;
+    background-color: #f0f0f0;
+    border-top: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #696969;
+    border-bottom: 1px solid #696969;
+    color: #202020;
+    display: block;
+    width: 91px;
+    height: 19px;
+    text-align: center;
+    border-top: 1px solid #e3e3e3;
+    border-left: 1px solid #e3e3e3;
+    border-right: 1px solid #a0a0a0;
+    border-bottom: 1px solid #a0a0a0;
+    padding: 2px;
+}
 
-    .vbe-mock-indenter .indent-4 {
-        margin-left: 16px;
-    }
+.vbe-mock-indenter input[type=button]:hover, .vbe-mock-indenter input[type=submit]:hover {
+    background-color: #f0f0f0;
+    border-top: 1px solid #696969;
+    border-left: 1px solid #696969;
+    border-right: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+    border-top: 1px solid #a0a0a0;
+    border-left: 1px solid #a0a0a0;
+    border-right: 1px solid #e3e3e3;
+    border-bottom: 1px solid #e3e3e3;
+}
 
-    .vbe-mock-indenter h4 {
-        font-size: 12px;
-        font-weight: bold;
-        margin-top: 10px;
-    }
+.vbe-mock-indenter .indent-4 {
+    margin-left: 16px;
+}
 
-    .vbe-mock-indenter input[type=checkbox] {
-        -webkit-appearance: none;
-        background-color: #fff;
-        border: 1px solid #777;
-        padding: 6px;
-        border-radius: 0;
-        display: inline-block;
-        position: relative;
-        height: 12px;
-        line-height: 12px;
-    }
+.vbe-mock-indenter h4 {
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 10px;
+}
 
-        .vbe-mock-indenter input[type=checkbox]:checked:after {
-            content: '\2714';
-            font-size: 13px;
-            font-family: sans-serif;
-            font-weight: bold;
-            position: absolute;
-            top: 1px;
-            left: 0px;
-            color: #000;
-        }
+.vbe-mock-indenter input[type=checkbox] {
+    -webkit-appearance: none;
+    background-color: #fff;
+    border: 1px solid #777;
+    padding: 6px;
+    border-radius: 0;
+    display: inline-block;
+    position: relative;
+    height: 12px;
+    line-height: 12px;
+}
+
+.vbe-mock-indenter input[type=checkbox]:checked:after {
+    content: '\2714';
+    font-size: 13px;
+    font-family: sans-serif;
+    font-weight: bold;
+    position: absolute;
+    top: 1px;
+    left: 0px;
+    color: #000;
+}
+
+.highlight .text-center span {
+    display: block;
+}

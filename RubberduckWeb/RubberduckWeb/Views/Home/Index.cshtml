@@ -14,14 +14,14 @@
 <div class="row">
     @foreach (var highlight in Model.Highlights)
     {
-        <div class="col-md-4">
+        <div class="col-md-4 highlight">
             <h2>@highlight.Title</h2>
             <p>@highlight.Description</p>
             <p class="text-center">
                 <a href="@highlight.ActionLink">
-                    <div class="feature-highlight">
-                        <img class="border-image" src="@highlight.ImageUrl" alt="@highlight.ImageAltText"/>
-                    </div>
+                    <span class="feature-highlight">
+                        <img class="border-image" src="@Url.Content(highlight.ImageUrl)" alt="@highlight.ImageAltText"/>
+                    </span>
                 </a>
             </p>
             <p>@highlight.ImageCaption</p>
