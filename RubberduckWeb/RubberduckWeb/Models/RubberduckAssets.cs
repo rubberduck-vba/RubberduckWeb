@@ -20,11 +20,11 @@ namespace RubberduckWeb.Models
             Inspections = await RequestInspectionsAsync();
         }
 
-        public static bool ShouldInvalidate => Inspections == null || TotalReleaseDownloads == 0 || 
+        public static bool ShouldInvalidate => Inspections == null || !Downloads.Any() || 
             DateTime.UtcNow > _lastInvalalidated.AddDays(1);
 
-        //public static int TotalDownloads { get; private set; }
-        public static int TotalReleaseDownloads { get; private set; }
+        public static IReadOnlyList<ReleaseDownloadInfo> Downloads { get; private set; } 
+            = new List<ReleaseDownloadInfo>();
 
         private static DateTime _lastInvalalidated;
         public static IDictionary<string, InspectionInfo> Inspections { get; private set; }
@@ -35,29 +35,36 @@ namespace RubberduckWeb.Models
             try
             {
                 var client = new GitHubClient(new ProductHeaderValue("rubberduck-vba_RubberduckWEB"));
+                var allReleases = (await client.Repository.Release.GetAll(GitHubOrg, RepositoryName))
+                    .Select(release => new ReleaseDownloadInfo
+                    {
+                        IsPreRelease = release.Prerelease,
+                        TagName = $"[{release.TagName}]",
+                        ReleaseDate = release.CreatedAt.UtcDateTime,
+                        Downloads = release.Assets.Where(a => a.Name.EndsWith(".exe")).Sum(a => a.DownloadCount),
+                        InspectionDocsUrl = release.Assets.SingleOrDefault(a => a.Name == AssetName)?.BrowserDownloadUrl
+                    }).OrderBy(tag => tag.ReleaseDate).ToList();
 
-                var master = await client.Repository.Release.GetLatest(GitHubOrg, RepositoryName);
-                var masterUrl = master.Assets.SingleOrDefault(a => a.Name == AssetName)?.BrowserDownloadUrl;
+                var master = allReleases.Last(tag => !tag.IsPreRelease);
+                var next = allReleases.Last();
 
-                var allReleases = await client.Repository.Release.GetAll(GitHubOrg, RepositoryName);
-                var next = allReleases.FirstOrDefault(tag => tag.Prerelease);
-                var nextUrl = next?.Assets.SingleOrDefault(a => a.Name == AssetName)?.BrowserDownloadUrl;
-
-                var masterDocs = await DownloadXmlDocAssetAsync(masterUrl, isPreRelease: false);
-                var nextDocs = await DownloadXmlDocAssetAsync(nextUrl, isPreRelease: masterDocs.Any());
+                IDictionary<string, InspectionInfo> masterDocs = new Dictionary<string, InspectionInfo>();
+                IDictionary<string, InspectionInfo> nextDocs = new Dictionary<string, InspectionInfo>();
+                if (!string.IsNullOrEmpty(master.InspectionDocsUrl))
+                {
+                    masterDocs = await DownloadXmlDocAssetAsync(master.InspectionDocsUrl, isPreRelease: false);
+                }
+                if (!string.IsNullOrEmpty(next.InspectionDocsUrl))
+                {
+                    nextDocs = await DownloadXmlDocAssetAsync(next.InspectionDocsUrl, isPreRelease: masterDocs.Any()); // don't mark as prerelease if there's no docs in master
+                }
 
                 var result = masterDocs.AsEnumerable()
                     .Concat(nextDocs.AsEnumerable().Where(kvp => !masterDocs.ContainsKey(kvp.Key)))
                     .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
                 _lastInvalalidated = DateTime.UtcNow;
-                /*TotalDownloads = allReleases
-                    .Sum(release => release.Assets.Where(asset => asset.Name.EndsWith(".exe"))
-                    .Sum(asset => asset.DownloadCount));*/
-                TotalReleaseDownloads = allReleases
-                    .Where(release => !release.Prerelease)
-                    .Sum(release => release.Assets.Where(asset => asset.Name.EndsWith(".exe"))
-                    .Sum(asset => asset.DownloadCount));
+                Downloads = allReleases;
                 return result;
             }
             catch (Exception)

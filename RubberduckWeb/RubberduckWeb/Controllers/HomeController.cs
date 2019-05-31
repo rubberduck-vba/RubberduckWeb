@@ -13,17 +13,51 @@ namespace RubberduckWeb.Controllers
 {
     public class HomeController : AsyncController
     {
-        private readonly Random _random = new Random(DateTime.UtcNow.Minute);
+        private readonly Random _random = new Random();
 
         public async Task<ActionResult> Index()
         {
-            var highlights = GetFeatureHighlights();
-            var model = new HomePageModel(highlights, () => RubberduckAssets.TotalReleaseDownloads);
             if (RubberduckAssets.ShouldInvalidate)
             {
                 await RubberduckAssets.InvalidateAsync();
             }
+            var model = await BuildHomePageModelAsync();
             return View(model);
+        }
+
+        private async Task<HomePageModel> BuildHomePageModelAsync()
+        {
+            return await Task.Run(() =>
+            {
+                var downloads = RubberduckAssets.Downloads;
+                var releaseDownloads = downloads.Where(d => !d.IsPreRelease)
+                    .GroupBy(d => d.IsPreRelease)
+                    .Select(g => new ReleaseDownloadInfo
+                    {
+                        TagName = $"Releases since {g.First().TagName}",
+                        IsPreRelease = false,
+                        ReleaseDate = g.Min(d => d.ReleaseDate),
+                        Downloads = g.Sum(d => d.Downloads),
+                    }).SingleOrDefault();
+                var latestReleaseDownloads = downloads.Last(d => !d.IsPreRelease);
+                var preReleaseDownloads = downloads.Where(d => d.ReleaseDate > latestReleaseDownloads.ReleaseDate)
+                    .GroupBy(d => d.IsPreRelease)
+                    .Select(g => new ReleaseDownloadInfo
+                    {
+                        TagName = $"Prereleases since {g.First().TagName}",
+                        IsPreRelease = false,
+                        ReleaseDate = g.Min(d => d.ReleaseDate),
+                        Downloads = g.Sum(d => d.Downloads),
+                    }).SingleOrDefault();
+                var latestPreReleaseDownloads = downloads.Last(d => d.IsPreRelease);
+
+                var highlights = GetFeatureHighlights();
+                return new HomePageModel(highlights,
+                    releaseDownloads,
+                    latestReleaseDownloads,
+                    preReleaseDownloads,
+                    latestPreReleaseDownloads);
+            });
         }
 
         private FeatureHighlight[] GetFeatureHighlights()

@@ -37,7 +37,31 @@
     <div>
         <p>Are you running the latest version?</p>
         <p><a class="btn btn-success btn-lg" href="https://github.com/rubberduck-vba/Rubberduck/releases">Download</a></p>
-        <p><small>@Model.TotalReleaseDownloads.ToString("N0") total downloads</small></p>
+        <p>
+            <strong>Downloads</strong>
+            <table>
+                <tr>
+                    <td>@Model.LatestPreReleaseDownloads.TagName</td>
+                    <td>@Model.LatestPreReleaseDownloads.ReleaseDate.ToString("yyyy-MM-dd")</td>
+                    <td><strong>@Model.LatestPreReleaseDownloads.Downloads.ToString("N0")</strong></td>
+                </tr>
+                <tr>
+                    <td>@Model.TotalPreReleaseDownloads.TagName</td>
+                    <td>@Model.TotalPreReleaseDownloads.ReleaseDate.ToString("yyyy-MM-dd")</td>
+                    <td><strong>@Model.TotalPreReleaseDownloads.Downloads.ToString("N0")</strong></td>
+                </tr>
+                <tr>
+                    <td>@Model.LatestReleaseDownloads.TagName</td>
+                    <td>@Model.LatestReleaseDownloads.ReleaseDate.ToString("yyyy-MM-dd")</td>
+                    <td><strong>@Model.LatestReleaseDownloads.Downloads.ToString("N0")</strong></td>
+                </tr>
+                <tr>
+                    <td>@Model.TotalReleaseDownloads.TagName</td>
+                    <td>@Model.TotalReleaseDownloads.ReleaseDate.ToString("yyyy-MM-dd")</td>
+                    <td><strong>@Model.TotalReleaseDownloads.Downloads.ToString("N0")</strong></td>
+                </tr>
+            </table>
+        </p>
         <p>View the source code on GitHub. Star us if you like!</p>
         <p><a class="btn btn-outline-dark btn-lg" href="https://github.com/rubberduck-vba/Rubberduck/">Repository</a>
         </p>
