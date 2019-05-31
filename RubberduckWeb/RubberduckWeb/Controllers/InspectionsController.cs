@@ -16,7 +16,11 @@ namespace RubberduckWeb.Controllers
             {
                 await RubberduckAssets.InvalidateAsync();
             }
-            return View(RubberduckAssets.Inspections.Values);
+
+            var ignoreModuleExample = @"Option Explicit
+'@IgnoreModule; inspections will ignore this module";
+
+            return View(new InspectionsModel(RubberduckAssets.Inspections.Values, ignoreModuleExample));
         }
 
         public ActionResult Details(string id)

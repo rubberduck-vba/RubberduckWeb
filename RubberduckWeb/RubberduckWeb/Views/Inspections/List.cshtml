@@ -1,7 +1,7 @@
 ﻿@using RubberduckWeb.Controllers
 @using RubberduckWeb.Models
 
-@model IEnumerable<InspectionInfo>
+@model InspectionsModel
 
 @{
     ViewBag.Title = "Index";
@@ -13,40 +13,46 @@
 <section id="codeInspections">
     <div class="col-lg-12">
         <p>
-            By default (it can be configured not to), Rubberduck automatically runs the code through all enabled inspections after successfully parsing all modules. There are multiple types of inspections, including <em>code quality</em>, <em>readability and maintainability</em>, <em>language opportunities</em>, and a number of <em>Rubberduck opportunities</em>.
-            The list of inspections on this page (as well as their respective content and code examples) is generated directly from XML documentation in the source code.
+            Unless you configure it not to, Rubberduck automatically runs the code through all enabled inspections after successfully parsing all modules.
+            The list of inspections on this page (as well as their respective content and code examples) is generated directly from XML documentation in the source code merged into our repository on GitHub.
         </p>
         <p>
-            Most code inspections propose at least one quick-fix action that can be applied with a single click. Please review inspection results carefully before blanket-applying a "quick fix" across an entire project at once: a dozen modules modified is all it takes to fill up the <em>undo stack</em>.
-            As with any static code analysis tool, the accuracy of the results highly depends on how well the tool is understanding the code: you will get better results by avoiding late-bound member calls against <code>Variant</code> or <code>Object</code>, most notably.
+            You can make inspections ignore a specific module by adding an <code lang="vb">'@@IgnoreModule</code> annotation to that module's <code>(declarations)</code> section:
         </p>
         <p>
-            You can make inspections ignore a specific module by adding an <code>@@IgnoreModule</code> annotation to that module's <code>(declarations)</code> section:
+            <div class="vbe-mock-debugger">
+                <div class="code-area">
+                    <div class="code">
+                        <div class="block">@Html.Raw(Model.IgnoreModuleAnnotationExample)</div>
+                    </div>
+                </div>
+            </div>
         </p>
         <p>
-            Severity levels range from <code>DoNotShow</code> to <code>Error</code> and are completely configurable, for every single inspection. Inspections with their severity level set to <code>DoNotShow</code> do not execute at all: speed up Rubberduck static code analysis by reviewing which inspections you want to run and disabling the others! 
+            Severity levels range from <code>DoNotShow</code> to <code>Error</code> and are completely configurable, for every single inspection.
+            Inspections with their severity level set to <code>DoNotShow</code> do not execute at all: speed up Rubberduck static code analysis by reviewing which inspections you want to run and disabling the others!
         </p>
         <div>
             <table class="inspection-list-table">
                 <tbody>
-                @foreach (var item in Model.OrderBy(m => m.InspectionName)
-                    .Zip(Enumerable.Range(0, Model.Count()), (s, r) => new {Group = r / 2, Item = s})
-                    .GroupBy(i => i.Group, g => g.Item).ToList())
-                {
-                    <tr>
-                        @foreach (var info in item)
-                        {
-                            <td id=@info.InspectionName>
-                                <span><a href="Details/@info.InspectionName"><strong>@info.InspectionName</strong></a></span>
-                                @if (info.IsPreRelease)
-                                {
-                                    <span>Pre-Release</span>
-                                }
-                                <p>@info.Summary</p>
-                            </td>
-                        }
-                    </tr>
-                }
+                    @foreach (var item in Model.Inspections.OrderBy(m => m.InspectionName)
+                        .Zip(Enumerable.Range(0, Model.Inspections.Count()), (s, r) => new { Group = r / 2, Item = s })
+                        .GroupBy(i => i.Group, g => g.Item).ToList())
+                    {
+                        <tr>
+                            @foreach (var info in item)
+                            {
+                                <td id=@info.InspectionName class="inspection-list-column">
+                                    <span><a href="Details/@info.InspectionName"><strong>@info.InspectionName</strong></a></span>
+                                    @if (info.IsPreRelease)
+                                    {
+                                        <span>Pre-Release</span>
+                                    }
+                                    <p>@info.Summary</p>
+                                </td>
+                            }
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>

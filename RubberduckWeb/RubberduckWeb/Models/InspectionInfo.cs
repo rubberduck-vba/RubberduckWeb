@@ -1,10 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using RubberduckWeb.VBA;
 
 namespace RubberduckWeb.Models
 {
+    public class InspectionsModel
+    {
+        public InspectionsModel(IEnumerable<InspectionInfo> inspections, string ignoreModuleExampleCode)
+        {
+            Inspections = inspections;
+            var formatter = new FormattedCodeBlockBuilder();
+            IgnoreModuleAnnotationExample = formatter.Format(ignoreModuleExampleCode);
+        }
+
+        public IEnumerable<InspectionInfo> Inspections { get; }
+        public string IgnoreModuleAnnotationExample { get; }
+    }
+
     public class InspectionInfo
     {
         public InspectionInfo(string name, XElement node, bool isPreRelease = false)

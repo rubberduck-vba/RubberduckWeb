@@ -160,6 +160,10 @@ tr:nth-child(even) {
     width: 100%;
 }
 
+.inspection-list-column {
+    width: 50%;
+}
+
 .row {
     margin-bottom: 20px;
 }

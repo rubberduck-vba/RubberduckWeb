@@ -13,17 +13,51 @@ namespace RubberduckWeb.Controllers
 {
     public class HomeController : AsyncController
     {
-        private readonly Random _random = new Random(DateTime.UtcNow.Minute);
+        private readonly Random _random = new Random();
 
         public async Task<ActionResult> Index()
         {
-            var highlights = GetFeatureHighlights();
-            var model = new HomePageModel(highlights, () => RubberduckAssets.TotalReleaseDownloads);
             if (RubberduckAssets.ShouldInvalidate)
             {
                 await RubberduckAssets.InvalidateAsync();
             }
+            var model = await BuildHomePageModelAsync();
             return View(model);
+        }
+
+        private async Task<HomePageModel> BuildHomePageModelAsync()
+        {
+            return await Task.Run(() =>
+            {
+                var downloads = RubberduckAssets.Downloads;
+                var releaseDownloads = downloads.Where(d => !d.IsPreRelease)
+                    .GroupBy(d => d.IsPreRelease)
+                    .Select(g => new ReleaseDownloadInfo
+                    {
+                        TagName = $"Releases since {g.First().TagName}",
+                        IsPreRelease = false,
+                        ReleaseDate = g.Min(d => d.ReleaseDate),
+                        Downloads = g.Sum(d => d.Downloads),
+                    }).SingleOrDefault();
+                var latestReleaseDownloads = downloads.Last(d => !d.IsPreRelease);
+                var preReleaseDownloads = downloads.Where(d => d.ReleaseDate > latestReleaseDownloads.ReleaseDate)
+                    .GroupBy(d => d.IsPreRelease)
+                    .Select(g => new ReleaseDownloadInfo
+                    {
+                        TagName = $"Prereleases since {g.First().TagName}",
+                        IsPreRelease = false,
+                        ReleaseDate = g.Min(d => d.ReleaseDate),
+                        Downloads = g.Sum(d => d.Downloads),
+                    }).SingleOrDefault();
+                var latestPreReleaseDownloads = downloads.Last(d => d.IsPreRelease);
+
+                var highlights = GetFeatureHighlights();
+                return new HomePageModel(highlights,
+                    releaseDownloads,
+                    latestReleaseDownloads,
+                    preReleaseDownloads,
+                    latestPreReleaseDownloads);
+            });
         }
 
         private FeatureHighlight[] GetFeatureHighlights()
@@ -33,42 +67,42 @@ namespace RubberduckWeb.Controllers
                 new FeatureHighlight(
                     "Unit Testing", 
                     _aboutUnitTesting, 
-                    "~Content/Images/TestExplorer.png",
+                    "Content/Images/TestExplorer.png",
                     "Test Explorer dockable toolwindow", 
                     "Unit testing. In VBA/VB6.", 
                     Url.Action("UnitTesting")),
                 new FeatureHighlight(
                     "Code Inspections",
                     _aboutInspections,
-                    "~Content/Images/CodeInspections.png",
+                    "Content/Images/CodeInspections.png",
                     "Inspection Results dockable toolwindow",
                     "Well over 80 inspections, and counting.",
                     Url.Action("List", "Inspections")),
                 new FeatureHighlight(
                     "Smart Indenter",
                     _aboutSmartIndenter,
-                    "~Content/Images/SmartIndenter.png",
+                    "Content/Images/SmartIndenter.png",
                     "All your Smart Indenter options, and more.",
                     "Rubberduck can import your legacy Smart Indenter settings.",
                     Url.Action("Indentation")),
                 new FeatureHighlight(
                     "Refactorings",
                     _aboutRefactorings,
-                    "~Content/Images/Refactoring.png",
+                    "Content/Images/Refactoring.png",
                     "Refactorings context menu",
                     "Why risk Find/Replace when you can Refactor/Rename?",
                     Url.Action("Refactorings")),
                 new FeatureHighlight(
                     "Navigation",
                     _aboutNavigation,
-                    "~Content/Images/Navigation.png",
+                    "Content/Images/Navigation.png",
                     "Navigation tools menu",
                     "Features that make you want to early-bind everything.",
                     Url.Action("Navigation")),
                 new FeatureHighlight(
                     "Code Explorer",
                     _aboutCodeExplorer,
-                    "~Content/Images/CodeExplorer.png",
+                    "Content/Images/CodeExplorer.png",
                     "Navigation tools menu",
                     "Warning: Addictive.",
                     Url.Action("Navigation")),

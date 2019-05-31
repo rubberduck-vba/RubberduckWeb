@@ -6,16 +6,35 @@ using System.Web.Mvc;
 
 namespace RubberduckWeb.Models
 {
+    public class ReleaseDownloadInfo
+    {
+        public bool IsPreRelease { get; set; }
+        public string TagName { get; set; }
+        public DateTime ReleaseDate { get; set; }
+        public int Downloads { get; set; }
+        public string InspectionDocsUrl { get; set; }
+    }
+
     public class HomePageModel
     {
-        public HomePageModel(FeatureHighlight[] highlights, Func<int> totalReleaseDownloads)
+        public HomePageModel(FeatureHighlight[] highlights, 
+            ReleaseDownloadInfo totalReleaseDownloads, 
+            ReleaseDownloadInfo latestReleaseDownloads,
+            ReleaseDownloadInfo totalPreReleaseDownloads,
+            ReleaseDownloadInfo latestPreReleaseDownloads)
         {
             Highlights = highlights;
-            TotalReleaseDownloads = totalReleaseDownloads();
+            TotalReleaseDownloads = totalReleaseDownloads;
+            LatestReleaseDownloads = latestReleaseDownloads;
+            TotalPreReleaseDownloads = totalPreReleaseDownloads;
+            LatestPreReleaseDownloads = latestPreReleaseDownloads;
         }
 
         public FeatureHighlight[] Highlights { get; }
-        public int TotalReleaseDownloads { get; }
+        public ReleaseDownloadInfo TotalReleaseDownloads { get; }
+        public ReleaseDownloadInfo LatestReleaseDownloads { get; }
+        public ReleaseDownloadInfo TotalPreReleaseDownloads { get; }
+        public ReleaseDownloadInfo LatestPreReleaseDownloads { get; }
     }
 
     public class FeatureHighlight
