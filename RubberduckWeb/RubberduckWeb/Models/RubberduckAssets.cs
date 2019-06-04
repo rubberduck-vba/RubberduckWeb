@@ -11,6 +11,8 @@ namespace RubberduckWeb.Models
 {
     public static class RubberduckAssets
     {
+        private static readonly int MinutesToInvalide = 30; // NOTE: unauthenticated requests capped at 60 requests/hour.
+
         private const string GitHubOrg = "rubberduck-vba";
         private const string RepositoryName = "Rubberduck";
         private const string AssetName = "Rubberduck.CodeAnalysis.xml";
@@ -21,7 +23,7 @@ namespace RubberduckWeb.Models
         }
 
         public static bool ShouldInvalidate => Inspections == null || !Downloads.Any() || 
-            DateTime.UtcNow > _lastInvalalidated.AddDays(1);
+            DateTime.UtcNow > _lastInvalalidated.AddMinutes(MinutesToInvalide);
 
         public static IReadOnlyList<ReleaseDownloadInfo> Downloads { get; private set; } 
             = new List<ReleaseDownloadInfo>();
