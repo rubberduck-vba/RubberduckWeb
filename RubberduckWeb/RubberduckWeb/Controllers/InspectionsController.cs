@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using RubberduckWeb.Models;
@@ -20,7 +21,7 @@ namespace RubberduckWeb.Controllers
             var ignoreModuleExample = @"Option Explicit
 '@IgnoreModule; inspections will ignore this module";
 
-            return View(new InspectionsModel(RubberduckAssets.Inspections.Values, ignoreModuleExample));
+            return View(new InspectionsModel(RubberduckAssets.Inspections.Values.Where(e => !e.IsHidden), ignoreModuleExample));
         }
 
         public ActionResult Details(string id)

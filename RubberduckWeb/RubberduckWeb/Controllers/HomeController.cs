@@ -69,7 +69,7 @@ namespace RubberduckWeb.Controllers
                     _aboutUnitTesting, 
                     "~/Content/Images/TestExplorer.png",
                     "Test Explorer dockable toolwindow", 
-                    "Unit testing. In VBA/VB6.", 
+                    "A simple, no-boilerplate unit testing framework for VBA/VB6.", 
                     Url.Action("UnitTesting")),
                 new FeatureHighlight(
                     "Code Inspections",
@@ -106,6 +106,13 @@ namespace RubberduckWeb.Controllers
                     "Navigation tools menu",
                     "Warning: Addictive.",
                     Url.Action("Navigation")),
+                new FeatureHighlight(
+                    "Reference Explorer",
+                    _aboutReferenceExplorer,
+                    "~/Content/Images/ReferenceExplorer.png",
+                    "Reference Explorer",
+                    "That search box is your new best friend.",
+                    Url.Action("ReferenceExplorer")),
                 /* todo */
             }
             .Select(highlight => new {Value=_random.NextDouble(), Highlight=highlight})
@@ -122,6 +129,7 @@ namespace RubberduckWeb.Controllers
         private readonly string _aboutCodeExplorer = @"Organize your VBA/VB6 project like never before, using special annotation comments to customize a folder hierarchy.";
         private readonly string _aboutCodeMetrics = @"Identify potentially problematic areas by reviewing cyclomatic complexity, nesting, and other metrics.";
         private readonly string _aboutRefactorings = @"Clean up your code by easily renaming existing identifiers. Extract interfaces, reorder parameters, and more.";
+        private readonly string _aboutReferenceExplorer = @"Never again waste your time wading through hundreds of type libraries to add a library reference. Pin the libraries you use more often.";
 
         public ActionResult Refactorings()
         {
@@ -134,6 +142,11 @@ namespace RubberduckWeb.Controllers
         }
 
         public ActionResult Navigation()
+        {
+            return View();
+        }
+
+        public ActionResult ReferenceExplorer()
         {
             return View();
         }

@@ -26,6 +26,7 @@ namespace RubberduckWeb.Models
             IsPreRelease = isPreRelease;
             InspectionName = name.Replace("Inspection", string.Empty).Trim();
             Summary = node.Element("summary")?.Value.Trim();
+            IsHidden = node.Element("summary")?.Attribute("hidden")?.Value == "true";
             Reasoning = node.Element("why")?.Value.Trim();
             References = node.Elements("references").Select(e => e.Attribute("name")?.Value).ToArray();
             HostApp = node.Element("hostapp")?.Attribute("name")?.Value.Trim();
@@ -68,6 +69,7 @@ namespace RubberduckWeb.Models
         }
 
         public bool IsPreRelease { get; }
+        public bool IsHidden { get; }
         public string InspectionName { get; }
         public string Summary { get; }
         public string[] References { get; }
