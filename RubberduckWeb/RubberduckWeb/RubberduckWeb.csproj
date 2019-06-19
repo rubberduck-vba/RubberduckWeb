@@ -431,6 +431,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Build\CacheStatus.cshtml" />
+    <Content Include="Views\Home\ReferenceExplorer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

@@ -4,7 +4,7 @@
 @model InspectionInfo
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Rubberduck - " + Model.InspectionName;
 }
 
 <h4>Inspection Details</h4>
@@ -25,7 +25,7 @@
                 <dd>@Model.Reasoning</dd>
                 @if (!string.IsNullOrEmpty(Model.HostApp))
                 {
-                <dt>Required Host Application</dt>
+                <dt>This inspection will only run if the VBE host application is the specified executable:</dt>
                 <dd>@Model.HostApp</dd>
                 }
                 @if (Model.References.Any())
