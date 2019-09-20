@@ -38,39 +38,53 @@
                 }
                 </dd>
                 }
-                @if (Model.ResultExamples.Any())
+                @if (Model.Examples.Any(e => e.HasResult))
                 {
                 <dt>The following code example(s) would trigger this inspection:</dt>
                 <dd>
-                @foreach (var example in Model.ResultExamples)
+                @foreach (var example in Model.Examples.Where(e => e.HasResult))
                 {
-                <p>
-                    <div class="vbe-mock-debugger">
-                        <div class="code-area">
-                            <div class="code">
-                                <div class="block">@Html.Raw(example)</div>
+                    foreach (var module in example.Modules)
+                    {
+                        if (!string.IsNullOrEmpty(module.Name))
+                        {
+                            <div>@module.Name</div>
+                        }
+                        <p>
+                        <div class="vbe-mock-debugger">
+                            <div class="code-area">
+                                <div class="code">
+                                    <div class="block">@Html.Raw(module.FormattedContent)</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </p>
+                        </p>
+                    }
                 }
                 </dd>
                 }
-                @if (Model.NoResultExamples.Any())
+                @if (Model.Examples.Any(e => !e.HasResult))
                 {
                 <dt>The following code example(s) would <strong>not</strong> trigger this inspection:</dt>
                 <dd>
-                @foreach (var example in Model.NoResultExamples)
+                @foreach (var example in Model.Examples.Where(e => !e.HasResult))
                 {
-                <p>
-                    <div class="vbe-mock-debugger">
-                        <div class="code-area">
-                            <div class="code">
-                                <div class="block">@Html.Raw(example)</div>
+                    foreach (var module in example.Modules)
+                    {
+                        if (!string.IsNullOrEmpty(module.Name))
+                        {
+                            <div>@module.Name</div>
+                        }
+                        <p>
+                            <div class="vbe-mock-debugger">
+                                <div class="code-area">
+                                    <div class="code">
+                                        <div class="block">@Html.Raw(module.FormattedContent)</div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </p>
+                        </p>
+                    }
                 }
                 </dd>
                 }
