@@ -19,7 +19,7 @@ namespace RubberduckWeb.Controllers
             }
 
             var ignoreModuleExample = @"Option Explicit
-'@IgnoreModule; inspections will ignore this module";
+'@IgnoreModule: inspections will ignore this module";
 
             return View(new InspectionsModel(RubberduckAssets.Inspections.Values.Where(e => !e.IsHidden), ignoreModuleExample));
         }
