@@ -36,19 +36,19 @@
             <table class="inspection-list-table">
                 <tbody>
                     @foreach (var item in Model.Inspections.OrderBy(m => m.InspectionName)
-                        .Zip(Enumerable.Range(0, Model.Inspections.Count()), (s, r) => new { Group = r / 2, Item = s })
-                        .GroupBy(i => i.Group, g => g.Item).ToList())
+                        .Zip(Enumerable.Range(0, Model.Inspections.Count()), (s, r) => new { Group = r / 2, Item = s, Index = r + 1 })
+                        .GroupBy(i => i.Group, g => g).ToList())
                     {
                         <tr>
                             @foreach (var info in item)
                             {
-                                <td id=@info.InspectionName class="inspection-list-column">
-                                    <span><a href="Details/@info.InspectionName"><strong>@info.InspectionName</strong></a></span>
-                                    @if (info.IsPreRelease)
+                                <td id=@info.Item.InspectionName class="inspection-list-column">
+                                    <span><a href="Details/@info.Item.InspectionName"><strong>@info.Index. @info.Item.InspectionName</strong></a></span>
+                                    @if (info.Item.IsPreRelease)
                                     {
-                                        <span>Pre-Release</span>
+                                        <span>Pre-Release: this inspection is only available in pre-release builds.</span>
                                     }
-                                    <p>@info.Summary</p>
+                                    <p>@info.Item.Summary</p>
                                 </td>
                             }
                         </tr>
