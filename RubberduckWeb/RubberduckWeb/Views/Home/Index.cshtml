@@ -40,16 +40,22 @@
         <p>
             <strong>Downloads</strong>
             <table>
+                @if (Model.LatestPreReleaseDownloads.ReleaseDate > Model.LatestReleaseDownloads.ReleaseDate)
+                {
                 <tr>
                     <td>@Model.LatestPreReleaseDownloads.TagName</td>
                     <td>@Model.LatestPreReleaseDownloads.ReleaseDate.ToString("yyyy-MM-dd")</td>
                     <td><strong>@Model.LatestPreReleaseDownloads.Downloads.ToString("N0")</strong></td>
                 </tr>
+                }
+                @if (Model.TotalPreReleaseDownloads != null) // if there aren't any prerelease builds since last release...
+                {
                 <tr>
                     <td>@Model.TotalPreReleaseDownloads.TagName</td>
                     <td>@Model.TotalPreReleaseDownloads.ReleaseDate.ToString("yyyy-MM-dd")</td>
                     <td><strong>@Model.TotalPreReleaseDownloads.Downloads.ToString("N0")</strong></td>
                 </tr>
+                }
                 <tr>
                     <td>@Model.LatestReleaseDownloads.TagName</td>
                     <td>@Model.LatestReleaseDownloads.ReleaseDate.ToString("yyyy-MM-dd")</td>
