@@ -23,13 +23,12 @@ namespace RubberduckWeb
 
             // Log it here
 
-            var httpException = exception as HttpException;
 
             var routeData = new RouteData();
             routeData.Values.Add("controller", "Error");
 
-            if (httpException != null)
-            { 
+            if (exception is HttpException httpException)
+            {
                 Response.Clear();
 
                 switch (httpException.GetHttpCode())
