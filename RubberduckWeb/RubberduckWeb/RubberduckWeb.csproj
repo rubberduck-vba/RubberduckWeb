@@ -272,16 +272,11 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="libs\NLog.dll.nlog" />
-    <Content Include="libs\Rubberduck.API.dll.config" />
-    <Content Include="libs\Rubberduck.API.x32.tlb" />
-    <Content Include="libs\Rubberduck.API.x64.tlb" />
     <Content Include="libs\Rubberduck.CodeAnalysis.dll.config" />
     <Content Include="libs\Rubberduck.Core.dll.config" />
     <Content Include="libs\Rubberduck.RegisterAddIn.bat" />
     <Content Include="libs\Rubberduck.RegisterAddIn.reg" />
     <Content Include="libs\Rubberduck.VBEditor.VBA.dll.config" />
-    <Content Include="libs\Rubberduck.x32.tlb" />
-    <Content Include="libs\Rubberduck.x64.tlb" />
     <Content Include="libs\RubberduckTests.dll.config" />
     <Content Include="libs\RubberduckTests.dll.lastcodeanalysissucceeded" />
     <Content Include="Content\bootstrap.min.css.map" />
@@ -293,6 +288,7 @@
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\GoDaddyProfile.pubxml" />
     <None Include="Properties\PublishProfiles\rubberduckvba.com - Web Deploy.pubxml" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -319,44 +315,24 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="libs\Office.dll" />
-    <Content Include="libs\Rubberduck.API.dll" />
-    <Content Include="libs\Rubberduck.API.h" />
-    <Content Include="libs\Rubberduck.API.pdb" />
-    <Content Include="libs\Rubberduck.API_i.c" />
     <Content Include="libs\Rubberduck.CodeAnalysis.dll" />
-    <Content Include="libs\Rubberduck.CodeAnalysis.pdb" />
     <Content Include="libs\Rubberduck.Core.dll" />
-    <Content Include="libs\Rubberduck.Core.pdb" />
     <Content Include="libs\Rubberduck.Core.xml" />
     <Content Include="libs\Rubberduck.dll" />
     <Content Include="libs\Rubberduck.h" />
     <Content Include="libs\Rubberduck.Interaction.dll" />
-    <Content Include="libs\Rubberduck.Interaction.pdb" />
     <Content Include="libs\Rubberduck.Parsing.dll" />
-    <Content Include="libs\Rubberduck.Parsing.pdb" />
-    <Content Include="libs\Rubberduck.pdb" />
     <Content Include="libs\Rubberduck.Refactorings.dll" />
-    <Content Include="libs\Rubberduck.Refactorings.pdb" />
     <Content Include="libs\Rubberduck.RegexAssistant.dll" />
-    <Content Include="libs\Rubberduck.RegexAssistant.pdb" />
     <Content Include="libs\Rubberduck.Resources.dll" />
-    <Content Include="libs\Rubberduck.Resources.pdb" />
     <Content Include="libs\Rubberduck.SettingsProvider.dll" />
-    <Content Include="libs\Rubberduck.SettingsProvider.pdb" />
     <Content Include="libs\Rubberduck.SmartIndenter.dll" />
-    <Content Include="libs\Rubberduck.SmartIndenter.pdb" />
     <Content Include="libs\Rubberduck.UnitTesting.dll" />
-    <Content Include="libs\Rubberduck.UnitTesting.pdb" />
     <Content Include="libs\Rubberduck.VBEditor.dll" />
-    <Content Include="libs\Rubberduck.VBEditor.pdb" />
     <Content Include="libs\Rubberduck.VBEditor.VB6.dll" />
-    <Content Include="libs\Rubberduck.VBEditor.VB6.pdb" />
     <Content Include="libs\Rubberduck.VBEditor.VBA.dll" />
-    <Content Include="libs\Rubberduck.VBEditor.VBA.pdb" />
     <Content Include="libs\RubberduckTests.dll" />
     <Content Include="libs\RubberduckTests.dll.CodeAnalysisLog.xml" />
-    <Content Include="libs\RubberduckTests.pdb" />
-    <Content Include="libs\Rubberduck_i.c" />
     <Content Include="libs\System.ValueTuple.dll" />
     <Content Include="libs\System.Windows.Interactivity.dll" />
     <Content Include="Scripts\bootstrap.js" />
