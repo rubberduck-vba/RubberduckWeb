@@ -197,6 +197,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Mocks\MockIndenterSettings.cs" />
+    <Compile Include="Models\CodeAnalysisXmlDocs.cs" />
     <Compile Include="Models\HomePageModel.cs" />
     <Compile Include="Models\IndenterSettingsModel.cs" />
     <Compile Include="Models\InspectionInfo.cs" />
@@ -259,6 +260,8 @@
     <Content Include="Content\Images\RenameRefactoring.png" />
     <Content Include="Content\Images\RubberduckHeaderLogo.png" />
     <Content Include="Content\Images\TestRunner.png" />
+    <Content Include="Content\Rubberduck.CodeAnalysis.master.xml" />
+    <Content Include="Content\Rubberduck.CodeAnalysis.next.xml" />
     <Content Include="Declarations\ADODB.6.1.xml" />
     <Content Include="Declarations\Excel.1.8.xml" />
     <Content Include="Declarations\MSForms.2.0.xml" />
@@ -408,6 +411,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Build\CacheStatus.cshtml" />
     <Content Include="Views\Home\ReferenceExplorer.cshtml" />
+    <Content Include="Views\Inspections\QuickFixInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

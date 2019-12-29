@@ -21,17 +21,29 @@ namespace RubberduckWeb.Controllers
             var ignoreModuleExample = @"Option Explicit
 '@IgnoreModule: inspections will ignore this module";
 
-            return View(new InspectionsModel(RubberduckAssets.Inspections.Values.Where(e => !e.IsHidden), ignoreModuleExample));
+            return View(new InspectionsModel(RubberduckAssets.CodeAnalysisXmlDocs.Inspections.Where(e => !e.IsHidden), ignoreModuleExample));
         }
 
         public ActionResult Details(string id)
         {
-            if (RubberduckAssets.Inspections.TryGetValue(id, out var info))
+            var info = RubberduckAssets.CodeAnalysisXmlDocs.Inspections.SingleOrDefault(e => e.InspectionName == id);
+            if (info != default)
             {
                 return View(info);
             }
 
-            return RedirectToAction("PageNotFound", "Error");
+            return RedirectToAction(nameof(ErrorController.PageNotFound), "Error");
+        }
+
+        public ActionResult QuickFixInfo(string id)
+        {
+            var info = RubberduckAssets.CodeAnalysisXmlDocs.QuickFixes.SingleOrDefault(e => e.QuickFixName == id);
+            if (info != default)
+            {
+                return View(info);
+            }
+
+            return RedirectToAction(nameof(ErrorController.PageNotFound), "Error");
         }
     }
 }

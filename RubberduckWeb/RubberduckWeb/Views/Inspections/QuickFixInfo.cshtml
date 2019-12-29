@@ -1,0 +1,91 @@
+﻿@using RubberduckWeb.Models;
+@model QuickFixInfo
+
+@{
+    ViewBag.Title = Model.QuickFixName;
+}
+
+<h4>QuickFix Details</h4>
+
+<div>
+    <h3>@Model.QuickFixName</h3>
+    <hr />
+    <div>
+        @{
+                <dl class="dl-horizontal">
+                    <dt>Summary</dt>
+                    <dd>@Model.Summary</dd>
+                    <dt>Inspections</dt>
+                    @if (Model.Inspections == null || !Model.Inspections.Any())
+                    {
+                        <dd>This quickfix is available for all inspection results that can be annotated with a comment.</dd>
+                    }
+                    else
+                    {
+                        <dd>This quickfix is available for the following inspections:</dd>
+                        <dd>
+                            <ul>
+                                @foreach (var inspection in Model.Inspections)
+                                {
+                                    <li>@Html.ActionLink(inspection, "Details", new { id = inspection.Replace("Inspection", string.Empty) }, null)</li>
+                                }
+                            </ul>
+                        </dd>
+                    }
+
+                    @if (Model.Examples.Any())
+                    {
+                        <dt>Code <strong>before</strong> quickfix is applied:</dt>
+                        <dd>
+                            @foreach (var example in Model.Examples)
+                            {
+                                foreach (var module in example.ModulesBefore)
+                                {
+                                    if (!string.IsNullOrEmpty(module.Name))
+                                    {
+                                        <div>@module.Name</div>
+                                    }
+                                    <p>
+                                        <div class="vbe-mock-debugger">
+                                            <div class="code-area">
+                                                <div class="code">
+                                                    <div class="block">@Html.Raw(module.FormattedContent)</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </p>
+                                }
+                            }
+                        </dd>
+                        <dt>Code <strong>after</strong> quickfix is applied:</dt>
+                        <dd>
+                            @foreach (var example in Model.Examples)
+                            {
+                                foreach (var module in example.ModulesAfter)
+                                {
+                                    if (!string.IsNullOrEmpty(module.Name))
+                                    {
+                                        <div>@module.Name</div>
+                                    }
+                                    <p>
+                                        <div class="vbe-mock-debugger">
+                                            <div class="code-area">
+                                                <div class="code">
+                                                    <div class="block">@Html.Raw(module.FormattedContent)</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </p>
+                                }
+                            }
+                        </dd>
+                    }
+                </dl>
+        }
+    </div>
+</div>
+<p>
+    <br />
+    @Html.ActionLink("Back to inspections", "List")
+</p>
+

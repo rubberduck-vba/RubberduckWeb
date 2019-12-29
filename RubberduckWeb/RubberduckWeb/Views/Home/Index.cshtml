@@ -40,7 +40,7 @@
         <p>
             <strong>Downloads</strong>
             <table>
-                @if (Model.LatestPreReleaseDownloads.ReleaseDate > Model.LatestReleaseDownloads.ReleaseDate)
+                @if (Model.LatestPreReleaseDownloads != null && Model.LatestPreReleaseDownloads.ReleaseDate > Model.LatestReleaseDownloads.ReleaseDate)
                 {
                 <tr>
                     <td>@Model.LatestPreReleaseDownloads.TagName</td>

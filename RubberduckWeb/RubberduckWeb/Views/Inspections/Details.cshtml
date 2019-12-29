@@ -1,10 +1,9 @@
 ﻿@using RubberduckWeb.Models
-@using RubberduckWeb.VBA
 
 @model InspectionInfo
 
 @{
-    ViewBag.Title = "Rubberduck - " + Model.InspectionName;
+    ViewBag.Title = Model.InspectionName;
 }
 
 <h4>Inspection Details</h4>
@@ -37,6 +36,20 @@
                     @reference
                 }
                 </dd>
+                }
+                @if (Model.QuickFixes.Any())
+                {
+                    <dt>Available quickfixes:</dt>
+                    <dd>
+                        <ul>
+                            @foreach (var fix in Model.QuickFixes)
+                            {
+                                <li>
+                                    @Html.ActionLink(fix.QuickFixName, "QuickFixInfo", new { id = fix.QuickFixName }, null)
+                                </li>
+                            }
+                        </ul>
+                    </dd>
                 }
                 @if (Model.Examples.Any(e => e.HasResult))
                 {
