@@ -39,7 +39,7 @@ namespace RubberduckWeb.Controllers
                         ReleaseDate = g.Min(d => d.ReleaseDate),
                         Downloads = g.Sum(d => d.Downloads),
                     }).SingleOrDefault();
-                var latestReleaseDownloads = downloads.Last(d => !d.IsPreRelease);
+                var latestReleaseDownloads = downloads.LastOrDefault(d => !d.IsPreRelease);
                 var preReleaseDownloads = downloads.Where(d => d.ReleaseDate > latestReleaseDownloads.ReleaseDate)
                     .GroupBy(d => d.IsPreRelease)
                     .Select(g => new ReleaseDownloadInfo
@@ -49,7 +49,7 @@ namespace RubberduckWeb.Controllers
                         ReleaseDate = g.Min(d => d.ReleaseDate),
                         Downloads = g.Sum(d => d.Downloads),
                     }).SingleOrDefault();
-                var latestPreReleaseDownloads = downloads.Last(d => d.IsPreRelease);
+                var latestPreReleaseDownloads = downloads.LastOrDefault(d => d.IsPreRelease);
 
                 var highlights = GetFeatureHighlights();
                 return new HomePageModel(highlights,
@@ -127,7 +127,7 @@ namespace RubberduckWeb.Controllers
         private readonly string _aboutSmartIndenter = @"A C# port/rewrite of the original Smart Indenter 32-bit VBIDE add-in works in 64-bit hosts.";
         private readonly string _aboutNavigation = @"Quickly find what's using what and where, with enhanced navigation tooling.";
         private readonly string _aboutCodeExplorer = @"Organize your VBA/VB6 project like never before, using special annotation comments to customize a folder hierarchy.";
-        private readonly string _aboutCodeMetrics = @"Identify potentially problematic areas by reviewing cyclomatic complexity, nesting, and other metrics.";
+        //private readonly string _aboutCodeMetrics = @"Identify potentially problematic areas by reviewing cyclomatic complexity, nesting, and other metrics.";
         private readonly string _aboutRefactorings = @"Clean up your code by easily renaming existing identifiers. Extract interfaces, reorder parameters, and more.";
         private readonly string _aboutReferenceExplorer = @"Never again waste your time wading through hundreds of type libraries to add a library reference. Pin the libraries you use more often.";
 

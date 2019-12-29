@@ -12,7 +12,7 @@ namespace RubberduckWeb.Models
         public string TagName { get; set; }
         public DateTime ReleaseDate { get; set; }
         public int Downloads { get; set; }
-        public string InspectionDocsUrl { get; set; }
+        public string CodeAnalysisXmlDocsUrl { get; set; }
     }
 
     public class HomePageModel
